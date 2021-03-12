@@ -28,4 +28,6 @@ $ npm install
 ```
 
 ## Project Development Process
-☑️ [Components](https://github.com/u9urturk/ReCapProject-Rent-A-Car-Front-end/tree/master/src/app/components) , [Models](https://github.com/u9urturk/ReCapProject-Rent-A-Car-Front-end/tree/master/src/app/models) ve [Services](https://github.com/u9urturk/ReCapProject-Rent-A-Car-Front-end/tree/master/src/app/services) Oluşturuldu
+☑️ [Components](https://github.com/u9urturk/ReCapProject-Rent-A-Car-Front-end/tree/master/src/app/components) , [Models](https://github.com/u9urturk/ReCapProject-Rent-A-Car-Front-end/tree/master/src/app/models) ve [Services](https://github.com/u9urturk/ReCapProject-Rent-A-Car-Front-end/tree/master/src/app/services) Katmanları Oluşturuldu     
+☑️ [BootStrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/) Entegrasyonu Yapıldı 
+
