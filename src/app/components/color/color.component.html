@@ -1,8 +1,13 @@
 <div *ngIf="dataLoaded==false" class="spinner-grow text-primary" role="status">
     <span class="visually-hidden">Loading...</span>
 </div>
-<table *ngIf="dataLoaded==true" class="table">
-    <thead>
+<table *ngIf="dataLoaded==true" class="table ">
+    <thead class="table-info">
+        <tr>
+            <th>Renk Listesi</th>          
+        </tr>
+    </thead>
+    <thead class="table-dark">
         <tr>
             <th>Id</th>
             <th>Renk</th>

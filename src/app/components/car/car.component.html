@@ -3,8 +3,13 @@
   <span class="visually-hidden">Loading...</span>
 </div>
 
-<table *ngIf="dataLoaded==true" class="table">
-    <thead>
+<table *ngIf="dataLoaded==true" class="table ">
+    <thead class="table-info">
+        <tr>
+            <th>Araba Listesi</th>          
+        </tr>
+    </thead>
+    <thead class="table-dark">
         <tr>
             <th>Id</th>
             <th>Marka</th>
