@@ -16,10 +16,13 @@
 # Clone to repository
 $ git clone https://github.com/u9urturk/ReCapProject-Rent-A-Car-Front-end
   
-  cmd
+  
 # Go to the folder you cloned
 $ cd ReCapProject-Rent-A-Car-Front-end
-  cmd
-# Install dependencies
+  
+# Project started with VSCode
 $ code .
+
+# Install dependencies
+$ npm install
 ```
