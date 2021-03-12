@@ -7,8 +7,19 @@
 ## Project Prensentation
 ##### - Bu Proje , [Rent A Car( Araba Kiralama )](https://github.com/u9urturk/ReCapProject-Rent-A-Car) Sisteminin FrontEnd Geliştirme Sürecini İçermektedir 
 ##### - [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4 İle Oluşturulan Projede [BootStrap v5.0 ](https://getbootstrap.com/docs/5.0/getting-started/introduction/) Framework'ü Kullanılmıştır
+<br>
+<br>
 
+## Installation
 
-
-
-
+```bash
+# Clone to repository
+$ git clone https://github.com/u9urturk/ReCapProject-Rent-A-Car-Front-end
+  
+  cmd
+# Go to the folder you cloned
+$ cd ReCapProject-Rent-A-Car-Front-end
+  cmd
+# Install dependencies
+$ code .
+```
