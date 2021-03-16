@@ -1,28 +1,48 @@
+<div *ngIf="dataLoaded==false" class="clearfix">
+    <div class="spinner-border float-end" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<div class="row">
+    <ul class="list-group" class="col-md-3">
+        <thead class="list-group-item">
+            <tr>
+                <th>Mevcut Markalar</th>          
+            </tr>
+        </thead>
+        <ul class="list-group">
+            
+            <li (click)="setCurrentBrand(brand)" 
+            routerLink = "/cars/brand/{{brand.brandId}}"
+            *ngFor="let brand of brands"
+             [class]="getCurrentBrandClass(brand)">{{brand.brandName}}
+            </li>
+        </ul>
+    </ul>
 
-<div *ngIf="dataLoaded==false" class="spinner-border text-secondary" role="status">
-  <span class="visually-hidden">Loading...</span>
+    <div class="col-md-9">
+        <div class="container overflow-hidden">
+            <div class="row gy-5">
+               <div *ngFor="let car of cars" class="col-4">
+                 <div>
+                    <div class="card" style="width: 20rem;">
+                        <img src="assets/svg/adısz.jpg" class="card-img-top" alt="...">
+                        <div class class="card-body">
+                            <h5 class="card-title">{{car.carName}}</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Marka = {{car.brandName}}</li>
+                            <li class="list-group-item">Model = {{car.desciription}}</li>
+                            <li class="list-group-item">Model Yılı = {{car.modelYear}}</li>
+                            <li class="list-group-item">Renk = {{car.colorName}}</li>
+                            <li class="list-group-item">Günlük Ücret ={{car.dailyPrice}}</li>
+                        </ul>
+                    </div>
+                 </div>
+               </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<table *ngIf="dataLoaded==true" class="table ">
-    <thead class="table-info">
-        <tr>
-            <th>Araba Listesi</th>          
-        </tr>
-    </thead>
-    <thead class="table-dark">
-        <tr>
-            <th>Id</th>
-            <th>Marka</th>
-            <th>Renk</th>
-            <th>Günlük Ücret</th>
-        </tr>
-    </thead>
 
-
-    <tr *ngFor = "let car of cars">
-        <td>{{car.carId}}</td>
-        <td>{{car.brandName}}</td>
-        <td>{{car.colorName}}</td>
-        <td>{{car.dailyPrice}}</td>
-    </tr>
-</table>
