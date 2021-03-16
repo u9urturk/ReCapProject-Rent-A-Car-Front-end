@@ -1,48 +1,94 @@
-<div *ngIf="dataLoaded==false" class="clearfix">
-    <div class="spinner-border float-end" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
+<div *ngIf="dataLoaded==false" class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
 </div>
 <div class="row">
-    <ul class="list-group" class="col-md-3">
-        <thead class="list-group-item">
-            <tr>
-                <th>Mevcut Markalar</th>          
-            </tr>
-        </thead>
-        <ul class="list-group">
-            
-            <li (click)="setCurrentBrand(brand)" 
-            routerLink = "/cars/brand/{{brand.brandId}}"
-            *ngFor="let brand of brands"
-             [class]="getCurrentBrandClass(brand)">{{brand.brandName}}
-            </li>
-        </ul>
-    </ul>
+    <ul class="col-md-3">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h2 class="">Mevcut Markalar</h2>
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul class="list-group">
 
+                            <button type="button" class="btn btn-outline-primary" (click)="setCurrentBrand(brand)"
+                                routerLink="/cars/brand/{{brand.brandId}}" *ngFor="let brand of brands"
+                                [class]="getCurrentBrandClass(brand)">{{brand.brandName}}
+                            </button>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                        >
+                        <h2>Mevcut Renkler</h2>
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul class="list-group">
+
+                            <button type="button" class="btn btn-outline-primary" (click)="setCurrentColor(color)"
+                                routerLink="/cars/color/{{color.colorId}}" *ngFor="let color of colors"
+                                [class]="getCurrentColorClass(color)">{{color.colorName}}
+                            </button>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ul>
     <div class="col-md-9">
         <div class="container overflow-hidden">
             <div class="row gy-5">
-               <div *ngFor="let car of cars" class="col-4">
-                 <div>
-                    <div class="card" style="width: 20rem;">
-                        <img src="assets/svg/adısz.jpg" class="card-img-top" alt="...">
-                        <div class class="card-body">
-                            <h5 class="card-title">{{car.carName}}</h5>
+                <div *ngFor="let car of cars" class="col-4">
+                    <div>
+                        <div class="card" style="width: 20rem;">
+                            <button (click)="setCurrentImageCar(car)" routerLink="/carimages/car/{{car.carId}}"
+                             type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <img src="assets/svg/adısz.jpg" class="img-fluid" class="card-img-top" alt="...">
+                            </button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h2 class="modal-title" id="exampleModalLabel">Görseller</h2>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                       <h5 *ngIf="currentCar">{{currentCar.carId}} ulaşılan Araç Id</h5> 
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                      <button type="button" class="btn btn-primary">Kirala</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            <div class class="card-body">
+                                <h5 class="card-title">{{car.carName}}</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Marka = {{car.brandName}}</li>
+                                <li class="list-group-item">Model = {{car.desciription}}</li>
+                                <li class="list-group-item">Model Yılı = {{car.modelYear}}</li>
+                                <li class="list-group-item">Renk = {{car.colorName}}</li>
+                                <li class="list-group-item">Günlük Ücret ={{car.dailyPrice}}</li>
+                            </ul>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Marka = {{car.brandName}}</li>
-                            <li class="list-group-item">Model = {{car.desciription}}</li>
-                            <li class="list-group-item">Model Yılı = {{car.modelYear}}</li>
-                            <li class="list-group-item">Renk = {{car.colorName}}</li>
-                            <li class="list-group-item">Günlük Ücret ={{car.dailyPrice}}</li>
-                        </ul>
                     </div>
-                 </div>
-               </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-

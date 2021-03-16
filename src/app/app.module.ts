@@ -12,6 +12,7 @@ import { RentalComponent } from './components/rental/rental.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarimageComponent } from './components/carimage/carimage.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CustomerComponent,
     RentalComponent,
     NaviComponent,
-    HomeComponent
+    HomeComponent,
+    CarimageComponent
   ],
   imports: [
     BrowserModule,

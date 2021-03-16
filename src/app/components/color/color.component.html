@@ -10,5 +10,3 @@
     <li (click)="setCurrentColor(color)"  *ngFor="let color of colors"
      [class]="getCurrentColorClass(color)">{{color.colorName}}</li>
 </ul>
-
-<h5 *ngIf="currentColor">{{currentColor.colorName}} Seçtiniz</h5>
