@@ -1,16 +1,18 @@
 <div *ngIf="dataLoaded==false" class="progress">
-    <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" role="progressbar"
+        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
 </div>
 <div class="row">
     <ul class="col-md-3">
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
+                <div class="accordion" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <h2 class="">Mevcut Markalar</h2>
+                        data-bs-target="#collapseOne" style="background-color:rgb(199, 199, 199);" aria-expanded="true"
+                        aria-controls="collapseOne">
+                        <h2 style="padding-left: 65px;">Mevcut Markalar</h2>
                     </button>
-                </h2>
+                </div>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
@@ -28,15 +30,14 @@
                 <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
-                        >
-                        <h2>Mevcut Renkler</h2>
+                        style="background-color:rgb(199, 199, 199);">
+                        <h2 style="padding-left: 65px;">Mevcut Renkler</h2>
                     </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <ul class="list-group">
-
                             <button type="button" class="btn btn-outline-primary" (click)="setCurrentColor(color)"
                                 routerLink="/cars/color/{{color.colorId}}" *ngFor="let color of colors"
                                 [class]="getCurrentColorClass(color)">{{color.colorName}}
@@ -51,40 +52,72 @@
     <div class="col-md-9">
         <div class="container overflow-hidden">
             <div class="row gy-5">
-                <div *ngFor="let car of cars" class="col-4">
+                <div *ngFor="let car of carDetails" class="col-4">
                     <div>
-                        <div class="card" style="width: 20rem;">
-                            <button (click)="setCurrentImageCar(car)" routerLink="/carimages/car/{{car.carId}}"
-                             type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <img src="assets/svg/adısz.jpg" class="img-fluid" class="card-img-top" alt="...">
+                        <div class="card" style="width: 18rem;">
+                            <button (click)="setCurrentCarId(car)"
+                                
+                                type="button" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                <img src="assets/svg/anasayfa1.jpg" class="img-fluid" class="card-img-top" alt="...">
                             </button>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h2 class="modal-title" id="exampleModalLabel">Görseller</h2>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>
+                                                <div id="carouselExampleIndicators" class="carousel slide"
+                                                    data-bs-ride="carousel">
+                                                    <div class="carousel-indicators">
+                                                        <button type="button"
+                                                            data-bs-target="#carouselExampleIndicators"
+                                                            data-bs-slide-to="0" class="active" aria-current="true"
+                                                            aria-label="Slide 1"></button>
+                                                        <button type="button"
+                                                            data-bs-target="#carouselExampleIndicators"
+                                                            data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                                        <button type="button"
+                                                            data-bs-target="#carouselExampleIndicators"
+                                                            data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                                    </div>
+                                                    <div class="carousel-inner">
+                                                        <div  class="getImageByCarId(car.carId)"  class="carousel-item active">
+                                                            <img
+                                                                style="height: 400px; width: 1200px;" alt="...">
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <ul *ngIf="currentCarId">
+                                                <li class="list-group-item"><strong>Marka = </strong>
+                                                    {{car.brandName}}</li>
+                                                <li class="list-group-item"><strong>Model =</strong>
+                                                    {{car.desciription}}</li>
+                                                <li class="list-group-item"><strong>Model Yılı = </strong>
+                                                    {{car.modelYear}}</li>
+                                                <li class="list-group-item"><strong>Renk =</strong>
+                                                    {{car.colorName}}</li>
+                                                <li class="list-group-item"><strong>Günlük Ücret
+                                                        =</strong>{{car.dailyPrice}}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Vazgeç</button>
+                                            <button type="button" class="btn btn-primary">Kirala</button>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                       <h5 *ngIf="currentCar">{{currentCar.carId}} ulaşılan Araç Id</h5> 
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                      <button type="button" class="btn btn-primary">Kirala</button>
-                                    </div>
-                                  </div>
                                 </div>
-                              </div>
-                            <div class class="card-body">
-                                <h5 class="card-title">{{car.carName}}</h5>
                             </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Marka = {{car.brandName}}</li>
-                                <li class="list-group-item">Model = {{car.desciription}}</li>
-                                <li class="list-group-item">Model Yılı = {{car.modelYear}}</li>
-                                <li class="list-group-item">Renk = {{car.colorName}}</li>
-                                <li class="list-group-item">Günlük Ücret ={{car.dailyPrice}}</li>
-                            </ul>
+                            <div class class="card-body">
+                                <h3 class="card-title"><strong>{{car.carName}}</strong></h3>
+                            </div>
                         </div>
                     </div>
                 </div>

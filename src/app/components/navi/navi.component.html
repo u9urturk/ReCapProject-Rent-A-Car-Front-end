@@ -1,5 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
+    <div>
+      <img src="assets/svg/logo.gif" width="40" height="32" class="d-block my-1"  >
+    </div>
     <a class="navbar-brand" href="#" class="btn btn-dark">Rent A Car</a>
     <button class="navbar-toggler" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,24 +16,21 @@
           <a class="nav-link" href="#">Kullanıcı İşlemleri</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             İşlemler
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#"  
+          <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
+            <li ><a class="dropdown-item" 
               [class]="getAllCarClass()" 
-              routerLink = "/cars" >Kiralık Araba Listesi</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Araba Marka Listesi</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Araba Renk Listesi</a></li>
+              routerLink = "/cars"  >Kiralık Araba Listesi</a></li>
+              
           </ul>
         </li>
         
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit" class="btn btn-dark">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Hoş Geldiniz" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit" class="btn btn-dark">Login</button>
       </form>
     </div>
   </div>
