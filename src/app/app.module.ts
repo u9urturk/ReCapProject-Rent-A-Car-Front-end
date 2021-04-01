@@ -13,6 +13,7 @@ import { NaviComponent } from './components/navi/navi.component';
 import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarimageComponent } from './components/carimage/carimage.component';
+import { CarDetailComponent } from './components/car-detail/car-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CarimageComponent } from './components/carimage/carimage.component';
     RentalComponent,
     NaviComponent,
     HomeComponent,
-    CarimageComponent
+    CarimageComponent,
+    CarDetailComponent
   ],
   imports: [
     BrowserModule,

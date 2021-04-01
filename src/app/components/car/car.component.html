@@ -52,12 +52,10 @@
     <div class="col-md-9">
         <div class="container overflow-hidden">
             <div class="row gy-5">
-                <div *ngFor="let car of carDetails" class="col-4">
+                <div *ngFor="let car of carDetails"  class="col-4">
                     <div>
-                        <div class="card" style="width: 18rem;">
-                            <button (click)="setCurrentCarId(car)"
-                                
-                                type="button" data-bs-toggle="modal"
+                        <div class="card" class="card-img" style="width: 18rem;">
+                            <button (click)="setCurrentCarId(car.carId)" type="button" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 <img src="assets/svg/anasayfa1.jpg" class="img-fluid" class="card-img-top" alt="...">
                             </button>
@@ -71,41 +69,10 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <div>
-                                                <div id="carouselExampleIndicators" class="carousel slide"
-                                                    data-bs-ride="carousel">
-                                                    <div class="carousel-indicators">
-                                                        <button type="button"
-                                                            data-bs-target="#carouselExampleIndicators"
-                                                            data-bs-slide-to="0" class="active" aria-current="true"
-                                                            aria-label="Slide 1"></button>
-                                                        <button type="button"
-                                                            data-bs-target="#carouselExampleIndicators"
-                                                            data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                        <button type="button"
-                                                            data-bs-target="#carouselExampleIndicators"
-                                                            data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                                    </div>
-                                                    <div class="carousel-inner">
-                                                        <div  class="getImageByCarId(car.carId)"  class="carousel-item active">
-                                                            <img
-                                                                style="height: 400px; width: 1200px;" alt="...">
-                                                        </div>
-                                                    </div>  
-                                                </div>
+                                            <div class="modal-img">
+                                                <img src="{{getCarImageUrl(carImage.id)}}" *ngFor="let carImage of carImages"
+                                                                class="d-block w-100" alt="...">
                                             </div>
-                                            <ul *ngIf="currentCarId">
-                                                <li class="list-group-item"><strong>Marka = </strong>
-                                                    {{car.brandName}}</li>
-                                                <li class="list-group-item"><strong>Model =</strong>
-                                                    {{car.desciription}}</li>
-                                                <li class="list-group-item"><strong>Model Yılı = </strong>
-                                                    {{car.modelYear}}</li>
-                                                <li class="list-group-item"><strong>Renk =</strong>
-                                                    {{car.colorName}}</li>
-                                                <li class="list-group-item"><strong>Günlük Ücret
-                                                        =</strong>{{car.dailyPrice}}</li>
-                                            </ul>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
@@ -115,7 +82,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class class="card-body">
+                            <div class="card-body">
                                 <h3 class="card-title"><strong>{{car.carName}}</strong></h3>
                             </div>
                         </div>
