@@ -50,44 +50,37 @@
 
     </ul>
     <div class="col-md-9">
-        <div class="container overflow-hidden">
-            <div class="row gy-5">
-                <div *ngFor="let car of carDetails"  class="col-4">
-                    <div>
-                        <div class="card" class="card-img" style="width: 18rem;">
-                            <button (click)="setCurrentCarId(car.carId)" type="button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                <img src="assets/svg/anasayfa1.jpg" class="img-fluid" class="card-img-top" alt="...">
-                            </button>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="modal-img">
-                                                <img src="{{getCarImageUrl(carImage.id)}}" *ngFor="let carImage of carImages"
-                                                                class="d-block w-100" alt="...">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Vazgeç</button>
-                                            <button type="button" class="btn btn-primary">Kirala</button>
-                                        </div>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col"  *ngFor="let car of carDetails">
+                <div >
+                    <app-car-card (click)="setCurrentCarId(car.carId)" type="button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" [carDetail]="car"></app-car-card>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header">
+        
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-img">
+                                        <img src="{{getCarImageUrl(carImage.id)}}" *ngFor="let carImage of carImages"
+                                            class="d-block w-100" alt="...">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="card-title"><strong>{{car.carName}}</strong></h3>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                    <button type="button" class="btn btn-primary">Kirala</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="card-body">
+                        <h3 class="card-title"><strong>{{car.carName}}</strong></h3>
+                    </div>
                 </div>
+        
             </div>
         </div>
     </div>

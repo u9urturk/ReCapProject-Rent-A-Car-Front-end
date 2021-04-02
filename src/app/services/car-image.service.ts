@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CarDetail } from '../models/carDetail';
 import { CarImage } from '../models/carImage';
 import { ListResponseModel } from '../models/listResponseModel';
 

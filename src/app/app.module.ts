@@ -12,8 +12,8 @@ import { RentalComponent } from './components/rental/rental.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CarimageComponent } from './components/carimage/carimage.component';
-import { CarDetailComponent } from './components/car-detail/car-detail.component';
+import { CarCardComponent } from './components/car/car-card/car-card.component';
+import { TestComponent } from './components/car/test/test.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +25,8 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
     RentalComponent,
     NaviComponent,
     HomeComponent,
-    CarimageComponent,
-    CarDetailComponent
+    CarCardComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
@@ -17,13 +17,16 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class CarComponent implements OnInit {
   carDetails: CarDetail[] = []
+  @Input() excarDetails: CarDetail
+  @Input() class:string='';
   carDetailBase:CarDetail[]=[];
   car!:CarDetail;
   carz!:Car;
-  carImageUrl:string=''
   brands: Brand[] = []
   colors: Color[] = []
   carImages!:CarImage[];
+  excarImage!:CarImage
+  carImageUrl:string=""
   currentColor: Color;
   currentBrand: Brand;
   dataLoaded = false;
@@ -51,19 +54,12 @@ export class CarComponent implements OnInit {
       else {
         this.getCars()
         
+        
       }
     })
     
   }
-
-  getCarByCarId(carId:number){
-    this.carService.getCarByCarId(carId).subscribe((response)=>{
-      this.carz = response.data;
-      console.log(this.carz)
-
-      this.getImageByCarId(this.carz.id)
-    })
-  }
+ 
   getCars() {
     this.carService.getCars().subscribe(response => {
       this.carDetails = response.data 
@@ -105,6 +101,7 @@ export class CarComponent implements OnInit {
  
   getCarImageUrl(carImageId:number):string{
     return this.carImageService.getCarImageUrl(carImageId);
+    
   }
 
   getBrands() {
@@ -154,6 +151,10 @@ export class CarComponent implements OnInit {
     this.getImageByCarId(carId)
   }
 
+
+ 
+
+  
  
 
 }
