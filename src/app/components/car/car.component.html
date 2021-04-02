@@ -3,44 +3,48 @@
         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
 </div>
 <div class="row">
-    <ul class="col-md-3">
+    <ul class="col-md-2" style="margin-top: 10px; " >
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
-                <div class="accordion" id="headingOne">
+                <div class="accordion-header"  id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" style="background-color:rgb(199, 199, 199);" aria-expanded="true"
-                        aria-controls="collapseOne">
-                        <h2 style="padding-left: 65px;">Mevcut Markalar</h2>
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Brands
                     </button>
                 </div>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                <div id="collapseOne"  class="accordion-collapse collapse show" aria-labelledby="headingOne"
                     data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <ul class="list-group">
+                    <div class="accordion-body" style="background-color:rgb(54, 53, 53); ">
+                        <li class="list-group" >
 
-                            <button type="button" class="btn btn-outline-primary" (click)="setCurrentBrand(brand)"
+
+                            <button type="button" style="background-color:rgb(54, 53, 53);border: none;"
+                                class="btn btn-outline-secondary" (click)="setCurrentBrand(brand)"
                                 routerLink="/cars/brand/{{brand.brandId}}" *ngFor="let brand of brands"
-                                [class]="getCurrentBrandClass(brand)">{{brand.brandName}}
+                                [class]="getCurrentBrandClass(brand)">
+                                <img src="{{brand.brandLogo}}" width="35px" height="35px" alt=""> 
                             </button>
-                        </ul>
+
+                        </li>
                     </div>
                 </div>
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
-                        style="background-color:rgb(199, 199, 199);">
-                        <h2 style="padding-left: 65px;">Mevcut Renkler</h2>
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Colors
                     </button>
                 </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
+                <div id="collapseTwo"  class="accordion-collapse collapse show" aria-labelledby="headingTwo"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <ul class="list-group">
-                            <button type="button" class="btn btn-outline-primary" (click)="setCurrentColor(color)"
+                            <button type="button" style="background-color: rgb(54, 53, 53);border: none;"
+                                class="btn btn-outline-secondary" (click)="setCurrentColor(color)"
                                 routerLink="/cars/color/{{color.colorId}}" *ngFor="let color of colors"
-                                [class]="getCurrentColorClass(color)">{{color.colorName}}
+                                [class]="getCurrentColorClass(color)">
+                                <img src="{{color.colorLogo}}" width="30px" height="30px" alt="">
                             </button>
                         </ul>
                     </div>
@@ -49,10 +53,14 @@
         </div>
 
     </ul>
-    <div class="col-md-9">
+    <div class="col-md-10" style="background-repeat: no-repeat;" 
+    [ngStyle]="{'background-image':'url(https://png2.cleanpng.com/sh/f49d219a5f95cdf692538839cbb2287d/L0KzQYm3UsI4N6hmfZH0aYP2gLBuTfhqb5l8ees2cnBkdH7rhgNqb59qip9xaXfrh7LCTgJwaZUyTdMENXWzcbToUvViamgzT6YAMEG1Rom4VcE6P2g2UKQ5Nka6Q3B3jvc=/kisspng-highway-road-designer-highway-road-5a95e0aca2eab7.7450126815197718206673.png)',
+                'background-repeat':'no-repeat',
+                'background-size':'cover'
+                }" > 
         <div class="row row-cols-1 row-cols-md-2 g-4">
-            <div class="col"  *ngFor="let car of carDetails">
-                <div >
+            <div class="col" *ngFor="let car of carDetails">
+                <div>
                     <app-car-card (click)="setCurrentCarId(car.carId)" type="button" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" [carDetail]="car"></app-car-card>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -60,27 +68,28 @@
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
-        
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <h2 class="modal-title" id="exampleModalLabel"><strong>{{car.carName}}</strong></h2>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="modal-img">
                                         <img src="{{getCarImageUrl(carImage.id)}}" *ngFor="let carImage of carImages"
                                             class="d-block w-100" alt="...">
+                                            
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                    <button type="button" class="btn btn-warning"
+                                        data-bs-dismiss="modal">Vazgeç</button>
                                     <button type="button" class="btn btn-primary">Kirala</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <h3 class="card-title"><strong>{{car.carName}}</strong></h3>
-                    </div>
+                    
                 </div>
-        
+
             </div>
         </div>
     </div>
