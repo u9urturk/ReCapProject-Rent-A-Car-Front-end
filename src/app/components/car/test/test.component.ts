@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertifyService } from 'src/app/services/material_services/alertify.service';
 
 @Component({
   selector: 'app-test',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComponent implements OnInit {
 
-  constructor() { }
+  constructor(private alertify:AlertifyService) { }
 
   ngOnInit(): void {
+    
   }
+  
 
+  test(){
+    this.alertify.success("test başarılı");
+  }
+  login(){
+    this.alertify.login();
+  }
+ 
 }
