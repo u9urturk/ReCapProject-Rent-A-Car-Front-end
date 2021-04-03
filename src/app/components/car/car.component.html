@@ -3,62 +3,66 @@
         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
 </div>
 <div class="row">
-    <ul class="col-md-2" style="margin-top: 10px; " >
-        <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-                <div class="accordion-header"  id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Brands
-                    </button>
-                </div>
-                <div id="collapseOne"  class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body" style="background-color:rgb(54, 53, 53); ">
-                        <li class="list-group" >
+    <div class="col-md-2">
+        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+            data-bs-content="Disabled popover">
+            <img src="https://www.luxpng.com/picl/85/1179222_settings-icon-camera-settings-icon-white-transparent-png.png"
+                width="40px" height="40px" style="margin-left: 10px;" type="button" data-bs-toggle="modal"
+                data-bs-target="#exampleModal1">
+        </span>
 
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="border-radius: 40px;">
+                    <div class="modal-header" [ngStyle]="{'background-image':'url(https://www.pngfind.com/pngs/b/294-2949260_car-silhouette-png.png)',
+                    'background-repeat':'no-repeat',
+                    'background-size':'cover',
+                    'border':'none'
+                    }">
+                        <h3 class="modal-title" id="exampleModalLabel1"><br></h3>
 
-                            <button type="button" style="background-color:rgb(54, 53, 53);border: none;"
-                                class="btn btn-outline-secondary" (click)="setCurrentBrand(brand)"
-                                routerLink="/cars/brand/{{brand.brandId}}" *ngFor="let brand of brands"
-                                [class]="getCurrentBrandClass(brand)">
-                                <img src="{{brand.brandLogo}}" width="35px" height="35px" alt=""> 
-                            </button>
-
-                        </li>
                     </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Colors
-                    </button>
-                </h2>
-                <div id="collapseTwo"  class="accordion-collapse collapse show" aria-labelledby="headingTwo"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <ul class="list-group">
-                            <button type="button" style="background-color: rgb(54, 53, 53);border: none;"
-                                class="btn btn-outline-secondary" (click)="setCurrentColor(color)"
-                                routerLink="/cars/color/{{color.colorId}}" *ngFor="let color of colors"
-                                [class]="getCurrentColorClass(color)">
-                                <img src="{{color.colorLogo}}" width="30px" height="30px" alt="">
-                            </button>
-                        </ul>
+                    <div class="modal-body"
+                        style="background-color: rgb(54, 53, 53); border-end-end-radius: 35px;border-end-start-radius: 35px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row row-cols-1 row-cols-md-3 g-4">
+                                    <div class="col" *ngFor="let brand of brands" style="border:none;">
+                                        <div class="card" style="border:none; background-color: rgb(54, 53, 53);"
+                                            (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.brandId}}"
+                                            data-bs-dismiss="modal">
+                                            <img src="{{brand.brandLogo}}" width="35px" height="35px" alt="...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row row-cols-1 row-cols-md-3 g-4">
+                                    <div class="col" *ngFor="let color of colors" style="border:none;">
+                                        <div class="card" style="border:none; background-color: rgb(54, 53, 53);"
+                                            (click)="setCurrentColor(color)" routerLink="/cars/color/{{color.colorId}}"
+                                            data-bs-dismiss="modal">
+                                            <img src="{{color.colorLogo}}" width="35px" height="35px" alt="...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
 
-    </ul>
-    <div class="col-md-10" style="background-repeat: no-repeat;" 
-    [ngStyle]="{'background-image':'url(https://png2.cleanpng.com/sh/f49d219a5f95cdf692538839cbb2287d/L0KzQYm3UsI4N6hmfZH0aYP2gLBuTfhqb5l8ees2cnBkdH7rhgNqb59qip9xaXfrh7LCTgJwaZUyTdMENXWzcbToUvViamgzT6YAMEG1Rom4VcE6P2g2UKQ5Nka6Q3B3jvc=/kisspng-highway-road-designer-highway-road-5a95e0aca2eab7.7450126815197718206673.png)',
-                'background-repeat':'no-repeat',
-                'background-size':'cover'
-                }" > 
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" [ngStyle]="{'background-image':'url(https://png2.cleanpng.com/sh/f49d219a5f95cdf692538839cbb2287d/L0KzQYm3UsI4N6hmfZH0aYP2gLBuTfhqb5l8ees2cnBkdH7rhgNqb59qip9xaXfrh7LCTgJwaZUyTdMENXWzcbToUvViamgzT6YAMEG1Rom4VcE6P2g2UKQ5Nka6Q3B3jvc=/kisspng-highway-road-designer-highway-road-5a95e0aca2eab7.7450126815197718206673.png)',
+    'background-repeat':'no-repeat',
+    'background-size':'cover'
+    }">
+        <div class="row row-cols-1 row-cols-md-3 g-4 " style="margin-left: 20px;">
             <div class="col" *ngFor="let car of carDetails">
                 <div>
                     <app-car-card (click)="setCurrentCarId(car.carId)" type="button" data-bs-toggle="modal"
@@ -76,7 +80,7 @@
                                     <div class="modal-img">
                                         <img src="{{getCarImageUrl(carImage.id)}}" *ngFor="let carImage of carImages"
                                             class="d-block w-100" alt="...">
-                                            
+
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -87,7 +91,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
 
             </div>

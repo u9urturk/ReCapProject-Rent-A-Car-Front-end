@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
+import { Brand } from 'src/app/models/brand';
+import { BrandService } from 'src/app/services/brand.service';
 import { AlertifyService } from 'src/app/services/material_services/alertify.service';
 
 @Component({
@@ -7,8 +10,10 @@ import { AlertifyService } from 'src/app/services/material_services/alertify.ser
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
+  
+  brands:Brand[]=[]
 
-  constructor(private alertify:AlertifyService) { }
+  constructor(private alertify:AlertifyService,private brand:BrandService) { }
 
   ngOnInit(): void {
     
@@ -21,5 +26,13 @@ export class TestComponent implements OnInit {
   login(){
     this.alertify.login();
   }
+
+  getBrands(){
+    this.brand.getBrands().subscribe(response=>{
+      this.brands=response.data
+    })
+  }
+
+  
  
 }

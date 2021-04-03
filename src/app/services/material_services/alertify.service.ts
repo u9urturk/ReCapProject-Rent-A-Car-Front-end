@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BrandService } from '../brand.service';
 
 declare let alertify:any;
 
@@ -21,10 +22,15 @@ export class AlertifyService {
     alertify.error(message);
   }
 
-  login(){
-    alertify.prompt('alert').set({transition:'zoom',message: 'Kullanıcı Adı'}).setHeader('Hoş Geldiniz').show(); 
+  test(){
+    alertify.alert()
   }
 
+  login(){
+    alertify.alert().set({transition:'zoom'}).setHeader('Kategoriler').show(); 
+  }
+
+  
  
 
   

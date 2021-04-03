@@ -17,6 +17,11 @@ import { LoginComponent } from './components/navi/login/login.component';
 import {AlertifyService} from './services/material_services/alertify.service'
 
 
+
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,13 +34,15 @@ import {AlertifyService} from './services/material_services/alertify.service'
     HomeComponent,
     CarCardComponent,
     TestComponent,
-    LoginComponent
+    LoginComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
   ],
   providers: [AlertifyService],
   bootstrap: [AppComponent]
