@@ -37,6 +37,17 @@ $ npm install
 ![commit2](https://user-images.githubusercontent.com/77547474/111200276-9d15a580-85d2-11eb-84fd-261d707a20ed.PNG)
 ![commit3](https://user-images.githubusercontent.com/77547474/111250849-1935da80-861f-11eb-88c0-7833d2651e83.PNG)
 ![commit3-1](https://user-images.githubusercontent.com/77547474/111250560-99a80b80-861e-11eb-9204-a61ee030f374.PNG)
+![AnaSayfa1](https://user-images.githubusercontent.com/77547474/113551926-131f9200-95fe-11eb-9ede-37175b110800.PNG)
+![AnaSayfa2](https://user-images.githubusercontent.com/77547474/113551945-1b77cd00-95fe-11eb-96bd-f04db146a4f6.PNG)
+![Cars](https://user-images.githubusercontent.com/77547474/113551966-22064480-95fe-11eb-9c45-9b4386981a1c.PNG)
+![Kategoriler](https://user-images.githubusercontent.com/77547474/113551983-27fc2580-95fe-11eb-874e-ceaa34b4ba56.PNG)
+![Araç Görselleri](https://user-images.githubusercontent.com/77547474/113551993-2c284300-95fe-11eb-8ba8-6d9bb0581830.PNG)
+
+
+
+
+
+
 
 
 
