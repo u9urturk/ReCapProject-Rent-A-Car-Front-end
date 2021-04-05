@@ -4,12 +4,13 @@
 </div>
 <div class="row">
     <div class="col-md-2">
-        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
-            data-bs-content="Disabled popover">
+        <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right"
+            title="Kategoriler">
             <img src="https://www.luxpng.com/picl/85/1179222_settings-icon-camera-settings-icon-white-transparent-png.png"
                 width="40px" height="40px" style="margin-left: 10px;" type="button" data-bs-toggle="modal"
                 data-bs-target="#exampleModal1">
         </span>
+
 
         <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1"
             aria-hidden="true">
@@ -20,11 +21,16 @@
                     'background-size':'cover',
                     'border':'none'
                     }">
-                        <h3 class="modal-title" id="exampleModalLabel1"><br></h3>
+                        <h3 class="modal-title" id="exampleModalLabel1">
+                            <div class="mb-12">
+                                <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Kategoriler">
+                            </div>
+                           
+                        </h3>
 
                     </div>
                     <div class="modal-body"
-                        style="background-color: rgb(54, 53, 53); border-end-end-radius: 35px;border-end-start-radius: 35px;">
+                        style="background-color: rgb(54, 53, 53); border-end-end-radius: 35px;border-end-start-radius: 35px; ">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -63,30 +69,55 @@
     'background-size':'cover'
     }">
         <div class="row row-cols-1 row-cols-md-3 g-4 " style="margin-left: 20px;">
-            <div class="col" *ngFor="let car of carDetails">
+            <div class="col" *ngFor="let car of carDetails  | filter:filterText">
                 <div>
-                    <app-car-card (click)="setCurrentCarId(car.carId)" type="button" data-bs-toggle="modal"
+                    <app-car-card (click)="setCurrentCarId(car)" type="button" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" [carDetail]="car"></app-car-card>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h2 class="modal-title" id="exampleModalLabel"><strong>{{car.carName}}</strong></h2>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
+                            <div class="modal-content" style="border-radius: 40px;background-color: rgb(54, 53, 53);">
+
                                 <div class="modal-body">
                                     <div class="modal-img">
-                                        <img src="{{getCarImageUrl(carImage.id)}}" *ngFor="let carImage of carImages"
-                                            class="d-block w-100" alt="...">
-
+                                        <div class="basic-container">
+                                            <gallery id="basic-test" [items]="items" thumbposition="left"></gallery>
+                                        </div>
                                     </div>
+
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer" style="border:none">
+                                    <img src="assets/svg/detail.png" width="90px" height="90px"
+                                        style="margin-right: 1000px;" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal2">
+                                    <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content" style="border-radius: 30px;">
+                                                <div class="modal-header" style="background-color: rgb(54, 53, 53);
+                                                 border-start-start-radius: 27px; border-top-right-radius: 27px; ">
+                                                    <img src="assets/svg/aracBilgileri.png" width="150px" height="50px"
+                                                        class="modal-title" id="exampleModalLabel"
+                                                        style="margin-left: 20px;">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body" *ngIf="currentCar">
+                                                    <ul><strong>Araç Plakası : </strong>{{currentCar.carName}}</ul>
+                                                    <ul><strong>Araç Model : </strong>{{currentCar.brandName}}
+                                                        {{currentCar.desciription}}</ul>
+                                                    <ul><strong>Model Yılı : </strong>{{currentCar.modelYear}}</ul>
+                                                    <ul><strong>Günlük Ücret : </strong>{{currentCar.dailyPrice| lira}}
+                                                    </ul>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                     <button type="button" class="btn btn-warning"
                                         data-bs-dismiss="modal">Vazgeç</button>
-                                    <button type="button" class="btn btn-primary">Kirala</button>
+                                    <button type="button" (click)="rentCar(currentCar)" class="btn btn-primary">Kirala</button>
                                 </div>
                             </div>
                         </div>

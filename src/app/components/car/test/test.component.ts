@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brand.service';
 import { AlertifyService } from 'src/app/services/material_services/alertify.service';
+
+
+
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
+  
 })
 export class TestComponent implements OnInit {
   

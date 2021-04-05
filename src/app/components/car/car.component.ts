@@ -9,39 +9,61 @@ import { BrandService } from 'src/app/services/brand.service';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
+import { GalleryItem, Gallery, ImageItem, ThumbnailsPosition, ImageSize } from 'ng-gallery'
+
+
+
+
+
+
 
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
-  styleUrls: ['./car.component.css']
+  styleUrls: ['./car.component.css'],
+
+  template: `
+    <img *ngFor="let item of items; index as i"
+         [lightbox]="i"
+         [src]="item.data.thumb">
+  `
 })
 export class CarComponent implements OnInit {
   carDetails: CarDetail[] = []
   @Input() excarDetails: CarDetail
-  @Input() class:string='';
-  carDetailBase:CarDetail[]=[];
-  car!:CarDetail;
-  carz!:Car;
+  @Input() class: string = '';
+  carDetailBase: CarDetail[] = [];
+  car!: CarDetail;
+  carz!: Car;
   brands: Brand[] = []
   colors: Color[] = []
-  carImages!:CarImage[];
-  excarImage!:CarImage
-  carImageUrl:string=""
+  carImages!: CarImage[];
+  currentCar!: CarDetail;
   currentColor: Color;
   currentBrand: Brand;
   dataLoaded = false;
-  ImageLoad=false;
-  path:string="https://localhost:44378"
-  
+  items: GalleryItem[] = [];
+  filterText = "";
+
+
+
+
+
+
   constructor(private carService: CarService,
     private activatedRoute: ActivatedRoute,
     private brandService: BrandService,
     private colorService: ColorService,
-    private carImageService:CarImageService
-     ){ }
+    private carImageService: CarImageService,
+    private toastrService:ToastrService,
+    public gallery: Gallery,
+    
+    
+  ) { }
+
 
   ngOnInit(): void {
-    
+
     this.getColors()
     this.getBrands()
     this.activatedRoute.params.subscribe(params => {
@@ -53,23 +75,26 @@ export class CarComponent implements OnInit {
       }
       else {
         this.getCars()
-        
-        
+
+
       }
     })
-    
+
+
+
+
   }
- 
+
   getCars() {
     this.carService.getCars().subscribe(response => {
-      this.carDetails = response.data 
-      this.dataLoaded=true;
-      
-      
+      this.carDetails = response.data
+      this.dataLoaded = true;
+
+
     })
   }
 
-  
+
 
   getCarsByBrand(brandId: number) {
     this.carService.getCarsByBrand(brandId).subscribe(response => {
@@ -84,24 +109,50 @@ export class CarComponent implements OnInit {
       this.carDetails = response.data
       this.dataLoaded = true;
       // console.log(response.data)
-      
+
     })
   }
 
 
-  getImageByCarId(carId:number){
-    this.carImageService.getCarImagesByCarId(carId).subscribe(response=>{
+  getImageByCarId(carId: number) {
+    this.carImageService.getCarImagesByCarId(carId).subscribe(response => {
       this.carImages = response.data
-      
-     
+      this.getCarImageUrl();
 
-    })  
+      //this.setNgGallery();
+    })
   }
 
- 
-  getCarImageUrl(carImageId:number):string{
-    return this.carImageService.getCarImageUrl(carImageId);
-    
+  // setNgGallery(){
+  //   const imageUrls =  []
+  //   for(let i=0;i<this.carImages.length;i++){
+  //     imageUrls.push({
+  //       src:this.carImages[i].imagePath,
+  //       thumb:this.carImages[i].imagePath
+  //     })
+  //   }
+
+
+
+  //   this.items=imageUrls.map(x=> new ImageItem({src:x.src,thumb:x.thumb}))
+
+  // }
+
+
+
+  getCarImageUrl() {
+    const imageUrl: any[] = []
+    this.carImages.forEach(image => {
+      imageUrl.push({
+        src: this.carImageService.getCarImageUrl(image.id),
+        thumb: this.carImageService.getCarImageUrl(image.id)
+      })
+    });
+
+    this.items = imageUrl.map(img => new ImageItem({ src: img.src, thumb: img.thumb }))
+
+
+
   }
 
   getBrands() {
@@ -130,11 +181,11 @@ export class CarComponent implements OnInit {
     } else {
       return "list-group-item"
     }
-   
+
   }
 
   setCurrentColor(color: Color) {
-    this.currentColor = color;  
+    this.currentColor = color;
     // console.log(color)
 
   }
@@ -147,14 +198,18 @@ export class CarComponent implements OnInit {
     }
   }
 
-  setCurrentCarId(carId:number){
-    this.getImageByCarId(carId)
+  setCurrentCarId(car: CarDetail) {
+    this.getImageByCarId(car.carId)
+    this.currentCar = car;
   }
 
 
- 
+  rentCar(currentCar:CarDetail){
+    console.log(currentCar);
+  }
 
-  
- 
+
+
+
 
 }

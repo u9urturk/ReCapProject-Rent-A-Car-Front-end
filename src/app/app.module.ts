@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
+import {FormsModule} from '@angular/forms'
+
 import { AppComponent } from './app.component';
 import { CarComponent } from './components/car/car.component';
 import { BrandComponent } from './components/brand/brand.component';
@@ -14,12 +16,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarCardComponent } from './components/car/car-card/car-card.component';
 import { TestComponent } from './components/car/test/test.component';
 import { LoginComponent } from './components/navi/login/login.component';
-import {AlertifyService} from './services/material_services/alertify.service'
+import {AlertifyService} from './services/material_services/alertify.service';
+import { GalleryModule } from 'ng-gallery';
+import { GALLERY_CONFIG } from 'ng-gallery';
+import { LightboxModule } from  'ng-gallery/lightbox';
+import { LiraPipe } from './pipes/lira.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
-
-
-
-
+import {ToastrModule} from 'ngx-toastr'
+ 
 
 
 @NgModule({
@@ -35,6 +40,10 @@ import {AlertifyService} from './services/material_services/alertify.service'
     CarCardComponent,
     TestComponent,
     LoginComponent,
+    LiraPipe,
+    FilterPipe,
+    
+
     
   ],
   imports: [
@@ -42,9 +51,27 @@ import {AlertifyService} from './services/material_services/alertify.service'
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    GalleryModule,LightboxModule.withConfig({
+      panelClass:'fullscreen'
+    }),
+    FormsModule,
+    ToastrModule.forRoot({
+      positionClass:"toast-bottom-right"
+    })
+    
+    
     
   ],
-  providers: [AlertifyService],
+  providers: [AlertifyService,{
+    provide:GALLERY_CONFIG,
+    useValue:{
+      dots:true,
+      imageSize:'cover',
+      thumbPosition:'left',
+      loadingStrategy:'preload'
+     
+    }
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
