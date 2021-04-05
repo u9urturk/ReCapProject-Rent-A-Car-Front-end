@@ -10,6 +10,7 @@ import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
 import { GalleryItem, Gallery, ImageItem, ThumbnailsPosition, ImageSize } from 'ng-gallery'
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -205,7 +206,7 @@ export class CarComponent implements OnInit {
 
 
   rentCar(currentCar:CarDetail){
-    console.log(currentCar);
+    this.toastrService.success(currentCar.carName + " Plakalı araç kiralandı")
   }
 
 

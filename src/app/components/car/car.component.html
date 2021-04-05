@@ -7,7 +7,7 @@
         <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right"
             title="Kategoriler">
             <img src="https://www.luxpng.com/picl/85/1179222_settings-icon-camera-settings-icon-white-transparent-png.png"
-                width="40px" height="40px" style="margin-left: 10px;" type="button" data-bs-toggle="modal"
+                width="40px" height="40px" style="margin-left: 10px; margin-top: 5px;" type="button" data-bs-toggle="modal"
                 data-bs-target="#exampleModal1">
         </span>
 
@@ -77,7 +77,11 @@
                         aria-hidden="true">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content" style="border-radius: 40px;background-color: rgb(54, 53, 53);">
-
+                                <div class="modal-header" style="border: none; height: 50px;">
+                                    <img src="assets/svg/detail.png" width="60px" 
+                                        style="margin-right: 1000px; margin-top: 10px;" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal2">
+                                </div>
                                 <div class="modal-body">
                                     <div class="modal-img">
                                         <div class="basic-container">
@@ -87,24 +91,21 @@
 
                                 </div>
                                 <div class="modal-footer" style="border:none">
-                                    <img src="assets/svg/detail.png" width="90px" height="90px"
-                                        style="margin-right: 1000px;" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal2">
+                                    
                                     <div class="modal fade" id="exampleModal2" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content" style="border-radius: 30px;">
                                                 <div class="modal-header" style="background-color: rgb(54, 53, 53);
-                                                 border-start-start-radius: 27px; border-top-right-radius: 27px; ">
+                                                 border-start-start-radius: 27px; border-top-right-radius: 27px;  ">
                                                     <img src="assets/svg/aracBilgileri.png" width="150px" height="50px"
                                                         class="modal-title" id="exampleModalLabel"
                                                         style="margin-left: 20px;">
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
+                                                    
                                                 </div>
                                                 <div class="modal-body" *ngIf="currentCar">
-                                                    <ul><strong>Araç Plakası : </strong>{{currentCar.carName}}</ul>
-                                                    <ul><strong>Araç Model : </strong>{{currentCar.brandName}}
+                                                    <ul><strong>Plaka : </strong>{{currentCar.carName}}</ul>
+                                                    <ul><strong>Marka-Model : </strong>{{currentCar.brandName}}
                                                         {{currentCar.desciription}}</ul>
                                                     <ul><strong>Model Yılı : </strong>{{currentCar.modelYear}}</ul>
                                                     <ul><strong>Günlük Ücret : </strong>{{currentCar.dailyPrice| lira}}
