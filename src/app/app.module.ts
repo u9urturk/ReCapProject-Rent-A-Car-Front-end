@@ -24,7 +24,9 @@ import { LightboxModule } from  'ng-gallery/lightbox';
 import { LiraPipe } from './pipes/lira.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 
-import {ToastrModule} from 'ngx-toastr'
+import {ToastrModule} from 'ngx-toastr';
+import { RentSummaryComponent } from './components/rent-summary/rent-summary.component';
+import { RentalCarCardComponent } from './components/rental/rental-car-card/rental-car-card.component'
  
 
 
@@ -43,6 +45,8 @@ import {ToastrModule} from 'ngx-toastr'
     LoginComponent,
     LiraPipe,
     FilterPipe,
+    RentSummaryComponent,
+    RentalCarCardComponent,
     
 
     

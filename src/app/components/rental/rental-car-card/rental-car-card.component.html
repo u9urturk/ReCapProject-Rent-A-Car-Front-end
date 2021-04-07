@@ -1,0 +1,8 @@
+<div class="row row-cols-1 row-cols-md-2 g-4"  gallerize>
+    <div class="col" *ngFor="let item of items" >
+        <div class="card"  >
+            <img  [src]="item.data.thumb"  style="height: 180px;"
+                 >
+        </div>
+    </div>
+</div>

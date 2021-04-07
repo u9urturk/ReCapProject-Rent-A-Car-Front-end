@@ -1,26 +1,27 @@
-<div *ngIf="dataLoaded==false" class="spinner-grow text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 style="margin-left: 200px; color: white;"><strong>Araç Görselleri</strong></h2>
+        </div>
+        <div class="col-md-6">
+            <h2 style="margin-left:200px; color: white;"><strong>Kira Bilgileri</strong></h2>
+        </div>
+    </div>
+    <div class="row" *ngFor="let mycar of rentals" style="margin-top: 10px; ">
+        <div class="col-md-6">
+
+            <app-rental-car-card [carId]="mycar.carId"></app-rental-car-card>
+        </div>
+        <div class="col-md-6">
+            <ul style="color: white;">
+                <li>{{mycar.carName}}</li>
+                <li>{{mycar.customerName}} {{mycar.customerLastName}}</li>
+                <li>{{mycar.customerEmail}}</li>
+                <li>{{mycar.carBrand}} {{mycar.carModel}}</li>
+                <li>{{mycar.dailyRentPrice | lira}}</li>
+                <li>{{mycar.rentDate}}</li>
+                <li>{{mycar.returnDate}}</li>
+            </ul>
+        </div>
+    </div>
 </div>
-<table *ngIf="dataLoaded==true" class="table " >
-    <thead class="table-info">
-        <tr>
-            <th>Kira Listesi</th>          
-        </tr>
-    </thead>
-    <thead class="table-dark">
-        <tr>
-            <th>Id</th>
-            <th>Müşteri Adı Soyadı</th>
-            <th>E-Mail</th>
-            <th>Araç Marka</th>
-            <th>Kiralanma Tarihi</th>
-        </tr>
-    </thead>
-    <tr  *ngFor="let rental of rentals" >
-        <td>{{rental.id}}</td>
-        <td>{{rental.customerName}} {{rental.customerLastName}}</td>
-        <td>{{rental.customerEmail}}</td>
-        <td>{{rental.carBrand}}</td>
-        <td>{{rental.rentDate}}</td>
-    </tr>
-</table>

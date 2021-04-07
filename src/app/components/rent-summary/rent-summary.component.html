@@ -1,0 +1,12 @@
+<div  class="nav-item dropdown" *ngIf="rentals.length > 0">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      MyCars
+    </a>
+  
+    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+      
+      <li *ngFor="let rentedcar of rentals"><a class="dropdown-item"type="button" routerLink="rentals/mycar"  >{{rentedcar.carName}}</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" type="button" routerLink="rentals/mycar" >Go MyCars</a></li>
+    </ul>
+  </div>

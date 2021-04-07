@@ -22,20 +22,11 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-car',
   templateUrl: './car.component.html',
   styleUrls: ['./car.component.css'],
-
-  template: `
-    <img *ngFor="let item of items; index as i"
-         [lightbox]="i"
-         [src]="item.data.thumb">
-  `
+  
 })
 export class CarComponent implements OnInit {
   carDetails: CarDetail[] = []
-  @Input() excarDetails: CarDetail
-  @Input() class: string = '';
-  carDetailBase: CarDetail[] = [];
   car!: CarDetail;
-  carz!: Car;
   brands: Brand[] = []
   colors: Color[] = []
   carImages!: CarImage[];
