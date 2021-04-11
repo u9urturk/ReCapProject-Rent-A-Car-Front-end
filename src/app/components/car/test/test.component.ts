@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CarImageService } from 'src/app/services/car-image.service';
-import { UploadFilesService } from 'src/app/services/material_services/upload-files.service';
 
 
 
@@ -18,8 +17,7 @@ export class TestComponent implements OnInit {
   nestedReactiveForm:any = FormGroup;
   constructor(private fb:FormBuilder,
     private carImageService:CarImageService,
-    private toastrService:ToastrService,
-    private uploadService:UploadFilesService) { 
+    private toastrService:ToastrService) { 
     
   }
   

@@ -7,7 +7,6 @@ import { TestComponent } from './components/car/test/test.component';
 import { HomeComponent } from './components/home/home.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { Test2Component } from './components/test2/test2.component';
-import { UploadFilesComponent } from './components/upload-files/upload-files.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},

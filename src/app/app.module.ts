@@ -30,8 +30,9 @@ import { RentalCarCardComponent } from './components/rental/rental-car-card/rent
 import { CarAddComponent } from './components/car/car-add/car-add.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { UploadFilesComponent } from './components/upload-files/upload-files.component';
+
 import { Test2Component } from './components/test2/test2.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 
  
@@ -57,8 +58,10 @@ import { Test2Component } from './components/test2/test2.component';
     CarAddComponent,
     AdminPanelComponent,
     FooterComponent,
-    UploadFilesComponent,
+   
     Test2Component,
+   
+    ImageUploadComponent,
     
     
     
