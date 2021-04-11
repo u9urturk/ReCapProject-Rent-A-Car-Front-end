@@ -1,56 +1,49 @@
-<button id="button" aria-describedby="tooltip">My button</button>
-<div id="tooltip" role="tooltip">
-  My tooltip
-  <div id="arrow" data-popper-arrow></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="nestedReactiveForm">
+                <div formArrayName="carForms">
+                    <div class=" row">
+                        <div class="col-md-3" [formGroupName]="i"
+                            *ngFor="let reactiveForm of nestedReactiveForm.controls.carForms.controls;let i = index">
+                            <div class="form-group">
+                                <label class="control-label"><span style="color:red"> Car Form {{i+1}}</span></label>
+                                <a href="javascript:void(0)" class="close-icon"
+                                    *ngIf="nestedReactiveForm.controls.carForms.length > 1"
+                                    (click)="removeSelectedForm(i)"></a>
+                            </div>
+
+                            <div class="form-group">
+
+                                <input class="form-control" id="carId" name="carId"
+                                    formControlName="carId" placeholder="Araç Id Girin">
+                            </div>
+
+                            <div class="form-group">
+
+                                <input type="file" (change)="fileupload($event,i)" multiple class="form-control"
+                                    style="height: 100%;" accept="image/*">
+                            </div>
+                            <div class="form-group">
+                                <span
+                                    *ngFor="let image of nestedReactiveForm.controls.carForms.controls[i].controls['images'].controls;let j = index"
+                                    class="imagecontainer">
+                                    <img [src]="image.value"
+                                        style="width: 50px; height: 50px; border-radius: 50%; margin-top: 5px;">
+                                    <div class="overlay">
+                                        <a href="javascript:void(0)" class="icon" title="remove" ></a>
+                                        <i type="button" class="fa fa-trash" (click)="removeImage(i, j)" ></i>
+                                    </div>
+                                </span>
+                            </div>
+                            <button type="submit" class="btn btn-success" [disabled]="!nestedReactiveForm.valid"
+                                (click)="save(nestedReactiveForm.value)">submit</button>
+                            <button type="submit" class="btn btn-primary" style="float: right;"
+                                (click)="addNewForm()">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script>
-  const button = document.querySelector('#button');
-  const tooltip = document.querySelector('#tooltip');
-
-  const popperInstance = Popper.createPopper(button, tooltip, {
-    modifiers: [
-      {
-        name: 'offset',
-        options: {
-          offset: [0, 8],
-        },
-      },
-    ],
-  });
-
-  function show() {
-    // Make the tooltip visible
-    tooltip.setAttribute('data-show', '');
-
-    // Enable the event listeners
-    popperInstance.setOptions({
-      modifiers: [{ name: 'eventListeners', enabled: true }],
-    });
-
-    // Update its position
-    popperInstance.update();
-  }
-
-  function hide() {
-    // Hide the tooltip
-    tooltip.removeAttribute('data-show');
-
-    // Disable the event listeners
-    popperInstance.setOptions({
-      modifiers: [{ name: 'eventListeners', enabled: false }],
-    });
-  }
-
-  const showEvents = ['mouseenter', 'focus'];
-  const hideEvents = ['mouseleave', 'blur'];
-
-  showEvents.forEach(event => {
-    button.addEventListener(event, show);
-  });
-
-  hideEvents.forEach(event => {
-    button.addEventListener(event, hide);
-  });
-</script>

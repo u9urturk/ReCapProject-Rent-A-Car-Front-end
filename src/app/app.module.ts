@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
-import {FormsModule} from '@angular/forms'
+import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -26,7 +26,14 @@ import { FilterPipe } from './pipes/filter.pipe';
 
 import {ToastrModule} from 'ngx-toastr';
 import { RentSummaryComponent } from './components/rent-summary/rent-summary.component';
-import { RentalCarCardComponent } from './components/rental/rental-car-card/rental-car-card.component'
+import { RentalCarCardComponent } from './components/rental/rental-car-card/rental-car-card.component';
+import { CarAddComponent } from './components/car/car-add/car-add.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { UploadFilesComponent } from './components/upload-files/upload-files.component';
+import { Test2Component } from './components/test2/test2.component';
+
+
  
 
 
@@ -47,6 +54,13 @@ import { RentalCarCardComponent } from './components/rental/rental-car-card/rent
     FilterPipe,
     RentSummaryComponent,
     RentalCarCardComponent,
+    CarAddComponent,
+    AdminPanelComponent,
+    FooterComponent,
+    UploadFilesComponent,
+    Test2Component,
+    
+    
     
 
     
@@ -60,6 +74,7 @@ import { RentalCarCardComponent } from './components/rental/rental-car-card/rent
       panelClass:'fullscreen'
     }),
     FormsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     })

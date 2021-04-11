@@ -24,5 +24,5 @@ export class RentSummaryComponent implements OnInit {
       this.rentals = response.data;
 
     })
-  }
+  } 
 }
