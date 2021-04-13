@@ -10,13 +10,10 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car-add.component.css']
 })
 export class CarAddComponent implements OnInit {
-  selectedFiles?: FileList;
-  currentFile?: File;
   carAddForm:FormGroup;
   imageAddForm:FormGroup;
   progress:number = 0;
-  brandId:5;
-  colorId:3;
+  
   
   
   constructor(private formsBuilder:FormBuilder,

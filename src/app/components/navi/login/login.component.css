@@ -1,5 +1,6 @@
 html,
 body {
+  min-height: 550px;
   height: 100%;
 }
 
@@ -9,6 +10,7 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #f5f5f5;
+  
 }
 
 .form-signin {
@@ -20,6 +22,7 @@ body {
 
 .form-signin .checkbox {
   font-weight: 400;
+  color: white;
 }
 
 .form-signin .form-floating:focus-within {
@@ -36,6 +39,7 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  margin-top: 10px;
 }
 
 .bd-placeholder-img {
@@ -51,3 +55,5 @@ body {
       font-size: 3.5rem;
     }
   }
+
+  
