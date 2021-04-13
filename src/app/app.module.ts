@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,6 +35,7 @@ import { Test2Component } from './components/test2/test2.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { BrandOperationComponent } from './components/brand/brand-operation/brand-operation.component';
 import { ColorOperationComponent } from './components/color/color-operation/color-operation.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
  
@@ -100,7 +101,7 @@ import { ColorOperationComponent } from './components/color/color-operation/colo
       loadingStrategy:'preload'
      
     }
-  }],
+  },{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

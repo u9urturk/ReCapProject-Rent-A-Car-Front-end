@@ -1,11 +1,47 @@
-<form id="loginForm">
-    <fieldset>
-        <label> Username </label>
-        <input type="text" value="Test"/> 
+<body class="text-center">
+  <main class="form-signin">
+    <form [formGroup]="loginForm">
+      <img
+        class="mb-4"
+        src="https://user-images.githubusercontent.com/77547474/113489808-f173bd00-94ce-11eb-93e5-9b8b49370cf6.png"
+        alt=""
+        width="250"
+        height="57"
+      />
+      
 
-        <label> Password </label>
-        <input type="password" value="password"/> 
+      
 
-        <input type="submit" value="Login"/>
-    </fieldset>
-</form>
+      <div class="form-floating" >
+        <input
+          type="email"
+          class="form-control"
+          formControlName="email"
+          id="floatingInput"
+          placeholder="name@example.com"
+        />
+        <label for="floatingInput">E-posta</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <label for="floatingPassword">Parola</label>
+      </div>
+
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me" /> Remember me
+        </label>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" (click)="login()">
+        Giriş Yap
+      </button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+    </form>
+  </main>
+</body>
