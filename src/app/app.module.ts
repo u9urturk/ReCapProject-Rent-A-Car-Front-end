@@ -33,6 +33,8 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { Test2Component } from './components/test2/test2.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { BrandOperationComponent } from './components/brand/brand-operation/brand-operation.component';
+import { ColorOperationComponent } from './components/color/color-operation/color-operation.component';
 
 
  
@@ -62,6 +64,10 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     Test2Component,
    
     ImageUploadComponent,
+   
+    BrandOperationComponent,
+   
+    ColorOperationComponent,
     
     
     
