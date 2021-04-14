@@ -1,4 +1,4 @@
-<body class="text-center" style="background-image: url(assets/svg/bmwcars.png);">
+<body class="text-center" style="background-image: url(assets/svg/bmwcars.png)">
   <main class="form-signin">
     <form [formGroup]="loginForm">
       <img
@@ -8,8 +8,8 @@
         width="300"
         height="57"
       />
-      
-      <div class="form-floating" >
+
+      <div class="form-floating">
         <input
           type="email"
           class="form-control"
@@ -38,7 +38,16 @@
       <button class="w-100 btn btn-lg btn-primary" (click)="login()">
         Giriş Yap
       </button>
-      
+      <button
+        class="w-100 btn btn-lg btn-warning"
+        id="register"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModaltest"
+      >
+        Kayıt Ol
+      </button>
+
+      <app-register></app-register>
     </form>
   </main>
 </body>

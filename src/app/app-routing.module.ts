@@ -8,6 +8,7 @@ import { TestComponent } from './components/car/test/test.component';
 import { ColorOperationComponent } from './components/color/color-operation/color-operation.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/navi/login/login.component';
+import { RegisterComponent } from './components/navi/register/register.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { Test2Component } from './components/test2/test2.component';
 import { LoginGuard } from './guards/login.guard';
@@ -23,7 +24,7 @@ const routes: Routes = [
   {path:"brand/operation",component:BrandOperationComponent,canActivate:[LoginGuard]},
   {path:"color/operation",component:ColorOperationComponent},
   {path:"login",component:LoginComponent},
-  //{path:"admin/test"}
+  {path:"admin/test",component:RegisterComponent}
   
   
 ];

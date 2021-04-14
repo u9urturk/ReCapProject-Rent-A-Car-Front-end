@@ -1,0 +1,16 @@
+#modal-box{
+    width: 300px;
+    height: auto;
+    
+}
+
+#modal-radius{
+    border-radius: 40px;
+}
+#exampleModalLabel{
+    margin-left: 95px;
+}
+
+#body{
+    border: none;
+}
