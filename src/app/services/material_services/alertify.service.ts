@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BrandService } from '../brand.service';
 
 declare let alertify:any;
 
@@ -24,6 +23,10 @@ export class AlertifyService {
 
   test(){
     alertify.alert()
+  }
+
+  adminGuard(){
+    alertify.alert().set({transition:'zoom',message:'Henüz böyle bir yolculuğa hazır değilsin','closable':false}).setHeader('Sistem Mesajı').show()
   }
 
   login(){

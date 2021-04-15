@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginModel } from 'src/app/models/loginModel';
 import { RegisterModel } from 'src/app/models/registerModel';
@@ -13,7 +13,9 @@ export class AuthService {
   constructor(private http:HttpClient) { }
 
   login(user:LoginModel){
-    return this.http.post<SingleResponseModel<TokenModel>>(this.apiUrl+"login",user);
+    let headers = new HttpHeaders();
+    headers = headers.append("Content-Type","application/json");
+    return this.http.post<SingleResponseModel<TokenModel>>(this.apiUrl+"login",user,{headers:headers});
   }
 
   isAuthenticated(){
@@ -26,12 +28,15 @@ export class AuthService {
 
   logOut(){
     localStorage.removeItem("token")
+    localStorage.removeItem("role")
+    localStorage.removeItem("name")
   }
 
-
+  
   getToken(){
     return localStorage.getItem("token")
   }
+
 
   register(user:RegisterModel){
     return this.http.post<SingleResponseModel<TokenModel>>(this.apiUrl+"register",user)

@@ -24,13 +24,13 @@
           <app-rent-summary></app-rent-summary>
         </li>
         <li>
-          <app-admin-panel></app-admin-panel>
+          <app-admin-panel *ngIf="getRole(admin)"></app-admin-panel>
         </li>
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Hoş Geldiniz" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit" *ngIf="!getItem()"routerLink="/login" class="btn btn-dark">Login</button>
-        <button class="btn btn-outline-success" type="submit" class="btn btn-secondary" *ngIf="getItem()" (click)="logOut()">Logout</button>
+        <button class="btn btn-outline-success" *ngIf="!getItem()"routerLink="/login" class="btn btn-dark">Login</button>
+        <button class="btn btn-outline-success" id="logout" class="btn btn-secondary" *ngIf="getItem()" [class]="getName()" (click)="logOut()">{{name}}</button>
       </form>
     </div>
   </div>
