@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Brand } from 'src/app/models/brand';
-import { Car } from 'src/app/models/car';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
 import { Color } from 'src/app/models/color';
@@ -11,11 +10,6 @@ import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
 import { GalleryItem, Gallery, ImageItem, ThumbnailsPosition, ImageSize } from 'ng-gallery'
 import { ToastrService } from 'ngx-toastr';
-
-
-
-
-
 
 
 @Component({
@@ -36,12 +30,6 @@ export class CarComponent implements OnInit {
   dataLoaded = false;
   items: GalleryItem[] = [];
   filterText = "";
-
-
-
-
-
-
   constructor(private carService: CarService,
     private activatedRoute: ActivatedRoute,
     private brandService: BrandService,
@@ -49,6 +37,7 @@ export class CarComponent implements OnInit {
     private carImageService: CarImageService,
     private toastrService:ToastrService,
     public gallery: Gallery,
+    private router:Router
     
     
   ) { }
@@ -197,8 +186,9 @@ export class CarComponent implements OnInit {
   }
 
 
-  rentCar(currentCar:CarDetail){
-    this.toastrService.success(currentCar.carName + " Plakalı araç kiralandı")
+  rentCar(currentCar:any){
+    //this.toastrService.success(currentCar.carName + " Plakalı araç kiralandı")
+    this.router.navigate(["cardetail/"+currentCar.carId])
   }
 
 

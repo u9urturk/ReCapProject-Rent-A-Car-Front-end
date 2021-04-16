@@ -91,35 +91,50 @@
 
                                 </div>
                                 <div class="modal-footer" style="border:none">
-                                    
-                                    <div class="modal fade" id="exampleModal2" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content" style="border-radius: 30px;">
-                                                <div class="modal-header" style="background-color: rgb(54, 53, 53);
-                                                 border-start-start-radius: 27px; border-top-right-radius: 27px;  ">
-                                                    <img src="assets/svg/aracBilgileri.png" width="150px" height="50px"
-                                                        class="modal-title" id="exampleModalLabel"
-                                                        style="margin-left: 20px;">
-                                                    
-                                                </div>
-                                                <div class="modal-body" *ngIf="currentCar">
-                                                    <ul><strong>Plaka : </strong>{{currentCar.carName}}</ul>
-                                                    <ul><strong>Marka-Model : </strong>{{currentCar.brandName}}
-                                                        {{currentCar.desciription}}</ul>
-                                                    <ul><strong>Model Yılı : </strong>{{currentCar.modelYear}}</ul>
-                                                    <ul><strong>Günlük Ücret : </strong>{{currentCar.dailyPrice| lira}}
-                                                    </ul>
 
-                                                </div>
+                                    <!-- <mat-form-field appearance="outline">
+                                        <mat-label>Select Date Range</mat-label>
+                                          
+                                        <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
+                                          <input matStartDate placeholder="Start Date" formControlName="start">
+                                          <input matEndDate placeholder="End Date" formControlName="end">
+                                        </mat-date-range-input>
+                                           
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                          
+                                        <mat-date-range-picker #picker></mat-date-range-picker>
+                                      </mat-form-field>
+                                        
+                                      <h3>Start: {{range.value.start | date}} End: {{range.value.end | date}}</h3> -->
 
-                                            </div>
-                                        </div>
-                                    </div>
                                     <button type="button" class="btn btn-warning"
                                         data-bs-dismiss="modal">Vazgeç</button>
-                                    <button type="button" (click)="rentCar(currentCar)" class="btn btn-primary">Kirala</button>
+                                    <button type="button" (click)="rentCar(currentCar)" data-bs-dismiss="modal" class="btn btn-primary">Kirala</button>
                                 </div>
+                                <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content" style="border-radius: 30px;">
+                                        <div class="modal-header" style="background-color: rgb(54, 53, 53);
+                                         border-start-start-radius: 27px; border-top-right-radius: 27px;  ">
+                                            <img src="assets/svg/aracBilgileri.png" width="150px" height="50px"
+                                                class="modal-title" id="exampleModalLabel"
+                                                style="margin-left: 20px;">
+                                            
+                                        </div>
+                                        <div class="modal-body" *ngIf="currentCar">
+                                            <ul><strong>Plaka : </strong>{{currentCar.carName}}</ul>
+                                            <ul><strong>Marka-Model : </strong>{{currentCar.brandName}}
+                                                {{currentCar.desciription}}</ul>
+                                            <ul><strong>Model Yılı : </strong>{{currentCar.modelYear}}</ul>
+                                            <ul><strong>Günlük Ücret : </strong>{{currentCar.dailyPrice| lira}}
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>

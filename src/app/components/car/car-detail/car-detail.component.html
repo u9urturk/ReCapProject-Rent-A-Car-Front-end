@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-7" id="gallery">
+            <h1 id="header2"><strong>Görseller</strong></h1>
+            <div class="row row-cols-1 row-cols-md-2 g-4" gallerize>
+                <div class="col" *ngFor="let item of items">
+                    <div class="card">
+                        <img [src]="item.data.thumb" style="height: 180px" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5" *ngIf="carDetail[0]">
+            <div id="info">
+                <h1 id="header1"><strong>Araç Bilgileri</strong></h1>
+                <ul>
+                    <strong>Plaka : </strong>{{
+                    carDetail[0].carName
+                    }}
+                </ul>
+                <ul>
+                    <strong>Marka-Model : </strong>{{
+                    carDetail[0].brandName
+                    }}
+                    {{
+                    carDetail[0].desciription
+                    }}
+                </ul>
+                <ul>
+                    <strong>Model Yılı : </strong>{{
+                    carDetail[0].modelYear
+                    }}
+                </ul>
+                <ul>
+                    <strong>Günlük Ücret : </strong>{{
+                    carDetail[0].dailyPrice | lira
+                    }}
+                </ul>
+            </div>
+            <mat-form-field appearance="fill" id="date" style="width: 300px;">
+                <mat-label style="color: white;">Araç Kiralama ve Dönüş tarihi seçin</mat-label>
+
+                <mat-date-range-input [rangePicker]="picker" [formGroup]="rentForm" style="color: white;">
+                    <input matStartDate placeholder="Kiralama Tarihi" formControlName="rentDate" style="color: white;">
+                    <input matEndDate placeholder="Dönüş Tarihi" formControlName="returnDate" style="color: white;">
+                </mat-date-range-input>
+
+                <mat-datepicker-toggle matSuffix [for]="picker" style="color: white; "></mat-datepicker-toggle>
+
+                <mat-date-range-picker #picker style="color: white;"></mat-date-range-picker>
+            </mat-form-field>
+
+        </div>
+        <button class="btn btn-warning" (click)="rentCar()" style="margin-top: 10px;">Ödeme Adımına Geç</button>
+    </div>
+</div>

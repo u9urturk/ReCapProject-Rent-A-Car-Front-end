@@ -23,6 +23,9 @@ import { GALLERY_CONFIG } from 'ng-gallery';
 import { LightboxModule } from  'ng-gallery/lightbox';
 import { LiraPipe } from './pipes/lira.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import {ToastrModule} from 'ngx-toastr';
 import { RentSummaryComponent } from './components/rent-summary/rent-summary.component';
@@ -37,6 +40,7 @@ import { BrandOperationComponent } from './components/brand/brand-operation/bran
 import { ColorOperationComponent } from './components/color/color-operation/color-operation.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/navi/register/register.component';
+import { CarDetailComponent } from './components/car/car-detail/car-detail.component';
 
 
  
@@ -62,27 +66,22 @@ import { RegisterComponent } from './components/navi/register/register.component
     CarAddComponent,
     AdminPanelComponent,
     FooterComponent,
-   
     Test2Component,
-   
     ImageUploadComponent,
-   
     BrandOperationComponent,
-   
     ColorOperationComponent,
-   
     RegisterComponent,
-    
-    
-    
-
-    
+    CarDetailComponent,    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+
     GalleryModule,LightboxModule.withConfig({
       panelClass:'fullscreen'
     }),

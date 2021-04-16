@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
     this.decodedToken = jwtDecode(this.token)
     localStorage.setItem("role",this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'])
     localStorage.setItem("name",this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'])
+    localStorage.setItem("userId",this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
     // console.log(localStorage.getItem("role"))
     // console.log(this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'])
   }
