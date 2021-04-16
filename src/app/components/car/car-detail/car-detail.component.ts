@@ -11,7 +11,7 @@ import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { RentalService } from 'src/app/services/rental.service';
-import {Moment} from 'moment'
+import { Moment } from 'moment'
 import * as moment from 'moment';
 
 
@@ -26,22 +26,24 @@ export class CarDetailComponent implements OnInit {
   items: GalleryItem[] = [];
   userId: number;
   customer: CustomerAddModel;
-  dataLoaded=false;
-  createCustomer=false;
+  dataLoaded = false;
+  createCustomer = false;
   defaultCompany: string = "RentACar"
   carId: number;
+
   rentForm: FormGroup;
   // range = new FormGroup({
-  //   start: new FormControl(),
-  //   end: new FormControl()
+  //   rentDate: new FormControl((new Date()).toJSON()),
+  //   returnDate: new FormControl((new Date()).toISOString())
   // });
+
   constructor(private activatedRoute: ActivatedRoute,
     private carService: CarService,
     private toastr: ToastrService,
     private carImageService: CarImageService,
     private fb: FormBuilder,
     private customerService: CustomerService,
-    private rentalService:RentalService) { }
+    private rentalService: RentalService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -58,21 +60,23 @@ export class CarDetailComponent implements OnInit {
       // }
     })
     this.createRentForm();
+    
   }
+  // test(){
+  //   console.log(this.range);
+  // }
+
   createRentForm() {
     this.rentForm = this.fb.group({
       rentDate: [null, Validators.required],
       returnDate: [null, Validators.required]
-      
+
     })
-
     //console.log(this.rentForm)
-
   }
 
-
-  baseGetCustomerByUserId(userId:number){
-    this.customerService.getCustomerByUserId(userId).subscribe(response=>{
+  baseGetCustomerByUserId(userId: number) {
+    this.customerService.getCustomerByUserId(userId).subscribe(response => {
       console.log(response.data)
       this.customer = response.data
     })
@@ -81,50 +85,59 @@ export class CarDetailComponent implements OnInit {
 
     this.customerService.getCustomerByUserId(userId).subscribe(response => {
       //console.log(response.data)
-      if(response.data != null){
+      if (response.data != null) {
         this.customer = response.data
-      }else{
+      } else {
         this.dataLoaded = true
-        if(this.dataLoaded == true){
+        if (this.dataLoaded == true && this.userId != 0 && this.userId != null ) {
           this.createNewCustomer(userId)
           this.createCustomer = true;
-          if(this.createCustomer == true){
-            setTimeout(()=>this.baseGetCustomerByUserId(userId),1000)
-            
+          if (this.createCustomer == true) {
+            setTimeout(() => this.baseGetCustomerByUserId(userId), 1000)
+
           }
         }
       }
-      
-      
+
+
 
     })
-    
+
   }
 
-  createNewCustomer(userId:number){
+  createNewCustomer(userId: number) {
     let customerModel = Object.assign({ userId: userId, companyName: this.defaultCompany })
-        console.log(customerModel)
-        //this.toastr.success("Yeni Müşteri Kaydı")
-        this.customerService.customerAdd(customerModel).subscribe(response=>{
-          this.toastr.success(response.message,"Yeni Müşteri Kaydı")
-        })
+    console.log(customerModel)
+    //this.toastr.success("Yeni Müşteri Kaydı")
+    this.customerService.customerAdd(customerModel).subscribe(response => {
+      this.toastr.success(response.message, "Yeni Müşteri Kaydı")
+    })
   }
 
   getUserId() {
     var stringToConvert = localStorage.getItem("userId")
     this.userId = Number(stringToConvert); // tokendan gelen string tipteki userId'yi number tibine dönüştürdük. 
     //console.log(this.userId)
-    
+
   }
 
   rentCar() {
-    let rentModel = Object.assign({ carId: this.carId, customerId: this.customer.id }, this.rentForm.value )
+    if(this.rentForm.valid){
+      //console.log(this.rentForm.value)
+    var jsonRentForm = JSON.stringify(this.rentForm.value);
+    console.log(jsonRentForm)
+    var revertedRentForm = JSON.parse(jsonRentForm);
+    let rentModel = Object.assign({ carId: this.carId, customerId: this.customer.id }, revertedRentForm)
     console.log(rentModel)
-    // this.rentalService.rentCar(JSON.stringify(rentModel)).subscribe(response=>{
-    //   this.toastr.success(response.message,"OK")
-    // },responseError=>{
-    //   console.log(responseError);
-    // })
+    this.rentalService.rentCar(rentModel).subscribe(response=>{
+      this.toastr.success(response.message,"OK")
+    },responseError=>{
+      this.toastr.info(responseError.error)
+    })
+    }else{
+      this.toastr.error("Geçersiz Kullanım ","Dikkat  !")
+    }
+    
   }
 
   getCar(carId: number) {
@@ -148,7 +161,9 @@ export class CarDetailComponent implements OnInit {
     })
   }
   setCarId(carId: number) {
-    this.carId = carId;
+    var stringToConvert = carId
+    this.carId = Number(stringToConvert)
+    //console.log(this.carId)
   }
 
   getCarImageUrl() {

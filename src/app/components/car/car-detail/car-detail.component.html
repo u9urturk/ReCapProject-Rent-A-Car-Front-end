@@ -1,7 +1,6 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-7" id="gallery">
-            <h1 id="header2"><strong>Görseller</strong></h1>
+        <div class="col-md-7" id="gallery">  
             <div class="row row-cols-1 row-cols-md-2 g-4" gallerize>
                 <div class="col" *ngFor="let item of items">
                     <div class="card">
@@ -11,46 +10,55 @@
             </div>
         </div>
         <div class="col-md-5" *ngIf="carDetail[0]">
-            <div id="info">
-                <h1 id="header1"><strong>Araç Bilgileri</strong></h1>
-                <ul>
-                    <strong>Plaka : </strong>{{
-                    carDetail[0].carName
-                    }}
-                </ul>
-                <ul>
-                    <strong>Marka-Model : </strong>{{
-                    carDetail[0].brandName
-                    }}
-                    {{
-                    carDetail[0].desciription
-                    }}
-                </ul>
-                <ul>
-                    <strong>Model Yılı : </strong>{{
-                    carDetail[0].modelYear
-                    }}
-                </ul>
-                <ul>
-                    <strong>Günlük Ücret : </strong>{{
-                    carDetail[0].dailyPrice | lira
-                    }}
-                </ul>
+            <div class="card text-white  mb-3" id="card-a" >
+                <div class="card text-dark  mb-3" id="card-b">
+                    <div class="card-header"  style="border: none;"><h1 id="header1"><Strong>Araç Bilgileri</Strong></h1></div>
+                    <div class="card-body" >
+                        <ul>
+                            <strong style="margin-right: 20px;">Plaka : </strong>{{
+                            carDetail[0].carName
+                            }}
+                        </ul>
+                        <ul>
+                            <strong style="margin-right: 20px;">Marka-Model : </strong>{{
+                            carDetail[0].brandName
+                            }}
+                            {{
+                            carDetail[0].desciription
+                            }}
+                        </ul>
+                        <ul>
+                            <strong style="margin-right: 20px;">Model Yılı : </strong>{{
+                            carDetail[0].modelYear
+                            }}
+                        </ul>
+                        <ul>
+                            <strong style="margin-right: 20px;">Günlük Ücret : </strong>{{
+                            carDetail[0].dailyPrice | lira
+                            }}
+                        </ul>
+                        <mat-form-field appearance="fill" color="warn" id="date" style="width: 300px; color: white;">
+                            <mat-label style="color: white;" >Araç Kiralama ve Dönüş tarihi seçin</mat-label>
+
+                            <mat-date-range-input [rangePicker]="picker" [formGroup]="rentForm" >
+                                <input matStartDate placeholder="Kiralama Tarihi" formControlName="rentDate"
+                                     />
+                                <input matEndDate placeholder="Dönüş Tarihi" formControlName="returnDate"
+                                     />
+                            </mat-date-range-input>
+
+                            <mat-datepicker-toggle matSuffix [for]="picker" style="color: white;"  >
+                            </mat-datepicker-toggle>
+
+                            <mat-date-range-picker  touchUi #picker ></mat-date-range-picker>
+                        </mat-form-field>
+
+                    </div>
+                </div>
             </div>
-            <mat-form-field appearance="fill" id="date" style="width: 300px;">
-                <mat-label style="color: white;">Araç Kiralama ve Dönüş tarihi seçin</mat-label>
-
-                <mat-date-range-input [rangePicker]="picker" [formGroup]="rentForm" style="color: white;">
-                    <input matStartDate placeholder="Kiralama Tarihi" formControlName="rentDate" style="color: white;">
-                    <input matEndDate placeholder="Dönüş Tarihi" formControlName="returnDate" style="color: white;">
-                </mat-date-range-input>
-
-                <mat-datepicker-toggle matSuffix [for]="picker" style="color: white; "></mat-datepicker-toggle>
-
-                <mat-date-range-picker #picker style="color: white;"></mat-date-range-picker>
-            </mat-form-field>
-
         </div>
-        <button class="btn btn-warning" (click)="rentCar()" style="margin-top: 10px;">Ödeme Adımına Geç</button>
+        <button class="btn btn-warning" (click)="rentCar()" style="margin-top: 30px; margin-bottom: 20px;">
+            Ödeme Adımına Geç
+        </button>
     </div>
 </div>
