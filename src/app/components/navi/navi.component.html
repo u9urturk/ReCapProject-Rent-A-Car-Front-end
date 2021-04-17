@@ -21,17 +21,28 @@
           <a class="nav-link" routerLink = "/cars"  >Kiralık Araçlar</a>
         </li>
         <li>
-          <app-rent-summary></app-rent-summary>
-        </li>
-        <li>
           <app-admin-panel *ngIf="getRole(admin)"></app-admin-panel>
         </li>
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Hoş Geldiniz" aria-label="Search">
         <button class="btn btn-outline-success" *ngIf="!getItem()"routerLink="/login" class="btn btn-dark">Login</button>
-        <button class="btn btn-outline-success" id="logout" class="btn btn-secondary" *ngIf="getItem()" [class]="getName()" (click)="logOut()">{{name}}</button>
+        <button class="btn btn-outline-success" id="logout" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalUser" *ngIf="getItem()" [class]="getName()" ><b>{{name}}</b></button>
       </form>
+      <div class="modal fade" id="exampleModalUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="exampleModalLabel"  *ngIf="getItem()"><b>{{name}}</b></h2>
+            </div>
+            <div class="modal-body">
+              <button class="btn btn-warning" routerLink="rentals/mycar" data-bs-dismiss="modal"><b>Kiralanan Araçlar</b></button><br>
+              <button class="btn btn-warning" data-bs-dismiss="modal"><b>Profil</b> </button><br>
+              <button class="btn btn-warning" data-bs-dismiss="modal" (click)="logOut()"><b>Çıkış</b></button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </nav>

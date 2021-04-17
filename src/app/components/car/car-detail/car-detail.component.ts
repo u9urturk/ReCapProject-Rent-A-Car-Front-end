@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -11,8 +10,6 @@ import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { RentalService } from 'src/app/services/rental.service';
-import { Moment } from 'moment'
-import * as moment from 'moment';
 
 
 @Component({
@@ -60,7 +57,7 @@ export class CarDetailComponent implements OnInit {
       // }
     })
     this.createRentForm();
-    
+
   }
   // test(){
   //   console.log(this.range);
@@ -89,7 +86,7 @@ export class CarDetailComponent implements OnInit {
         this.customer = response.data
       } else {
         this.dataLoaded = true
-        if (this.dataLoaded == true && this.userId != 0 && this.userId != null ) {
+        if (this.dataLoaded == true && this.userId != 0 && this.userId != null) {
           this.createNewCustomer(userId)
           this.createCustomer = true;
           if (this.createCustomer == true) {
@@ -122,22 +119,22 @@ export class CarDetailComponent implements OnInit {
   }
 
   rentCar() {
-    if(this.rentForm.valid){
+    if (this.rentForm.valid) {
       //console.log(this.rentForm.value)
-    var jsonRentForm = JSON.stringify(this.rentForm.value);
-    console.log(jsonRentForm)
-    var revertedRentForm = JSON.parse(jsonRentForm);
-    let rentModel = Object.assign({ carId: this.carId, customerId: this.customer.id }, revertedRentForm)
-    console.log(rentModel)
-    this.rentalService.rentCar(rentModel).subscribe(response=>{
-      this.toastr.success(response.message,"OK")
-    },responseError=>{
-      this.toastr.info(responseError.error)
-    })
-    }else{
-      this.toastr.error("Geçersiz Kullanım ","Dikkat  !")
+      var jsonRentForm = JSON.stringify(this.rentForm.value);
+      //console.log(jsonRentForm)
+      var revertedRentForm = JSON.parse(jsonRentForm);
+      let rentModel = Object.assign({ carId: this.carId, customerId: this.customer.id }, revertedRentForm)
+      //console.log(rentModel)
+      this.rentalService.rentCar(rentModel).subscribe(response => {
+        this.toastr.success(response.message, "OK")
+      }, responseError => {
+        this.toastr.info(responseError.error)
+      })
+    } else {
+      this.toastr.error("Geçersiz Kullanım ", "Dikkat  !")
     }
-    
+
   }
 
   getCar(carId: number) {

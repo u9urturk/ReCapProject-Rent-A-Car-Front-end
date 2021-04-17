@@ -1,16 +1,34 @@
-#modal-box{
-    width: 300px;
-    height: auto;
-    
+#modal-box {
+  width: 400px;
+  height: auto;
 }
 
-#modal-radius{
-    border-radius: 40px;
+#modal-radius {
+  border-radius: 40px;
 }
-#exampleModalLabel{
-    margin-left: 95px;
+#exampleModalLabel {
+  margin-left: 95px;
 }
 
-#body{
-    border: none;
+#body {
+  border: none;
+}
+
+#register-img {
+  width: 200px;
+  height: 60px;
+  margin-left: 82px;
+}
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
 }

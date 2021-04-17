@@ -17,7 +17,7 @@
   <div class="modal-dialog" id="modal-box">
     <div class="modal-content" id="modal-radius">
       <div class="modal-header" style="border: none;">
-        <h5 class="modal-title"  id="exampleModalLabel">Kayıt Ol</h5>
+        <img  id="register-img" src="assets/svg/rentacar.png">
       </div>
       <div class="modal-body" id="body">
         <form
@@ -25,7 +25,7 @@
           
           class="form-register"
         >
-          <div class="form-group">
+          <div class="form-floating">
             <input
               type="text"
               id="firstName"
@@ -33,33 +33,39 @@
               formControlName="firstName"
               class="form-control"
               placeholder="Ad"
-              autofocus
+              
             />
+            <label for="firstName">Ad</label>
           </div>
-          <div class="form-group">
+          <div class="form-floating">
             <input
+              style="margin-top: 10px;"
               type="text"
               id="lastName"
               name="lastName"
               formControlName="lastName"
               class="form-control"
               placeholder="Soyad"
-              autofocus
+              
             />
+            <label for="lastName">Soyad</label>
           </div>
-          <div class="form-group">
+          <div class="form-floating">
             <input
+              style="margin-top: 10px;"
               type="email"
               id="email"
               name="email"
               formControlName="email"
               class="form-control"
               placeholder="E-mail"
-              autofocus
+              
             />
+            <label for="email">E-Posta</label>
           </div>
-          <div class="form-group">
+          <div class="form-floating">
             <input
+            style="margin-top: 10px;"
               type="password"
               id="password"
               name="password"
@@ -67,9 +73,11 @@
               class="form-control"
               placeholder="Şifre"
             />
+            <label for="password">Şifre</label>
           </div>
-          <div class="form-group">
+          <div class="form-floating">
             <input
+              style="margin-top: 10px;"
               type="password"
               id="confirmPassword"
               name="confirmPassword"
@@ -77,6 +85,7 @@
               class="form-control"
               placeholder="Şifre"
             />
+            <label for="confirmPassword">Şifre Doğrulama</label>
           </div>
         </form>
       </div>
@@ -84,7 +93,7 @@
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Vazgeç</button>
         <button  class="btn  btn-warning btn-block"
         [disabled]="!registerForm.valid"
-        type="button" data-bs-dismiss="modal" (click)="register()">
+        type="button" data-bs-dismiss="modal" style="margin-right: 10px;" (click)="register()">
           Kayıt Ol
         </button>
         
