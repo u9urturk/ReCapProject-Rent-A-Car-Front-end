@@ -9,32 +9,37 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5" *ngIf="carDetail[0]">
+        <div class="col-md-5" *ngIf="carDetail">
             <div class="card text-white  mb-3" id="card-a" >
                 <div class="card text-dark  mb-3" id="card-b">
                     <div class="card-header"  style="border: none;"><h1 id="header1"><Strong>Araç Bilgileri</Strong></h1></div>
                     <div class="card-body" >
                         <ul>
                             <strong style="margin-right: 20px;">Plaka : </strong>{{
-                            carDetail[0].carName
+                            carDetail.carName
                             }}
                         </ul>
                         <ul>
                             <strong style="margin-right: 20px;">Marka-Model : </strong>{{
-                            carDetail[0].brandName
+                            carDetail.brandName
                             }}
                             {{
-                            carDetail[0].desciription
+                            carDetail.desciription
                             }}
                         </ul>
                         <ul>
                             <strong style="margin-right: 20px;">Model Yılı : </strong>{{
-                            carDetail[0].modelYear
+                            carDetail.modelYear
                             }}
                         </ul>
                         <ul>
                             <strong style="margin-right: 20px;">Günlük Ücret : </strong>{{
-                            carDetail[0].dailyPrice | lira
+                            carDetail.dailyPrice | lira
+                            }}
+                        </ul>
+                        <ul>
+                            <strong style="margin-right: 20px;">Findeks Puanı: </strong>{{
+                            carDetail.carFindeksPoint
                             }}
                         </ul>
                         <mat-form-field appearance="fill" color="warn" id="date" style="width: 300px; color: white;">

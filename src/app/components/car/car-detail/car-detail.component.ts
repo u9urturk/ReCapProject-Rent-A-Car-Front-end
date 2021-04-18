@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -6,9 +7,11 @@ import { ToastrService } from 'ngx-toastr';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
 import { CustomerAddModel } from 'src/app/models/customerAddModel';
+import { FindeksModel } from 'src/app/models/findeksModel';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
+import { FindeksService } from 'src/app/services/findeks.service';
 import { RentalService } from 'src/app/services/rental.service';
 
 
@@ -18,15 +21,20 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./car-detail.component.css']
 })
 export class CarDetailComponent implements OnInit {
-  carDetail: CarDetail[] = [];
+  carDetail: CarDetail;
   carImages: CarImage[] = [];
+  findeks: FindeksModel;
   items: GalleryItem[] = [];
   userId: number;
   customer: CustomerAddModel;
+  customerId: number
   dataLoaded = false;
   createCustomer = false;
+  createCustomerFindeks = false;
+  findeksOK = true;
   defaultCompany: string = "RentACar"
   carId: number;
+
 
   rentForm: FormGroup;
   // range = new FormGroup({
@@ -40,7 +48,8 @@ export class CarDetailComponent implements OnInit {
     private carImageService: CarImageService,
     private fb: FormBuilder,
     private customerService: CustomerService,
-    private rentalService: RentalService) { }
+    private rentalService: RentalService,
+    private findeksService: FindeksService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -51,12 +60,12 @@ export class CarDetailComponent implements OnInit {
       }
       this.getUserId();
       this.getCustomerByUserId(this.userId);
-      // if(this.getCustomerByUserId(this.userId)!=null){
-      //   console.log("OK")
-      //   this.createNewCustomer(this.userId);
-      // }
+      setTimeout(() => this.getCustomerFindeksPoint(this.customerId), 500)
+
     })
+
     this.createRentForm();
+
 
   }
   // test(){
@@ -83,7 +92,9 @@ export class CarDetailComponent implements OnInit {
     this.customerService.getCustomerByUserId(userId).subscribe(response => {
       //console.log(response.data)
       if (response.data != null) {
-        this.customer = response.data
+        this.customer = response.data;
+        this.customerId = response.data.id;
+        //console.log(this.customerId)
       } else {
         this.dataLoaded = true
         if (this.dataLoaded == true && this.userId != 0 && this.userId != null) {
@@ -96,15 +107,13 @@ export class CarDetailComponent implements OnInit {
         }
       }
 
-
-
     })
 
   }
 
   createNewCustomer(userId: number) {
     let customerModel = Object.assign({ userId: userId, companyName: this.defaultCompany })
-    console.log(customerModel)
+    //console.log(customerModel)
     //this.toastr.success("Yeni Müşteri Kaydı")
     this.customerService.customerAdd(customerModel).subscribe(response => {
       this.toastr.success(response.message, "Yeni Müşteri Kaydı")
@@ -119,28 +128,88 @@ export class CarDetailComponent implements OnInit {
   }
 
   rentCar() {
+
     if (this.rentForm.valid) {
-      //console.log(this.rentForm.value)
-      var jsonRentForm = JSON.stringify(this.rentForm.value);
-      //console.log(jsonRentForm)
-      var revertedRentForm = JSON.parse(jsonRentForm);
-      let rentModel = Object.assign({ carId: this.carId, customerId: this.customer.id }, revertedRentForm)
-      //console.log(rentModel)
-      this.rentalService.rentCar(rentModel).subscribe(response => {
-        this.toastr.success(response.message, "OK")
-      }, responseError => {
-        this.toastr.info(responseError.error)
-      })
+      if (this.findeks.findeksPoint < this.carDetail.carFindeksPoint) {
+        this.toastr.error("Bu aracı kiralamak için gerekli olan findeks puanınız yetersiz", `Mevcut Findeks Puanınız : ${this.findeks.findeksPoint}`)
+      } else {
+        //console.log(this.rentForm.value)
+        var jsonRentForm = JSON.stringify(this.rentForm.value);
+        //console.log(jsonRentForm)
+        var revertedRentForm = JSON.parse(jsonRentForm);
+        let rentModel = Object.assign({ carId: this.carId, customerId: this.customer.id }, revertedRentForm)
+        //console.log(rentModel)
+        this.rentalService.rentCar(rentModel).subscribe(response => {
+          this.toastr.success(response.message, "OK")
+          setTimeout(()=>this.updateCustomerFindekPoint(),500);
+        }, responseError => {
+          this.toastr.info(responseError.error)
+        })
+      }
+
     } else {
       this.toastr.error("Geçersiz Kullanım ", "Dikkat  !")
     }
+
+
+
+  }
+  getCustomerFindeksPoint(customerId: number) {
+    this.findeksService.getCustomerFindeksPointByCustomerId(customerId).subscribe(response => {
+      if (response.data != null) {
+        this.findeks = response.data
+        //console.log(this.findeks,"OK")
+
+      } else {
+        this.findeksOK = false;
+        if (this.findeksOK == false) {
+          this.createCustomerFindeksPoint(customerId);
+          this.createCustomerFindeks = true;
+          if (this.createCustomerFindeks == true) {
+            setTimeout(() => this.baseGetCustomerFindeksPoint(customerId), 1000)
+          }
+        }
+
+      }
+
+    })
+  }
+
+  updateCustomerFindekPoint() {
+    let findeksModel = Object.assign({ id: this.findeks.id, customerId: this.customer.id })
+    this.findeksService.updateCustomerFindeksPoint(findeksModel).subscribe(response => {
+      this.toastr.info(response.message)
+      let updateOK = true
+      if (updateOK == true) {
+        setTimeout(()=>this.baseGetCustomerFindeksPoint(this.customer.id),500) 
+        setTimeout(() => this.toastr.info(`Yeni findeks puanınız ${this.findeks.findeksPoint}`),1000)
+      }
+    },responseError=>{
+      this.toastr.warning(responseError.error.message)
+    })
+  }
+
+  baseGetCustomerFindeksPoint(customerId: number) {
+    this.findeksService.getCustomerFindeksPointByCustomerId(customerId).subscribe(response => {
+      this.findeks = response.data;
+      //console.log("OK")
+
+    })
+  }
+
+  createCustomerFindeksPoint(customerId: number) {
+    let findeksModel = Object.assign({ customerId: customerId })
+    this.findeksService.newCustomerFindeksPoint(findeksModel).subscribe(response => {
+      this.toastr.info(response.message)
+
+    })
 
   }
 
   getCar(carId: number) {
     this.carService.getCarByCarId(carId).subscribe(response => {
       //console.log(response.data)
-      this.carDetail = response.data
+      this.carDetail = response.data[0]
       // if(this.carDetail){
       //   //console.log(this.carDetail)
       //   //this.toastr.info("OK")
@@ -173,8 +242,6 @@ export class CarDetailComponent implements OnInit {
     });
 
     this.items = imageUrl.map(img => new ImageItem({ src: img.src, thumb: img.thumb }))
-
-
 
   }
 
