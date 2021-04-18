@@ -1,4 +1,3 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -8,6 +7,8 @@ import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
 import { CustomerAddModel } from 'src/app/models/customerAddModel';
 import { FindeksModel } from 'src/app/models/findeksModel';
+import { Rental } from 'src/app/models/rental';
+import { RentModel } from 'src/app/models/rentModel';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -21,26 +22,22 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./car-detail.component.css']
 })
 export class CarDetailComponent implements OnInit {
+  rentDate:Date;
+  returnDate:Date;
   carDetail: CarDetail;
   carImages: CarImage[] = [];
   findeks: FindeksModel;
   items: GalleryItem[] = [];
   userId: number;
   customer: CustomerAddModel;
-  customerId: number
+  customerId: number;
   dataLoaded = false;
   createCustomer = false;
   createCustomerFindeks = false;
   findeksOK = true;
   defaultCompany: string = "RentACar"
   carId: number;
-
-
-  rentForm: FormGroup;
-  // range = new FormGroup({
-  //   rentDate: new FormControl((new Date()).toJSON()),
-  //   returnDate: new FormControl((new Date()).toISOString())
-  // });
+  sonuc:number;
 
   constructor(private activatedRoute: ActivatedRoute,
     private carService: CarService,
@@ -64,22 +61,11 @@ export class CarDetailComponent implements OnInit {
 
     })
 
-    this.createRentForm();
+    
 
 
   }
-  // test(){
-  //   console.log(this.range);
-  // }
-
-  createRentForm() {
-    this.rentForm = this.fb.group({
-      rentDate: [null, Validators.required],
-      returnDate: [null, Validators.required]
-
-    })
-    //console.log(this.rentForm)
-  }
+ 
 
   baseGetCustomerByUserId(userId: number) {
     this.customerService.getCustomerByUserId(userId).subscribe(response => {
@@ -127,19 +113,43 @@ export class CarDetailComponent implements OnInit {
 
   }
 
-  rentCar() {
+   addDays(date:Date, days:number) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+  
 
-    if (this.rentForm.valid) {
+  rentCar() {
+    
+    let Test:RentModel = {
+      carId : this.carId,
+      customerId: this.customer.id,
+      rentDate : this.addDays(this.rentDate,1).toISOString(),
+      returnDate :this.addDays(this.returnDate,1).toISOString()
+
+    }
+
+    if (Test.rentDate!= null) {
+      var date1 = new Date(Test.returnDate.toString());
+      var date2 = new Date(Test.rentDate.toString());
+      var difference = date1.getTime() - date2.getTime();
+
+      var numberOfDays = Math.ceil(difference / (1000 * 3600 * 24));
+
+      this.sonuc = numberOfDays * this.carDetail.dailyPrice;
+    }
+
+    
+    console.log(this.sonuc)
+    if (Test.rentDate) {
       if (this.findeks.findeksPoint < this.carDetail.carFindeksPoint) {
         this.toastr.error("Bu aracı kiralamak için gerekli olan findeks puanınız yetersiz", `Mevcut Findeks Puanınız : ${this.findeks.findeksPoint}`)
       } else {
-        //console.log(this.rentForm.value)
-        var jsonRentForm = JSON.stringify(this.rentForm.value);
-        //console.log(jsonRentForm)
-        var revertedRentForm = JSON.parse(jsonRentForm);
-        let rentModel = Object.assign({ carId: this.carId, customerId: this.customer.id }, revertedRentForm)
+        
+        //let rentModel = Object.assign({ carId: this.carId, customerId: this.customer.id }, revertedRentForm)
         //console.log(rentModel)
-        this.rentalService.rentCar(rentModel).subscribe(response => {
+        this.rentalService.rentCar(Test).subscribe(response => {
           this.toastr.success(response.message, "OK")
           setTimeout(()=>this.updateCustomerFindekPoint(),500);
         }, responseError => {
@@ -150,10 +160,7 @@ export class CarDetailComponent implements OnInit {
     } else {
       this.toastr.error("Geçersiz Kullanım ", "Dikkat  !")
     }
-
-
-
-  }
+  } 
   getCustomerFindeksPoint(customerId: number) {
     this.findeksService.getCustomerFindeksPointByCustomerId(customerId).subscribe(response => {
       if (response.data != null) {
