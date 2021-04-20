@@ -3,4 +3,5 @@ export interface RentModel{
     customerId:number;
     rentDate:string;
     returnDate:string;
+    payment:number;
 }

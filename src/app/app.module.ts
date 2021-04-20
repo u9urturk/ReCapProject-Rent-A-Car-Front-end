@@ -4,6 +4,10 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPaymentCardModule } from 'ngx-payment-card'; 
+
+
+
 
 
 import { AppComponent } from './app.component';
@@ -34,6 +38,7 @@ import { CarAddComponent } from './components/car/car-add/car-add.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { FooterComponent } from './components/footer/footer.component';
 
+
 import { Test2Component } from './components/test2/test2.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { BrandOperationComponent } from './components/brand/brand-operation/brand-operation.component';
@@ -41,6 +46,10 @@ import { ColorOperationComponent } from './components/color/color-operation/colo
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/navi/register/register.component';
 import { CarDetailComponent } from './components/car/car-detail/car-detail.component';
+import { PaymentComponent } from './components/car/payment/payment.component';
+
+
+
 
 
  
@@ -71,7 +80,11 @@ import { CarDetailComponent } from './components/car/car-detail/car-detail.compo
     BrandOperationComponent,
     ColorOperationComponent,
     RegisterComponent,
-    CarDetailComponent,    
+    CarDetailComponent,
+    PaymentComponent,
+
+
+      
   ],
   imports: [
     BrowserModule,
@@ -81,6 +94,9 @@ import { CarDetailComponent } from './components/car/car-detail/car-detail.compo
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
+    NgxPaymentCardModule,
+  
+    
 
     GalleryModule,LightboxModule.withConfig({
       panelClass:'fullscreen'

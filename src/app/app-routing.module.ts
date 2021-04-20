@@ -5,11 +5,14 @@ import { CarAddComponent } from './components/car/car-add/car-add.component';
 import { CarDetailComponent } from './components/car/car-detail/car-detail.component';
 
 import { CarComponent } from './components/car/car.component';
+
+import { PaymentComponent } from './components/car/payment/payment.component';
 import { TestComponent } from './components/car/test/test.component';
+
 import { ColorOperationComponent } from './components/color/color-operation/color-operation.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/navi/login/login.component';
-import { RegisterComponent } from './components/navi/register/register.component';
+
 import { RentalComponent } from './components/rental/rental.component';
 import { Test2Component } from './components/test2/test2.component';
 import { AdminGuard } from './guards/admin.guard';
@@ -27,7 +30,10 @@ const routes: Routes = [
   {path:"brand/operation",component:BrandOperationComponent,canActivate:[LoginGuard,AdminGuard]},
   {path:"color/operation",component:ColorOperationComponent,canActivate:[LoginGuard,AdminGuard]},
   {path:"login",component:LoginComponent},
-  {path:"admin/test",component:Test2Component}
+  {path:"admin/test",component:Test2Component},
+  {path:"x",component:PaymentComponent},
+ 
+  
   
   
 ];

@@ -1,0 +1,105 @@
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="paymentCardModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel"><strong>Ödeme Planı</strong></h2>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <a href="https://www.shift4shop.com/credit-card-logos.html"><img alt="Credit Card Logos" title="Credit Card Logos" src="https://www.shift4shop.com/images/credit-card-logos/cc-lg-5_b.png" width="300" height="59"  /></a>
+            <form [formGroup]="paymentForm" id="form">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="cardNumber" 
+                  formControlName="cardNumber"
+                  class="form-control"
+                  placeholder="Kart Numarası"
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="expirationDate"
+                  formControlName="expirationDate"
+                  class="form-control"
+                  placeholder="Son Kullanma Tarihi"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="name"
+                  formControlName="name"
+                  class="form-control"
+                  placeholder="Kart Sahibi"
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="securityCode"
+                  formControlName="securityCode"
+                  class="form-control"
+                  placeholder="Güvenlik Kodu"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <div class="card text-white mb-3" id="card-a">
+              <div class="card text-dark mb-3" id="card-b">
+                
+                <div class="card-body">
+                  <img src="{{ imagePath[0].path }}" id="img" />
+                </div>
+                <ul>
+                  <strong style="margin-right: 20px">Kiralama Tarihi:</strong
+                  >{{
+                    rentModel.rentDate
+                  }}
+                </ul>
+                <ul>
+                  <strong style="margin-right: 20px">Dönüş Tarihi:</strong
+                  >{{
+                    rentModel.returnDate
+                  }}
+                </ul>
+                <ul>
+                  <strong style="margin-right: 20px">Ödenecek Tutar: </strong
+                  >{{
+                    rentModel.payment | lira
+                  }}
+                </ul>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-warning"
+                data-bs-dismiss="modal"
+              >
+                Vazgeç
+              </button>
+              <button type="button" class="btn btn-primary" (click)="test()">
+                Kirala
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#paymentCardModal">TEST</button> -->
+    </div>
+  </div>
+</div>

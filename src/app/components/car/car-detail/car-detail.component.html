@@ -40,8 +40,11 @@
                         <ul>
                             <strong style="margin-right: 20px;">Findeks Puanı: </strong>{{
                             carDetail.carFindeksPoint
+                            
                             }}
+                            
                         </ul>
+                        
                         <mat-form-field appearance="fill" color="warn" id="date" style="width: 300px; color: white;">
                             <mat-label style="color: white;" >Araç Kiralama ve Dönüş tarihi seçin</mat-label>
 
@@ -64,8 +67,22 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-warning" (click)="rentCar()" style="margin-top: 30px; margin-bottom: 20px;">
+        <button class="btn btn-warning"
+         (click)="rentCarControl()" 
+         style="margin-top: 30px; margin-bottom: 20px;"
+         *ngIf="control == false"
+         >
+            Tarihi Onayla
+        </button>
+        <button class="btn btn-primary"
+         *ngIf="control == true"
+         style="margin-top: 30px; margin-bottom: 20px;"
+         data-bs-toggle="modal"
+         data-bs-target="#paymentCardModal"
+         >
             Ödeme Adımına Geç
         </button>
+        <app-payment *ngIf="rentModel" [rentModel]="rentModel"
+        [imagePath]="imagePath"></app-payment>
     </div>
 </div>
