@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/material_services/auth.service';
 import jwtDecode from"jwt-decode";
 import { DecodedToken } from 'src/app/models/decodedToken';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -58,10 +59,12 @@ export class LoginComponent implements OnInit {
   }
 
   decodeToken(){
+    
     this.decodedToken = jwtDecode(this.token)
     localStorage.setItem("role",this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'])
     localStorage.setItem("name",this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'])
     localStorage.setItem("userId",this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
+    localStorage.setItem("exp",this.decodedToken['exp'])
     // console.log(localStorage.getItem("role"))
     // console.log(this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'])
   }

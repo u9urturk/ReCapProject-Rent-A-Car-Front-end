@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CarImageService } from 'src/app/services/car-image.service';
+import { AuthService } from 'src/app/services/material_services/auth.service';
 
 
 
@@ -17,7 +18,8 @@ export class TestComponent implements OnInit {
   nestedReactiveForm:any = FormGroup;
   constructor(private fb:FormBuilder,
     private carImageService:CarImageService,
-    private toastrService:ToastrService) { 
+    private toastrService:ToastrService,
+    private auth:AuthService) { 
     
   }
   
@@ -26,6 +28,9 @@ export class TestComponent implements OnInit {
     this.createReactiveForm();
   }
   
+  test(){
+    this.auth.isLogened();
+  }
   createReactiveForm(){
     this.nestedReactiveForm = this.fb.group({
       carForms : this.fb.array([this.carForm()])

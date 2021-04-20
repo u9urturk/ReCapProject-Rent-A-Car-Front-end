@@ -10,6 +10,7 @@ import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
 import { GalleryItem, Gallery, ImageItem, ThumbnailsPosition, ImageSize } from 'ng-gallery'
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/material_services/auth.service';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class CarComponent implements OnInit {
     private carImageService: CarImageService,
     private toastrService:ToastrService,
     public gallery: Gallery,
-    private router:Router
+    private router:Router,
+    private auth:AuthService
     
     
   ) { }
@@ -187,8 +189,12 @@ export class CarComponent implements OnInit {
 
 
   rentCar(currentCar:any){
+    
     //this.toastrService.success(currentCar.carName + " Plakalı araç kiralandı")
+   if( this.auth.isLogened() == true){
     this.router.navigate(["cardetail/"+currentCar.carId])
+   }
+    
   }
 
 

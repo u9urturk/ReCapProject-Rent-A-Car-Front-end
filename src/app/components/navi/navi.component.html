@@ -2,8 +2,7 @@
   <div class="container-fluid">
 
     <a class="navbar-brand" href="#" class="btn btn-dark">
-      <img src="assets/svg/rentacar.png"
-        width="100px" height="20px" alt="">
+      <img src="assets/svg/rentacar.png" width="100px" height="20px" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +17,7 @@
           <a class="nav-link" routerLink="/tester">Tester</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink = "/cars"  >Kiralık Araçlar</a>
+          <a class="nav-link" routerLink="/cars">Kiralık Araçlar</a>
         </li>
         <li>
           <app-admin-panel *ngIf="getRole(admin)"></app-admin-panel>
@@ -26,23 +25,50 @@
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Hoş Geldiniz" aria-label="Search">
-        <button class="btn btn-outline-success" *ngIf="!getItem()"routerLink="/login" class="btn btn-dark">Login</button>
-        <button class="btn btn-outline-success" id="logout" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalUser" *ngIf="getItem()" [class]="getName()" ><b>{{name}}</b></button>
+        <button class="btn btn-outline-success" *ngIf="!getItem()" routerLink="/login"
+          class="btn btn-dark">Login</button>
+        <button class="btn btn-outline-success" id="logout" class="btn btn-secondary" data-bs-toggle="modal"
+          data-bs-target="#exampleModalUser" *ngIf="getItem()" [class]="getName()"><b>{{name}}</b></button>
       </form>
-      <div class="modal fade" id="exampleModalUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h2 class="modal-title" id="exampleModalLabel"  *ngIf="getItem()"><b>{{name}}</b></h2>
+      <div class="modal fade" id="exampleModalUser" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" >
+          <div class="modal-content"  style="border-radius: 40px;background-color:whitesmoke;">
+            <div class="modal-header"  [ngStyle]="{'background-image':'url(assets/nav/blue.png)',
+            'background-repeat':'no-repeat',
+            'background-size':'485px'
+            }">
+              <h2 class="modal-title" id="exampleModalLabel" *ngIf="getItem()" style="margin-left: 25px;"><b>{{name}}</b></h2>
             </div>
             <div class="modal-body">
-              <button class="btn btn-warning" routerLink="rentals/mycar" data-bs-dismiss="modal"><b>Kiralanan Araçlar</b></button><br>
-              <button class="btn btn-warning" data-bs-dismiss="modal"><b>Profil</b> </button><br>
-              <button class="btn btn-warning" data-bs-dismiss="modal" (click)="logOut()"><b>Çıkış</b></button>
+              <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                  <div class="card">
+                    <img src="assets/nav/rentcar.png" type="button" id="rentcar" routerLink="rentals/mycar"
+                      data-bs-dismiss="modal" class="card-img-top" >
+                    <h3 class="card-title" style="margin-left: 20px;"><b>Arabalarım</b></h3>
+                  </div>
+                </div>
+                <div class="col" >
+                  <div class="card" >
+                    <img src="assets/nav/profile.png" type="button" id="profile" data-bs-dismiss="modal"
+                      class="card-img-top" >
+                    <h3 class="card-title" style="margin-left: 37px;"><b>Profilim</b></h3>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card">
+                    <img src="assets/nav/logout.png" type="button" id="logout1" data-bs-dismiss="modal"
+                      (click)="logOut()" class="card-img-top">
+                    <h3 class="card-title" style="margin-left: 42px;"><b>Çıkış</b></h3>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </div>  
 </nav>
+

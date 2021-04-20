@@ -1,5 +1,32 @@
-#logout{
-    height: auto;
-    width: 200px;
+#logout {
+  height: auto;
+  width: 200px;
 }
 
+#rentcar {
+  width: 50px;
+  height: 50px;
+  margin-left: 35px;
+}
+
+#profile{
+    width: 70px;
+    height: 50px;
+    margin-left: 35px;
+}
+
+#logout1{
+    width: 50px;
+    height: 50px;
+    margin-left: 35px;
+}
+
+.card-title{
+    margin-top: 7px;
+}
+
+.card{
+    border:none;
+    background-color: whitesmoke;
+    
+}

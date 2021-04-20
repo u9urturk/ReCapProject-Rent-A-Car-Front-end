@@ -31,7 +31,6 @@ const routes: Routes = [
   {path:"color/operation",component:ColorOperationComponent,canActivate:[LoginGuard,AdminGuard]},
   {path:"login",component:LoginComponent},
   {path:"admin/test",component:Test2Component},
-  {path:"x",component:PaymentComponent},
  
   
   

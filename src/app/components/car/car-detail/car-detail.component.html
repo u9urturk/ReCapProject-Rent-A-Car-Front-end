@@ -12,7 +12,7 @@
         <div class="col-md-5" *ngIf="carDetail">
             <div class="card text-white  mb-3" id="card-a" >
                 <div class="card text-dark  mb-3" id="card-b">
-                    <div class="card-header"  style="border: none;"><h1 id="header1"><Strong>Araç Bilgileri</Strong></h1></div>
+                    <div class="card-header"  style="border:none"><h1 id="header1"><Strong>Araç Bilgileri</Strong></h1></div>
                     <div class="card-body" >
                         <ul>
                             <strong style="margin-right: 20px;">Plaka : </strong>{{
@@ -74,7 +74,7 @@
          >
             Tarihi Onayla
         </button>
-        <button class="btn btn-primary"
+        <button class="btn btn-success"
          *ngIf="control == true"
          style="margin-top: 30px; margin-bottom: 20px;"
          data-bs-toggle="modal"
@@ -85,6 +85,7 @@
         <app-payment *ngIf="rentModel" [rentModel]="rentModel"
         [imagePath]="imagePath"
         [findeks]="findeks"
-        [customer]="customer"></app-payment>
+        [customer]="customer"
+       ></app-payment>
     </div>
 </div>

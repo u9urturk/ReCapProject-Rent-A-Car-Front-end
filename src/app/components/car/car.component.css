@@ -1,21 +1,2 @@
-.accordion{
-    width: 100%;
-    max-width: 150px;
-    margin: auto;
-    border-radius: 4px;
-}
-.accordion .accordion-item .accordion-header .accordion-button{
-    color: #ffffff;
-    padding-left: 50px;
-    background-color: rgb(54, 53, 53);
-    font-weight: bold;
-    cursor: pointer;
-    border:none;
-    transition: all 0.6s ease;
-}
-
-.accordion-collapse{
-    border: none;
-}
 
 

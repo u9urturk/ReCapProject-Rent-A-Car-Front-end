@@ -28,6 +28,9 @@ export class AlertifyService {
   adminGuard(){
     alertify.alert().set({transition:'zoom',message:'Henüz böyle bir yolculuğa hazır değilsin','closable':false}).setHeader('Sistem Mesajı').show()
   }
+  paymentError(){
+    alertify.alert().set({transition:'zoom',message:'Kira sürecinin tamamlanabilmesi için ödeme bilgilerini girmelisiniz','closable':false}).setHeader('Sistem Mesajı').show()
+  }
 
   login(){
     alertify.alert().set({transition:'zoom'}).setHeader('Kategoriler').show(); 

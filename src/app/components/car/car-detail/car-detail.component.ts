@@ -145,7 +145,7 @@ export class CarDetailComponent implements OnInit {
           returnDate : formatDate.returnDate,
           payment : payment
         }
-         console.log(this.rentModel);
+        // console.log(this.rentModel);
         
       }
     }
@@ -156,7 +156,7 @@ export class CarDetailComponent implements OnInit {
         this.toastr.error("Bu aracı kiralamak için gerekli olan findeks puanınız yetersiz", `Mevcut Findeks Puanınız : ${this.findeks.findeksPoint}`)
       } else {
         this.control = true;
-        console.log(this.imagePath)
+        //console.log(this.imagePath)
         
       }
 

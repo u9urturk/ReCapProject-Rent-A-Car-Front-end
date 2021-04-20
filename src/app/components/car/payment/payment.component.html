@@ -1,73 +1,61 @@
-<div
-  class="modal fade"
-  id="paymentCardModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="paymentCardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title" id="exampleModalLabel">
-          <strong>Ödeme Planı</strong>
+          <strong>Ödeme Planı Ve İşlem Özeti</strong>
         </h2>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
-            <img src="assets/svg/credit-card.png" id="credit-card-img" alt="">
-            <form [formGroup]="paymentForm" id="form">
-              <div class="form-group">
-                <input
-                  type="number"
-                  id="cardNumber"
-                  formControlName="cardNumber"
-                  class="form-control"
-                  placeholder="Kart Numarası"
-                />
-              </div>
+            <div *ngIf="isCheckedCard == true;">
+              <h3><strong>Kredi Kartılarım</strong></h3>
+              <div class="list-group" >
+                <button type="button" style="margin-top: 5px;" *ngFor="let card of creditCard"(click)="setCurrentCard(card)"
+                 aria-current="true"
+                 [class]="cardActive(card)" 
+                 class="list-group-item list-group-item-action"> 
+                  <strong>Kart Numarası: <b>{{card.cardNumber}}</b> </strong>
+                </button> 
+                
+              </div> 
+            </div>
+            <div *ngIf="isCheckedCard == false;">
+              <img src="assets/svg/credit-card.png" id="credit-card-img" alt="">
+              <form [formGroup]="paymentForm" id="form">
+                <div class="form-group">
+                  <input type="number" id="cardNumber" formControlName="cardNumber" class="form-control"
+                    placeholder="Kart Numarası" />
+                </div>
 
-              <div class="form-group">
-                <input
-                  type="number"
-                  id="expirationDate"
-                  formControlName="expirationDate"
-                  class="form-control"
-                  placeholder="Son Kullanma Tarihi"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  type="text"
-                  id="name"
-                  formControlName="name"
-                  class="form-control"
-                  placeholder="Kart Sahibi"
-                />
-              </div>
+                <div class="form-group">
+                  <input type="number" id="expirationDate" formControlName="expirationDate" class="form-control"
+                    placeholder="Son Kullanma Tarihi" />
+                </div>
+                <div class="form-group">
+                  <input type="text" id="name" formControlName="name" class="form-control" placeholder="Kart Sahibi" />
+                </div>
 
-              <div class="form-group">
-                <input
-                  type="number"
-                  id="securityCode"
-                  formControlName="securityCode"
-                  class="form-control"
-                  placeholder="Güvenlik Kodu"
-                />
+                <div class="form-group">
+                  <input type="number" id="securityCode" formControlName="securityCode" class="form-control"
+                    placeholder="Güvenlik Kodu" />
+                </div>
+              </form>
+              <div class="form-check form-switch" [class]="saveCreditCard()">
+                <input style="margin-top: 5px;" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                  [(ngModel)]="isChecked" checked />
+                <label class="form-check-label" for="flexSwitchCheckChecked">
+                  <h3><strong>{{register}}</strong></h3>
+                </label>
               </div>
-            </form>
-            <div class="form-check form-switch" [class]="saveCreditCard()">
-              <input
-              style="margin-top: 5px;"
-                class="form-check-input"
-                type="checkbox"
-                id="flexSwitchCheckChecked"
-                [(ngModel)]="isChecked"
-                checked
-              />
-              <label class="form-check-label" for="flexSwitchCheckChecked"
-                ><h3><strong>{{register}}</strong></h3></label
-              >
+            </div>
+            <div class="form-check form-switch" [class]="creditCardSelect()">
+              <input style="margin-top: 5px;" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                [(ngModel)]="isCheckedCard" checked />
+              <label class="form-check-label" for="flexSwitchCheckChecked">
+                <h3><strong>{{cardSelect}}</strong></h3>
+              </label>
             </div>
           </div>
           <div class="col-md-6">
@@ -77,41 +65,50 @@
                   <img src="{{ imagePath[0].path }}" id="img" />
                 </div>
                 <ul>
-                  <strong style="margin-right: 20px">Kiralama Tarihi:</strong
-                  >{{
+                  <strong style="margin-right: 20px">Kiralama Tarihi:</strong><b>{{
                     rentModel.rentDate | date:'EEEE, MMMM d, y'
-                  }}
+                    }}</b>
                 </ul>
                 <ul>
-                  <strong style="margin-right: 20px">Dönüş Tarihi:</strong
-                  >{{
+                  <strong style="margin-right: 20px">Dönüş Tarihi:</strong><b>{{
                     rentModel.returnDate | date:'EEEE, MMMM d, y'
-                  }}
+                    }}</b>
                 </ul>
                 <ul>
-                  <strong style="margin-right: 20px">Ödenecek Tutar: </strong
-                  >{{
-                    rentModel.payment | lira 
-                  }}
+                  <strong style="margin-right: 20px">Ödenecek Tutar: </strong><b style="color: green;">{{
+                    rentModel.payment | lira
+                    }}</b>
                 </ul>
               </div>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-warning"
-                data-bs-dismiss="modal"
-              >
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">
                 Vazgeç
               </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                (click)="rentCar()"
-              >
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Kirala
               </button>
-              
+              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h2 class="modal-title" id="staticBackdropLabel"><strong>Kiralama Sürecini Tamamlamak
+                          Üzeresiniz</strong></h2>
+
+                    </div>
+                    <div class="modal-body">
+                      <strong>Ödenecek Tutar = </strong><b style="color: green;">{{rentModel.payment | lira}}</b>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                        (click)="reloadPage()">Onaylamıyorum</button>
+                      <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="rentCar()">Onaylıyorum</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
