@@ -27,11 +27,10 @@ export class CarDetailComponent implements OnInit {
   carImages: CarImage[] = [];
   imagePath:any [] =[]
   rentModel!:RentModel;
-  findeks: FindeksModel;
+  findeks!: FindeksModel;
   items: GalleryItem[] = [];
   userId: number;
-  customer: CustomerAddModel;
-  customerId: number;
+  customer!: CustomerAddModel;
   dataLoaded = false;
   createCustomer = false;
   createCustomerFindeks = false;
@@ -59,7 +58,7 @@ export class CarDetailComponent implements OnInit {
       }
       this.getUserId();
       this.getCustomerByUserId(this.userId);
-      setTimeout(() => this.getCustomerFindeksPoint(this.customerId), 500)
+      setTimeout(() => this.getCustomerFindeksPoint(this.customer.id), 500)
 
     })
 
@@ -81,7 +80,7 @@ export class CarDetailComponent implements OnInit {
       //console.log(response.data)
       if (response.data != null) {
         this.customer = response.data;
-        this.customerId = response.data.id;
+      
         //console.log(this.customerId)
       } else {
         this.dataLoaded = true
@@ -158,14 +157,7 @@ export class CarDetailComponent implements OnInit {
       } else {
         this.control = true;
         console.log(this.imagePath)
-        // //let rentModel = Object.assign({ carId: this.carId, customerId: this.customer.id }, revertedRentForm)
-        // //console.log(rentModel)
-        // this.rentalService.rentCar(Test).subscribe(response => {
-        //   this.toastr.success(response.message, "OK")
-        //   setTimeout(()=>this.updateCustomerFindekPoint(),500);
-        // }, responseError => {
-        //   this.toastr.info(responseError.error)
-        // })
+        
       }
 
     } else {
@@ -196,19 +188,7 @@ export class CarDetailComponent implements OnInit {
     })
   }
 
-  updateCustomerFindekPoint() {
-    let findeksModel = Object.assign({ id: this.findeks.id, customerId: this.customer.id })
-    this.findeksService.updateCustomerFindeksPoint(findeksModel).subscribe(response => {
-      this.toastr.info(response.message)
-      let updateOK = true
-      if (updateOK == true) {
-        setTimeout(()=>this.baseGetCustomerFindeksPoint(this.customer.id),500) 
-        setTimeout(() => this.toastr.info(`Yeni findeks puanınız ${this.findeks.findeksPoint}`),1000)
-      }
-    },responseError=>{
-      this.toastr.warning(responseError.error.message)
-    })
-  }
+  
 
   baseGetCustomerFindeksPoint(customerId: number) {
     this.findeksService.getCustomerFindeksPointByCustomerId(customerId).subscribe(response => {

@@ -16,21 +16,27 @@
 }
 
 #card-a {
-    border-color: black;
-    border-width: 7px;
-    border-radius: 50px;
+  border-color: black;
+  border-width: 7px;
+  border-radius: 50px;
 }
 
 #card-b {
-    border: none;
-    border-radius: 50px;
+  border: none;
+  border-radius: 50px;
 }
 
-.modal-content{
+.modal-content {
   background-color: whitesmoke;
   border-radius: 20px;
 }
 
-#header1{
-    margin-left: 10px;
+#header1 {
+  margin-left: 10px;
+}
+
+#credit-card-img {
+  width: 260px;
+  height: 150px;
+  margin-left: 25px;
 }
