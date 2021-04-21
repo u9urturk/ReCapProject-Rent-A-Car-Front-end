@@ -26,7 +26,7 @@ export class AdminGuard implements CanActivate {
     }else{
       this.router.navigate([""])
       this.alertify.adminGuard();
-      this.toastr.info("","Dikkat ! ");
+      this.toastr.info("Yetkisiz Giriş","Dikkat ! ");
       return false;
     }
   }

@@ -61,12 +61,8 @@ export class CarDetailComponent implements OnInit {
       setTimeout(() => this.getCustomerFindeksPoint(this.customer.id), 500)
 
     })
-
     
-
-
   }
- 
 
   baseGetCustomerByUserId(userId: number) {
     this.customerService.getCustomerByUserId(userId).subscribe(response => {

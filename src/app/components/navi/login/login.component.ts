@@ -15,7 +15,7 @@ import { DecodedToken } from 'src/app/models/decodedToken';
 export class LoginComponent implements OnInit {
   loginForm:FormGroup;
   token:string=""
-  decodedToken:DecodedToken;
+ 
   constructor(private fb:FormBuilder,
     private authService:AuthService,
     private toastr:ToastrService,
@@ -47,10 +47,12 @@ export class LoginComponent implements OnInit {
         this.toastr.info(response.message,"OK")
         localStorage.setItem("token",response.data.token)
         this.token = response.data.token
+        setTimeout(()=> this.authService.decodeToken(localStorage.getItem("token")))
         //this.decodeToken();
         //console.log(this.token)
-        setTimeout(()=>this.goComponent('cars'),1000)
-        this.decodeToken();        
+        setTimeout(()=>this.goComponent('cars'),1500)
+        
+              
       },responseError=>{
         console.log(responseError.error)
         this.toastr.error(responseError.error)
@@ -58,16 +60,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  decodeToken(){
-    
-    this.decodedToken = jwtDecode(this.token)
-    localStorage.setItem("role",this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'])
-    localStorage.setItem("name",this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'])
-    localStorage.setItem("userId",this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
-    localStorage.setItem("exp",this.decodedToken['exp'])
-    // console.log(localStorage.getItem("role"))
-    // console.log(this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'])
-  }
+  
 
 
 }

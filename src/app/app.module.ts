@@ -47,6 +47,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/navi/register/register.component';
 import { CarDetailComponent } from './components/car/car-detail/car-detail.component';
 import { PaymentComponent } from './components/car/payment/payment.component';
+import { ProfileComponent } from './components/navi/profile/profile.component';
 
 
 
@@ -82,6 +83,7 @@ import { PaymentComponent } from './components/car/payment/payment.component';
     RegisterComponent,
     CarDetailComponent,
     PaymentComponent,
+    ProfileComponent,
 
 
       

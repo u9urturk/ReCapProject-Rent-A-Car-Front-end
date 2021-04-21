@@ -1,0 +1,99 @@
+<div class="modal fade" id="modalProfile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="background-color:whitesmoke; border-radius: 50px;">
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel" style="margin-left: 7px;"><b>Profil</b></h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 10rem;">
+                            <img src="assets/nav/profile.png" class="card-img-top" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-md-8" *ngIf="user">
+                        <div class="card" style="width: 25rem;">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Ad&nbsp; - &nbsp;Soyad&nbsp;
+                                        :</strong>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{user.firstName}}&nbsp;{{user.lastName}}</b>
+                                </li>
+                            </ul>
+                            <div class="overlay">
+                                <a href="javascript:void(0)" class="icon" title="remove"></a>
+                                <i type="button" data-bs-toggle="modal" data-bs-target="#nameForm"
+                                    class="fa fa-cogs" ></i>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 25rem;">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"> <strong>E-Posta&nbsp;
+                                        :</strong>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{user.email}}</b></li>
+                            </ul>
+                            <div class="overlay">
+                                <a href="javascript:void(0)" class="icon" title="remove"></a>
+                                <i type="button" data-bs-toggle="modal"
+                                 data-bs-target="#emailForm" class="fa fa-cogs"
+                                 ></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="nameForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered">
+                    <div class="modal-content" style="background-color:whitesmoke ; border-radius: 50px;">
+                        <div class="modal-header">
+                            <h1 class="modal-title" id="exampleModalLabel"><b>Ad-Soyad Güncelle</b></h1>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]=" updateFormName" id="nameForm">
+                                <div class="form-group">
+                                    <input type="text" id="firstName" formControlName="firstName" class="form-control"
+                                        placeholder="Ad">
+                                </div>
+                                <div class="form-group" style="margin-top: 10px;">
+                                    <input type="text" id="lastName" formControlName="lastName" class="form-control"
+                                        placeholder="Soyad">
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Vazgeç</button>
+                            <button type="button" class="btn btn-success" 
+                            (click)="updateUserName()" 
+                            data-bs-dismiss="modal"
+                            style="margin-right: 10px;">Güncelle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="emailForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered">
+                    <div class="modal-content" style="background-color:whitesmoke ; border-radius: 50px;">
+                        <div class="modal-header">
+                            <h1 class="modal-title" id="exampleModalLabel"><b>E-Posta Güncelle</b></h1>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]=" updateFormEmail" id="emailForm">
+                                <div class="form-group">
+                                    <input type="text" id="email" formControlName="email" class="form-control"
+                                        placeholder="E-Posta">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Vazgeç</button>
+                            <button type="button" class="btn btn-success" 
+                            (click)="updateUserEmail()" 
+                            data-bs-dismiss="modal"
+                            style="margin-right: 10px;">Güncelle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
