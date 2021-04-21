@@ -1,14 +1,59 @@
-<div  class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Admin
-    </a>
+<li class="nav-item">
+  <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#adminModal" ><b>Yönetici Paneli</b> </a>
+</li>
+
+<div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content" style="border-radius: 40px;background-color:whitesmoke;">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel"><b>Yönetici Paneli</b></h1>
+      </div>
+      <div class="modal-body"  [ngStyle]="{'background-image':'url(assets/operation/redsmoke.png)',
+      'background-repeat':'no-repeat',
+      'background-size':'cover',
+      'border-radius':'13%'
+      }">
+        <div  class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+            <div class="card">
+              <img src="assets/operation/cars.png"routerLink="car/operation" type="button" id="icon" data-bs-dismiss="modal"
+                 class="card-img-top">
+              <h3 class="card-title"><b>Araba Operasyonları</b></h3>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img src="assets/operation/brands.png"routerLink="brand/operation" type="button" id="icon" data-bs-dismiss="modal"
+                 class="card-img-top">
+              <h3 class="card-title"><b>Marka Operasyonları</b></h3>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img src="assets/operation/colors.png"routerLink="color/operation" type="button" id="icon" data-bs-dismiss="modal"
+                 class="card-img-top">
+              <h3 class="card-title"><b>Renk Operasyonları</b></h3>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img src="assets/operation/users.png"routerLink="color/operation" type="button" id="icon" data-bs-dismiss="modal"
+                 class="card-img-top">
+              <h3 class="card-title"><b>Yetki Operasyonları</b></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   
-    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+    <!-- <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
       
       <li ><a class="dropdown-item"type="button" routerLink="car/operation"  >Car Operation</a></li>
       <li ><a class="dropdown-item"type="button" routerLink="brand/operation"  >Brand Operation</a></li>
       <li ><a class="dropdown-item"type="button" routerLink="color/operation"  >Color Operation</a></li>
       <li ><a class="dropdown-item"type="button" routerLink="admin/test">TEST</a></li>
       
-    </ul>
-  </div>
+    </ul> -->
+

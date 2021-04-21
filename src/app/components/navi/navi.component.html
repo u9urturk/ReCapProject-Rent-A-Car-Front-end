@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
+  <div class="container-fluid" style="height: 60px;">
 
     <a class="navbar-brand" href="#" class="btn btn-dark">
       <img src="assets/svg/rentacar.png" width="100px" height="20px" alt="">
@@ -11,48 +11,48 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Ana Sayfa</a>
+          <a class="nav-link active" aria-current="page" href="#"><b>Ana Sayfa</b> </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/tester">Tester</a>
+          <a class="nav-link" routerLink="/tester"><b>Tester</b> </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/cars">Kiralık Araçlar</a>
+          <a class="nav-link" routerLink="/cars"><b>Kiralık Araçlar</b></a>
         </li>
         <li>
           <app-admin-panel *ngIf="getRole(admin)"></app-admin-panel>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Hoş Geldiniz" aria-label="Search">
-        <button class="btn btn-outline-success" *ngIf="!getItem()" routerLink="/login"
-          class="btn btn-dark">Login</button>
-        <button class="btn btn-outline-success" id="logout" class="btn btn-secondary" data-bs-toggle="modal"
-          data-bs-target="#exampleModalUser" *ngIf="getItem()" [class]="getName()"><b>{{name}}</b></button>
-      </form>
+      <button class="btn  btn-warning" *ngIf="!getItem()" routerLink="/login" class="btn btn-primary"><b>Giriş Yap</b></button>
+      <div class="card"  type="button" id="logout"
+        data-bs-toggle="modal" data-bs-target="#exampleModalUser" *ngIf="getItem()" [class]="getName()">
+        <img src="{{ profileImageUrl }}" style="width: 50px; height: 50px; border-radius: 50%;"  />
+      </div>
+
       <div class="modal fade" id="exampleModalUser" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" >
-          <div class="modal-content"  style="border-radius: 40px;background-color:whitesmoke;">
-            <div class="modal-header"  [ngStyle]="{'background-image':'url(assets/nav/blue.png)',
+        <div class="modal-dialog">
+          <div class="modal-content" style="border-radius: 40px;background-color:whitesmoke;">
+            <div class="modal-header" [ngStyle]="{'background-image':'url(assets/nav/blue.png)',
             'background-repeat':'no-repeat',
             'background-size':'485px'
             }">
-              <h2 class="modal-title" id="exampleModalLabel" *ngIf="getItem()" style="margin-left: 25px;"><b>{{name}}</b></h2>
+              <h2 class="modal-title" id="exampleModalLabel" *ngIf="getItem()" style="margin-left: 25px;">
+                <b>{{name}}</b></h2>
             </div>
             <div class="modal-body">
               <div class="row row-cols-1 row-cols-md-3 g-4">
                 <div class="col">
                   <div class="card">
                     <img src="assets/nav/rentcar.png" type="button" id="rentcar" routerLink="rentals/mycar"
-                      data-bs-dismiss="modal" class="card-img-top" >
+                      data-bs-dismiss="modal" class="card-img-top">
                     <h3 class="card-title" style="margin-left: 20px;"><b>Arabalarım</b></h3>
                   </div>
                 </div>
-                <div class="col" >
-                  <div class="card" >
-                    <img src="assets/nav/profile.png" type="button" id="profile" data-bs-toggle="modal" data-bs-target="#modalProfile"
-                      class="card-img-top" >
+                <div class="col">
+                  <div class="card">
+                    <img src="assets/nav/profile.png" type="button" id="profile" data-bs-toggle="modal"
+                      data-bs-target="#modalProfile" class="card-img-top">
                     <h3 class="card-title" style="margin-left: 37px;"><b>Profilim</b></h3>
                   </div>
                 </div>
@@ -70,6 +70,5 @@
       </div>
       <app-profile></app-profile>
     </div>
-  </div>  
+  </div>
 </nav>
-

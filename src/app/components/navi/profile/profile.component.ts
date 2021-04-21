@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserModel } from 'src/app/models/userModel';
+import { ProfileImageService } from 'src/app/services/profile-image.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class ProfileComponent implements OnInit {
   updateFormEmail:FormGroup
   constructor(private userService:UserService,
     private fb:FormBuilder,
-    private toastr:ToastrService) { }
+    private toastr:ToastrService,
+    private profileImageService:ProfileImageService) { }
 
   ngOnInit(): void {
     this.getUserId();
@@ -24,7 +26,6 @@ export class ProfileComponent implements OnInit {
     this.createUpdateNameForm();
     this.createUpdateFormEmail();
   }
-
   getUserId(){
     this.userId = Number(localStorage.getItem("userId"))
   }

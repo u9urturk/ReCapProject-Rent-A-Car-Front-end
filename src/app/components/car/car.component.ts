@@ -63,8 +63,8 @@ export class CarComponent implements OnInit {
       }
     })
 
-
-
+   
+    
 
   }
 
@@ -184,7 +184,7 @@ export class CarComponent implements OnInit {
   setCurrentCarId(car: CarDetail) {
     this.getImageByCarId(car.carId)
     this.currentCar = car;
-    //console.log(this.currentCar.carId)
+    console.log(this.currentCar.carId)
   }
 
 

@@ -1,0 +1,48 @@
+<div class="card">
+    <img src="{{ profileImageUrl }}" class="card-img-top" alt="..." />
+    <div class="overlay">
+        <a href="javascript:void(0)" class="icon" title="remove"></a>
+        <i type="button" aria-hidden="true" id="trash"class="fa fa-trash"
+         data-bs-toggle="modal" data-bs-target="#deleteModal"></i>
+        <i type="button"  class="fa fa-picture-o" id="picture" aria-hidden="true"
+        data-bs-toggle="modal" data-bs-target="#uploadModal" (click)="selectAdd()"></i>
+        <i class="fa fa-wrench" aria-hidden="true" type="button" id="update"
+        data-bs-toggle="modal" data-bs-target="#uploadModal" (click)="selectUpdate()"></i>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content" style="border-radius: 40px;">
+            <div class="modal-header" style="border:none;margin-left: 60px;" >
+                <h2 class="modal-title" id="exampleModalLabel"><b>Görsel Silinecek , Onaylıyor musunuz ?</b></h2>
+            </div>
+            <div class="modal-footer" style="border:none">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                <button type="button" class="btn btn-warning" (click)="deleteImage()">Onaylıyorum</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content" style="border-radius: 40px;">
+            <div class="modal-header" id="uploadHeader" >
+                <h2 class="modal-title" id="exampleModalLabel"><img id="logo" src="assets/svg/rentacar.png" 
+                    ></h2>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="imageForm">
+                    <div class="form-group">
+                        <input type="file" (change)="uploadImage($event)" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border:none">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                <button type="button" class="btn btn-success" *ngIf="add == true" (click)="addImage()">Yükle</button>
+                <button type="button" class="btn btn-warning" *ngIf="update == true" (click)="updateImage()">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</div>
