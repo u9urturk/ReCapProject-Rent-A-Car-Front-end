@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Rental } from 'src/app/models/rental';
-import { RentModel } from 'src/app/models/rentModel';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { AlertifyService } from 'src/app/services/material_services/alertify.service';
 import { RentalService } from 'src/app/services/rental.service';

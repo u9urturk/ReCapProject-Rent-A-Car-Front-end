@@ -7,6 +7,7 @@ import { CarImage } from 'src/app/models/carImage';
 import { CustomerAddModel } from 'src/app/models/customerAddModel';
 import { FindeksModel } from 'src/app/models/findeksModel';
 import { FormatDateModel } from 'src/app/models/formatDateModel';
+import { Rental } from 'src/app/models/rental';
 import { RentModel } from 'src/app/models/rentModel';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
@@ -38,6 +39,8 @@ export class CarDetailComponent implements OnInit {
   defaultCompany: string = "RentACar"
   carId: number;
   control = false;
+  rental:Rental[]=[]
+  dateMatch = false;
   
   
 
@@ -59,10 +62,42 @@ export class CarDetailComponent implements OnInit {
       this.getUserId();
       this.getCustomerByUserId(this.userId);
       setTimeout(() => this.getCustomerFindeksPoint(this.customer.id), 500)
+      this.getRentalByCarId();
 
     })
     
   }
+
+  //Date Control
+    leasedDaysControl(currentRentDate:string,currentReturnDate:string){
+      x:for(let i = 0;i < this.rental.length;i++){
+        let start:Date = new Date(this.rental[i].rentDate)
+        let end :Date = new Date(this.rental[i].returnDate)
+        let startEx:Date =new Date(this.addDays(this.rental[i].rentDate,1).setHours(0,0,0))
+        let endEx:Date = new Date(this.addDays(this.rental[i].returnDate,1).setHours(0,0,0))
+        for(let index = startEx;(new Date(index)).getTime() <= (new Date(endEx)).getTime(); index = this.addDays(index,1)){
+          if((new Date(currentRentDate)).getTime()==(new Date(index)).getTime() || (new Date(currentReturnDate)).getTime()==(new Date(index)).getTime()){
+            //console.log("Tarihler Eşleşiyor")
+            this.toastr.warning(`Araç ${start.toLocaleDateString()} -- ${end.toLocaleDateString()} Tarihleri Arasında Kiralanmış Durumda `,"Dikkat !")
+            this.dateMatch = true;
+            break x;
+          }else{
+            //console.log("Tarihler Eşleşmiyor")
+          }
+        }
+      }
+    }
+
+  //----------------------------------------------------------------
+
+  // Rental Service 
+
+  getRentalByCarId(){
+    this.rentalService.getRentalsByCarId(this.carId).subscribe(response=>{
+      this.rental = response.data
+    })
+  }
+  //------------------------------------------------
 
   baseGetCustomerByUserId(userId: number) {
     this.customerService.getCustomerByUserId(userId).subscribe(response => {
@@ -123,11 +158,14 @@ export class CarDetailComponent implements OnInit {
       let formatDate:FormatDateModel = {
         rentDate: this.addDays(this.rentDate,1).toISOString(),
         returnDate :this.addDays(this.returnDate,1).toISOString()
-  
       }
-      if (formatDate.returnDate!= null) {
-        var date1 = new Date(formatDate.returnDate.toString());
-        var date2 = new Date(formatDate.rentDate.toString());
+      this.leasedDaysControl(formatDate.rentDate,formatDate.returnDate);
+      if(this.dateMatch == true){
+        setTimeout(()=>window.location.reload(),5000)
+      }
+      else if(this.dateMatch == false){
+        var date1 = new Date(formatDate.returnDate);
+        var date2 = new Date(formatDate.rentDate);
         var difference = date1.getTime() - date2.getTime();
   
         var numberOfDays = Math.ceil(difference / (1000 * 3600 * 24));
@@ -137,17 +175,16 @@ export class CarDetailComponent implements OnInit {
         this.rentModel = {
           customerId : this.customer.id,
           carId : this.carId,
-          rentDate :formatDate.rentDate,
-          returnDate : formatDate.returnDate,
+          rentDate :formatDate.rentDate.toString(),
+          returnDate : formatDate.returnDate.toString(),
           payment : payment
         }
-        // console.log(this.rentModel);
-        
+
+        //console.log(this.rentModel)
       }
+      
     }
-    
-   
-    if (this.rentModel != null) {
+    if (this.rentModel != null && this.dateMatch == false) {
       if (this.findeks.findeksPoint < this.carDetail.carFindeksPoint) {
         this.toastr.error("Bu aracı kiralamak için gerekli olan findeks puanınız yetersiz", `Mevcut Findeks Puanınız : ${this.findeks.findeksPoint}`)
       } else {
@@ -156,7 +193,7 @@ export class CarDetailComponent implements OnInit {
         
       }
 
-    } else {
+    } else if(this.rentDate == null) {
       this.toastr.error("Geçersiz Kullanım ", "Dikkat  !")
     }
   } 
