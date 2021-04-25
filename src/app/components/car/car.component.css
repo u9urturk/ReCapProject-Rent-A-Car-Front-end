@@ -1,2 +1,8 @@
-
-
+#picture {
+  color: whitesmoke;
+  font-size: 25px;
+  margin-top: 10px;
+  margin-right: 20px;
+  top: 50%;
+  left: 90%;
+}

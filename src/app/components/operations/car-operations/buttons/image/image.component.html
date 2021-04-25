@@ -1,0 +1,45 @@
+<div
+  class="modal fade"
+  id="imageModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius: 50px;color: whitesmoke;">
+      <div class="modal-header" id="uploadHeader">
+        <h2 class="modal-title" id="exampleModalLabel">
+          <img id="logo" src="assets/svg/rentacar.png" />
+        </h2>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="imageForm">
+          <div class="form-group">
+            <input type="file" (change)="uploadImage($event)" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" style="border: none">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Vazgeç
+        </button>
+        <button
+        type="button"
+        class="btn btn-danger"
+        *ngIf="add == true"
+        (click)="getCarImageUrl()"
+      >
+        Sil
+      </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          *ngIf="add == true"
+          (click)="addImage()"
+        >
+          Yükle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

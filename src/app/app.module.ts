@@ -48,7 +48,9 @@ import { RegisterComponent } from './components/navi/register/register.component
 import { CarDetailComponent } from './components/car/car-detail/car-detail.component';
 import { PaymentComponent } from './components/car/payment/payment.component';
 import { ProfileComponent } from './components/navi/profile/profile.component';
-import { ProfileImageComponent } from './components/operations/profileImage/profile-image/profile-image.component';
+import { ProfileImageComponent } from './components/operations/profile-image/profile-image.component';
+import { CarOperationsComponent } from './components/operations/car-operations/car-operations.component';
+import { ImageComponent } from './components/operations/car-operations/buttons/image/image.component';
 
 
 
@@ -86,6 +88,8 @@ import { ProfileImageComponent } from './components/operations/profileImage/prof
     PaymentComponent,
     ProfileComponent,
     ProfileImageComponent,
+    CarOperationsComponent,
+    ImageComponent,
 
 
       

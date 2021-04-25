@@ -20,17 +20,20 @@ import { AuthService } from 'src/app/services/material_services/auth.service';
   
 })
 export class CarComponent implements OnInit {
+  @Input() admin = false;
   carDetails: CarDetail[] = []
   car!: CarDetail;
   brands: Brand[] = []
   colors: Color[] = []
-  carImages!: CarImage[];
+  carImages: CarImage[] = [];
   currentCar!: CarDetail;
   currentColor: Color;
   currentBrand: Brand;
   dataLoaded = false;
   items: GalleryItem[] = [];
   filterText = "";
+  add = false;
+  
   constructor(private carService: CarService,
     private activatedRoute: ActivatedRoute,
     private brandService: BrandService,
@@ -39,11 +42,8 @@ export class CarComponent implements OnInit {
     private toastrService:ToastrService,
     public gallery: Gallery,
     private router:Router,
-    private auth:AuthService
-    
-    
+    private auth:AuthService  
   ) { }
-
 
   ngOnInit(): void {
 
@@ -58,26 +58,16 @@ export class CarComponent implements OnInit {
       }
       else {
         this.getCars()
-
-
       }
     })
-
-   
-    
-
   }
 
   getCars() {
     this.carService.getCars().subscribe(response => {
       this.carDetails = response.data
       this.dataLoaded = true;
-
-
     })
   }
-
-
 
   getCarsByBrand(brandId: number) {
     this.carService.getCarsByBrand(brandId).subscribe(response => {
@@ -92,36 +82,16 @@ export class CarComponent implements OnInit {
       this.carDetails = response.data
       this.dataLoaded = true;
       // console.log(response.data)
-
     })
   }
-
 
   getImageByCarId(carId: number) {
     this.carImageService.getCarImagesByCarId(carId).subscribe(response => {
       this.carImages = response.data
+      //console.log(this.carImages)
       this.getCarImageUrl();
-
-      //this.setNgGallery();
     })
   }
-
-  // setNgGallery(){
-  //   const imageUrls =  []
-  //   for(let i=0;i<this.carImages.length;i++){
-  //     imageUrls.push({
-  //       src:this.carImages[i].imagePath,
-  //       thumb:this.carImages[i].imagePath
-  //     })
-  //   }
-
-
-
-  //   this.items=imageUrls.map(x=> new ImageItem({src:x.src,thumb:x.thumb}))
-
-  // }
-
-
 
   getCarImageUrl() {
     const imageUrl: any[] = []
@@ -133,9 +103,6 @@ export class CarComponent implements OnInit {
     });
 
     this.items = imageUrl.map(img => new ImageItem({ src: img.src, thumb: img.thumb }))
-
-
-
   }
 
   getBrands() {
@@ -189,14 +156,16 @@ export class CarComponent implements OnInit {
 
 
   rentCar(currentCar:any){
-    
-    //this.toastrService.success(currentCar.carName + " Plakalı araç kiralandı")
    if( this.auth.isLogened() == true){
     this.router.navigate(["cardetail/"+currentCar.carId])
    }
-    
   }
 
+ //Admin Operations
+
+  imageAdd(){
+    this.add = true;
+  }
 
 
 

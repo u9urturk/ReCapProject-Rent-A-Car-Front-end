@@ -1,148 +1,279 @@
-<div *ngIf="dataLoaded==false" class="progress">
-    <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" role="progressbar"
-        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+<div *ngIf="dataLoaded == false" class="progress">
+  <div
+    class="progress-bar progress-bar-striped progress-bar-animated bg-secondary"
+    role="progressbar"
+    aria-valuenow="100"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    style="width: 100%"
+  ></div>
 </div>
 <div class="row">
-    <div class="col-md-2">
-        <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right"
-            title="Kategoriler">
-            <img src="https://www.luxpng.com/picl/85/1179222_settings-icon-camera-settings-icon-white-transparent-png.png"
-                width="40px" height="40px" style="margin-left: 10px; margin-top: 5px;" type="button" data-bs-toggle="modal"
-                data-bs-target="#exampleModal1">
-        </span>
+  <div class="col-md-2" *ngIf="admin == false">
+    <span
+      class="d-inline-block"
+      tabindex="0"
+      data-bs-toggle="tooltip"
+      data-bs-placement="right"
+      title="Kategoriler"
+    >
+      <img
+        src="https://www.luxpng.com/picl/85/1179222_settings-icon-camera-settings-icon-white-transparent-png.png"
+        width="40px"
+        height="40px"
+        style="margin-left: 10px; margin-top: 5px"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal1"
+      />
+    </span>
 
-
-        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" style="border-radius: 40px;">
-                    <div class="modal-header" [ngStyle]="{'background-image':'url(https://www.pngfind.com/pngs/b/294-2949260_car-silhouette-png.png)',
-                    'background-repeat':'no-repeat',
-                    'background-size':'cover',
-                    'border':'none'
-                    }">
-                        <h3 class="modal-title" id="exampleModalLabel1">
-                            <div class="mb-12">
-                                <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Kategoriler">
-                            </div>
-                           
-                        </h3>
-
+    <div
+      class="modal fade"
+      id="exampleModal1"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 40px">
+          <div
+            class="modal-header"
+            [ngStyle]="{
+              'background-image':
+                'url(https://www.pngfind.com/pngs/b/294-2949260_car-silhouette-png.png)',
+              'background-repeat': 'no-repeat',
+              'background-size': 'cover',
+              border: 'none'
+            }"
+          >
+            <h3 class="modal-title" id="exampleModalLabel1">
+              <div class="mb-12">
+                <input
+                  type="text"
+                  [(ngModel)]="filterText"
+                  class="form-control"
+                  id="filterText"
+                  placeholder="Kategoriler"
+                />
+              </div>
+            </h3>
+          </div>
+          <div
+            class="modal-body"
+            style="
+              background-color: rgb(54, 53, 53);
+              border-end-end-radius: 35px;
+              border-end-start-radius: 35px;
+            "
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                  <div
+                    class="col"
+                    *ngFor="let brand of brands"
+                    style="border: none"
+                  >
+                    <div
+                      class="card"
+                      style="border: none; background-color: rgb(54, 53, 53)"
+                      (click)="setCurrentBrand(brand)"
+                      routerLink="/cars/brand/{{ brand.brandId }}"
+                      data-bs-dismiss="modal"
+                    >
+                      <img
+                        src="{{ brand.brandLogo }}"
+                        width="35px"
+                        height="35px"
+                        alt="..."
+                      />
                     </div>
-                    <div class="modal-body"
-                        style="background-color: rgb(54, 53, 53); border-end-end-radius: 35px;border-end-start-radius: 35px; ">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row row-cols-1 row-cols-md-3 g-4">
-                                    <div class="col" *ngFor="let brand of brands" style="border:none;">
-                                        <div class="card" style="border:none; background-color: rgb(54, 53, 53);"
-                                            (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.brandId}}"
-                                            data-bs-dismiss="modal">
-                                            <img src="{{brand.brandLogo}}" width="35px" height="35px" alt="...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row row-cols-1 row-cols-md-3 g-4">
-                                    <div class="col" *ngFor="let color of colors" style="border:none;">
-                                        <div class="card" style="border:none; background-color: rgb(54, 53, 53);"
-                                            (click)="setCurrentColor(color)" routerLink="/cars/color/{{color.colorId}}"
-                                            data-bs-dismiss="modal">
-                                            <img src="{{color.colorLogo}}" width="35px" height="35px" alt="...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                  </div>
                 </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                  <div
+                    class="col"
+                    *ngFor="let color of colors"
+                    style="border: none"
+                  >
+                    <div
+                      class="card"
+                      style="border: none; background-color: rgb(54, 53, 53)"
+                      (click)="setCurrentColor(color)"
+                      routerLink="/cars/color/{{ color.colorId }}"
+                      data-bs-dismiss="modal"
+                    >
+                      <img
+                        src="{{ color.colorLogo }}"
+                        width="35px"
+                        height="35px"
+                        alt="..."
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-
+      </div>
     </div>
+  </div>
 </div>
 <div class="row">
-    <div class="col-md-12" [ngStyle]="{'background-image':'url(https://user-images.githubusercontent.com/77547474/114267821-a42fa800-9a06-11eb-9937-b4abc4d779a0.png)',
-    'background-repeat':'no-repeat',
-    'background-size':'cover',
-    'margin-left':'50px'
-    }">
-        <div class="row row-cols-1 row-cols-md-3 g-4 " style="margin-left: 20px;">
-            <div class="col" *ngFor="let car of carDetails  | filter:filterText">
-                <div>
-                    <app-car-card (click)="setCurrentCarId(car)" type="button" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal" [carDetail]="car"></app-car-card>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content" style="border-radius: 40px;background-color: rgb(54, 53, 53);">
-                                <div class="modal-header" style="border: none; height: 50px;">
-                                    <img src="assets/svg/detail.png" width="60px" 
-                                        style="margin-right: 1000px; margin-top: 10px;" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal2">
-                                </div>
-                                <div class="modal-body">
-                                    <div class="modal-img">
-                                        <div class="basic-container">
-                                            <gallery id="basic-test" [items]="items" thumbposition="left"></gallery>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer" style="border:none">
-
-                                    <!-- <mat-form-field appearance="outline">
-                                        <mat-label>Select Date Range</mat-label>
-                                          
-                                        <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
-                                          <input matStartDate placeholder="Start Date" formControlName="start">
-                                          <input matEndDate placeholder="End Date" formControlName="end">
-                                        </mat-date-range-input>
-                                           
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                          
-                                        <mat-date-range-picker #picker></mat-date-range-picker>
-                                      </mat-form-field>
-                                        
-                                      <h3>Start: {{range.value.start | date}} End: {{range.value.end | date}}</h3> -->
-
-                                    <button type="button" class="btn btn-warning"
-                                        data-bs-dismiss="modal">Vazgeç</button>
-                                    <button type="button" (click)="rentCar(currentCar)" data-bs-dismiss="modal" class="btn btn-primary">Kirala</button>
-                                </div>
-                                <div class="modal fade" id="exampleModal2" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content" style="border-radius: 30px;">
-                                        <div class="modal-header" style="background-color: rgb(54, 53, 53);
-                                         border-start-start-radius: 27px; border-top-right-radius: 27px;  ">
-                                            <img src="assets/svg/aracBilgileri.png" width="150px" height="50px"
-                                                class="modal-title" id="exampleModalLabel"
-                                                style="margin-left: 20px;">
-                                            
-                                        </div>
-                                        <div class="modal-body" *ngIf="currentCar">
-                                            <ul><strong>Plaka : </strong>{{currentCar.carName}}</ul>
-                                            <ul><strong>Marka-Model : </strong>{{currentCar.brandName}}
-                                                {{currentCar.desciription}}</ul>
-                                            <ul><strong>Model Yılı : </strong>{{currentCar.modelYear}}</ul>
-                                            <ul><strong>Günlük Ücret : </strong>{{currentCar.dailyPrice| lira}}
-                                            </ul>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
+  <div
+    class="col-md-12"
+    [ngStyle]="{
+      'background-image':
+        'url(https://user-images.githubusercontent.com/77547474/114267821-a42fa800-9a06-11eb-9937-b4abc4d779a0.png)',
+      'background-repeat': 'no-repeat',
+      'background-size': 'cover',
+      'margin-left': '50px'
+    }"
+  >
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-left: 20px">
+      <div class="col" *ngFor="let car of carDetails | filter: filterText">
+        <div>
+          <app-car-card
+            (click)="setCurrentCarId(car)"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            [carDetail]="car"
+          ></app-car-card>
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-xl">
+              <div
+                class="modal-content"
+                style="border-radius: 40px; background-color: rgb(54, 53, 53)"
+              >
+                <div class="modal-header" style="border: none; height: 50px">
+                    
+                  <img
+                    src="assets/svg/detail.png"
+                    width="60px"
+                    style="margin-right: 1000px; margin-top: 10px"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal2"
+                  />
+                  <i
+                    class="fa fa-picture-o"
+                    id="picture"
+                    *ngIf="admin == true"
+                    (click)="imageAdd()"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#imageModal"
+                    
+                  ></i>
                 </div>
-
+                <div class="modal-body">
+                  <div class="modal-img">
+                    <div class="basic-container">
+                      <gallery
+                        id="basic-test"
+                        [items]="items"
+                        thumbposition="left"
+                      ></gallery>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer" style="border: none">
+                  <button
+                    *ngIf="admin == false"
+                    type="button"
+                    class="btn btn-warning"
+                    data-bs-dismiss="modal"
+                  >
+                    Vazgeç
+                  </button>
+                  <button
+                    *ngIf="admin == false"
+                    type="button"
+                    (click)="rentCar(currentCar)"
+                    data-bs-dismiss="modal"
+                    class="btn btn-primary"
+                  >
+                    Kirala
+                  </button>
+                </div>
+                <div
+                  class="modal fade"
+                  id="exampleModal2"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content" style="border-radius: 30px">
+                      <div
+                        class="modal-header"
+                        style="
+                          background-color: rgb(54, 53, 53);
+                          border-start-start-radius: 27px;
+                          border-top-right-radius: 27px;
+                        "
+                      >
+                        <img
+                          src="assets/svg/aracBilgileri.png"
+                          width="150px"
+                          height="50px"
+                          class="modal-title"
+                          id="exampleModalLabel"
+                          style="margin-left: 20px"
+                        />
+                      </div>
+                      <div class="modal-body" *ngIf="currentCar">
+                        <ul>
+                          <strong>Plaka : </strong
+                          >{{
+                            currentCar.carName
+                          }}
+                        </ul>
+                        <ul>
+                          <strong>Marka-Model : </strong
+                          >{{
+                            currentCar.brandName
+                          }}
+                          {{
+                            currentCar.desciription
+                          }}
+                        </ul>
+                        <ul>
+                          <strong>Model Yılı : </strong
+                          >{{
+                            currentCar.modelYear
+                          }}
+                        </ul>
+                        <ul>
+                          <strong>Günlük Ücret : </strong
+                          >{{
+                            currentCar.dailyPrice | lira
+                          }}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+    <app-image *ngIf="currentCar"
+    [add]="add"
+    [carId]="currentCar.carId"
+    [carImages]="carImages"></app-image>
+  </div>
 </div>

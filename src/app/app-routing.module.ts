@@ -5,13 +5,12 @@ import { CarAddComponent } from './components/car/car-add/car-add.component';
 import { CarDetailComponent } from './components/car/car-detail/car-detail.component';
 
 import { CarComponent } from './components/car/car.component';
-
-import { PaymentComponent } from './components/car/payment/payment.component';
 import { TestComponent } from './components/car/test/test.component';
 
 import { ColorOperationComponent } from './components/color/color-operation/color-operation.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/navi/login/login.component';
+import { CarOperationsComponent } from './components/operations/car-operations/car-operations.component';
 
 import { RentalComponent } from './components/rental/rental.component';
 import { Test2Component } from './components/test2/test2.component';
@@ -26,7 +25,7 @@ const routes: Routes = [
   {path:"cars/color/:colorId",component:CarComponent},
   {path:"cardetail/:carId",component:CarDetailComponent},
   {path:"rentals/mycar",component:RentalComponent},
-  {path:"car/operation",component:CarAddComponent,canActivate:[LoginGuard,AdminGuard]},
+  {path:"car/operation",component:CarOperationsComponent,canActivate:[LoginGuard,AdminGuard]},
   {path:"brand/operation",component:BrandOperationComponent,canActivate:[LoginGuard,AdminGuard]},
   {path:"color/operation",component:ColorOperationComponent,canActivate:[LoginGuard,AdminGuard]},
   {path:"login",component:LoginComponent},
