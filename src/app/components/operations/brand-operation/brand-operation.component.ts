@@ -15,6 +15,8 @@ export class BrandOperationComponent implements OnInit {
   brandUpdateForm:FormGroup;
   brands:Brand[]=[];
   currentBrand:Brand;
+  sltUpdate=false;
+  sltAdd=false;
 
   constructor(private fb:FormBuilder,
     private toastr:ToastrService,
@@ -29,6 +31,15 @@ export class BrandOperationComponent implements OnInit {
     
   }
 
+  selectUpdate(){
+    this.sltUpdate = true;
+    this.sltAdd = false;
+  }
+
+  selectAdd(){
+    this.sltUpdate = false;
+    this.sltAdd = true;
+  }
   reloadPage(){
     window.location.reload()
   }
@@ -97,7 +108,7 @@ export class BrandOperationComponent implements OnInit {
 
   setCurrentBrand(brand:Brand){
     this.currentBrand=brand;
-    //console.log(this.currentBrand.brandId)
+    console.log(this.currentBrand.brandId)
   }
 
  

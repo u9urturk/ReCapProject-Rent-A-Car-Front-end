@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" (click)="selectAdd()" data-bs-toggle="modal" data-bs-target="#brandModal" class="btn btn-warning"><b>Marka
+                    Ekle</b></button>
+        </div>
+        <h1 id="title"><strong>Mevcut Markalar</strong></h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4" >
+            <div class="col" *ngFor="let brand of brands">
+                <div class="card" type="button" >
+                    <img src="{{ brand.brandLogo }}"  style="height: 150px;" />
+                    <div class="overlay">
+                        <a href="javascript:void(0)" class="icon"></a>
+                        <i type="button" id="trash" class="fa fa-trash"  data-mdb-toggle="tooltip"
+                            title="Markayı Sil" (click)="setCurrentBrand(brand)"
+                            (click)="brandDelete()"></i>
+                        <i class="fa fa-wrench" type="button" 
+                            id="update" (click)="selectUpdate()"
+                            (click)="setCurrentBrand(brand)"
+                            data-bs-toggle="modal" data-bs-target="#brandModal"
+                           
+                             data-mdb-toggle="tooltip" title="Markayı Güncelle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="brandModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="border-radius: 50px">
+                <div class="modal-header">
+                    <img src="assets/svg/rentacar.png" id="logo">
+
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="brandAddForm" *ngIf="sltAdd == true">
+                        <div class="form-floating">
+                            <input style="margin-top: 10px; background-color: whitesmoke; " type="text" id="brandName"
+                                formControlName="brandName" class="form-control" placeholder="Marka Adı" />
+                            <label for="brandName">Marka Adı</label>
+                        </div>
+                    </form>
+                    <form [formGroup]="brandUpdateForm" *ngIf="sltUpdate == true">
+                        <div class="form-floating">
+                            <input style="margin-top: 10px; background-color: whitesmoke; " type="text" id="brandLogo"
+                                formControlName="brandLogo" class="form-control" placeholder="Marka logosu" />
+                            <label for="brandLogo">Marka Logosu</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <b>Vazgeç</b>
+                    </button>
+                    <button type="button" *ngIf="sltAdd == true" (click)="brandAdd()" class="btn btn-warning">
+                        <b>Ekle</b>
+                    </button>
+                    <button type="button" (click)="brandUpdate()" *ngIf="sltUpdate == true" style="margin-right: 10px;" class="btn btn-primary">
+                        <b>Güncelle</b>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

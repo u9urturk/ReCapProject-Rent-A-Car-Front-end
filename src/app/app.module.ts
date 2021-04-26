@@ -19,7 +19,6 @@ import { RentalComponent } from './components/rental/rental.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { HomeComponent } from './components/home/home.component';
 import { CarCardComponent } from './components/car/car-card/car-card.component';
-import { TestComponent } from './components/car/test/test.component';
 import { LoginComponent } from './components/navi/login/login.component';
 import {AlertifyService} from './services/material_services/alertify.service';
 import { GalleryModule } from 'ng-gallery';
@@ -32,17 +31,12 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import {ToastrModule} from 'ngx-toastr';
-import { RentSummaryComponent } from './components/rent-summary/rent-summary.component';
 import { RentalCarCardComponent } from './components/rental/rental-car-card/rental-car-card.component';
-import { CarAddComponent } from './components/car/car-add/car-add.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { FooterComponent } from './components/footer/footer.component';
 
-
-import { Test2Component } from './components/test2/test2.component';
-import { ImageUploadComponent } from './components/image-upload/image-upload.component';
-import { BrandOperationComponent } from './components/brand/brand-operation/brand-operation.component';
-import { ColorOperationComponent } from './components/color/color-operation/color-operation.component';
+import { BrandOperationComponent } from './components/operations/brand-operation/brand-operation.component';
+import { ColorOperationComponent } from './components/operations/color-operation/color-operation.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/navi/register/register.component';
 import { CarDetailComponent } from './components/car/car-detail/car-detail.component';
@@ -70,17 +64,12 @@ import { ImageComponent } from './components/operations/car-operations/buttons/i
     NaviComponent,
     HomeComponent,
     CarCardComponent,
-    TestComponent,
     LoginComponent,
     LiraPipe,
     FilterPipe,
-    RentSummaryComponent,
     RentalCarCardComponent,
-    CarAddComponent,
     AdminPanelComponent,
     FooterComponent,
-    Test2Component,
-    ImageUploadComponent,
     BrandOperationComponent,
     ColorOperationComponent,
     RegisterComponent,

@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+          <button type="button" (click)="selectAdd()" data-bs-toggle="modal" data-bs-target="#colorModal" class="btn btn-warning"><b>Renk
+                  Ekle</b></button>
+      </div>
+      <h1 id="title"><strong>Mevcut Renkler</strong></h1>
+      <div class="row row-cols-1 row-cols-md-3 g-4" >
+          <div class="col" *ngFor="let color of colors">
+              <div class="card" type="button" >
+                  <img src="{{ color.colorLogo }}"  style="height: 150px;" />
+                  <div class="overlay">
+                      <a href="javascript:void(0)" class="icon"></a>
+                      <i type="button" id="trash" class="fa fa-trash"  data-mdb-toggle="tooltip"
+                          title="Rengi Sil" (click)="setCurrentColor(color)"
+                          (click)="colorDelete()"></i>
+                      <i class="fa fa-wrench" type="button" 
+                          id="update" (click)="selectUpdate()"
+                          (click)="setCurrentColor(color)"
+                          data-bs-toggle="modal" data-bs-target="#colorModal"
+                         
+                           data-mdb-toggle="tooltip" title="Rengi Güncelle"></i>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" id="colorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content" style="border-radius: 50px">
+              <div class="modal-header">
+                  <img src="assets/svg/rentacar.png" id="logo">
+
+              </div>
+              <div class="modal-body">
+                  <form [formGroup]="colorAddForm" *ngIf="sltAdd == true">
+                      <div class="form-floating">
+                          <input style="margin-top: 10px; background-color: whitesmoke; " type="text" id="colorName"
+                              formControlName="colorName" class="form-control" placeholder="Renk Adı" />
+                          <label for="brandName">Renk Adı</label>
+                      </div>
+                  </form>
+                  <form [formGroup]="colorUpdateForm" *ngIf="sltUpdate == true">
+                      <div class="form-floating">
+                          <input style="margin-top: 10px; background-color: whitesmoke; " type="text" id="colorLogo"
+                              formControlName="colorLogo" class="form-control" placeholder="Renk logosu" />
+                          <label for="brandLogo">Renk Logosu</label>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                      <b>Vazgeç</b>
+                  </button>
+                  <button type="button" *ngIf="sltAdd == true" (click)="colorAdd()" class="btn btn-warning">
+                      <b>Ekle</b>
+                  </button>
+                  <button type="button" (click)="colorUpdate()" *ngIf="sltUpdate == true" style="margin-right: 10px;" class="btn btn-primary">
+                      <b>Güncelle</b>
+                  </button>
+              </div>
+          </div>
+      </div>
