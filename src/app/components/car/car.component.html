@@ -9,7 +9,7 @@
   ></div>
 </div>
 <div class="row">
-  <div class="col-md-2" *ngIf="admin == false">
+  <div class="col-md-2" >
     <span
       class="d-inline-block"
       tabindex="0"
@@ -166,16 +166,6 @@
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal2"
                   />
-                  <i
-                    class="fa fa-picture-o"
-                    id="picture"
-                    *ngIf="admin == true"
-                    (click)="imageAdd()"
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#imageModal"
-                    
-                  ></i>
                 </div>
                 <div class="modal-body">
                   <div class="modal-img">
@@ -190,7 +180,7 @@
                 </div>
                 <div class="modal-footer" style="border: none">
                   <button
-                    *ngIf="admin == false"
+                    
                     type="button"
                     class="btn btn-warning"
                     data-bs-dismiss="modal"
@@ -198,7 +188,7 @@
                     Vazgeç
                   </button>
                   <button
-                    *ngIf="admin == false"
+                    
                     type="button"
                     (click)="rentCar(currentCar)"
                     data-bs-dismiss="modal"
@@ -271,9 +261,5 @@
         </div>
       </div>
     </div>
-    <app-image *ngIf="currentCar"
-    [add]="add"
-    [carId]="currentCar.carId"
-    [carImages]="carImages"></app-image>
   </div>
 </div>

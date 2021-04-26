@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
+import { ImageUrl } from 'src/app/models/imageUrlModel';
 import { CarImageService } from 'src/app/services/car-image.service';
 
 @Component({
@@ -11,34 +13,40 @@ import { CarImageService } from 'src/app/services/car-image.service';
 })
 export class ImageComponent implements OnInit {
 
-  @Input() carId: number;
+  @Input() car: CarDetail;
   imageForm: FormGroup;
-  @Input() carImages:CarImage[] = []
-  @Input() add = false;
+  carImages: CarImage[] = []
+  add = false;
+  update = false;
+  imageId: number;
+  imageUrls: ImageUrl[] = [];
   constructor(private fb: FormBuilder,
     private toastr: ToastrService,
-    private carImageService:CarImageService) { }
+    private carImageService: CarImageService) { }
 
   ngOnInit(): void {
     this.createForm();
-    //setTimeout(()=>this.test(),1500)
- 
-    
+    this.getCarImageDataByCarId();
+
   }
 
-  test(){
-    console.log(this.carImages)
+
+  selectAdd() {
+    this.add = true;
+    this.update = false;
   }
+
+  selectUpdate() {
+    this.add = false;
+    this.update = true;
+  }
+
+
   reloadPage() {
     window.location.reload();
   }
 
-
-  selectAdd(){
-    this.add = true;
-  }
-
-  // Profile  Upload 
+  // Image Upload 
   createForm() {
     this.imageForm = this.fb.group({
       image: [null, Validators.required],
@@ -58,12 +66,12 @@ export class ImageComponent implements OnInit {
     if (this.imageForm.valid) {
       var formData: any = new FormData();
 
-      formData.append("carId", this.carId);
+      formData.append("carId", this.car.carId);
       formData.append("image", this.imageForm.get('image')?.value);
 
       this.carImageService.imageAdd(formData).subscribe(response => {
         this.toastr.success(response.message)
-        setTimeout(() => this.reloadPage(),1000)
+        setTimeout(() => this.reloadPage(), 1000)
       }, responseError => {
         this.toastr.info(responseError.error.message)
       })
@@ -73,18 +81,70 @@ export class ImageComponent implements OnInit {
 
 
   }
+  
+
+
+  setCurrentImageId(id: number) {
+    this.imageId = id;
+    console.log(this.imageId)
+  }
+
+  // Image Delete
+  deleteImage() {
+    console.log(this.imageId)
+    // var formData: any = new FormData();
+    // formData.append("id", this.imageId)
+
+    // this.carImageService.imageDelete(formData).subscribe(response => {
+    //   this.toastr.success(response.message)
+    //   setTimeout(() => this.reloadPage(), 1000)
+    // }, responseError => {
+    //   this.toastr.error(responseError.error.message)
+    // })
+
+  }
+  //----------------------------------------------------------------
+
+  //Image Update
+  updateImage() {
+    if (this.imageForm.valid) {
+      var formData: any = new FormData();
+      formData.append("id", this.imageId);
+      formData.append("image", this.imageForm.get("image")?.value);
+
+      this.carImageService.imageUpdate(formData).subscribe(response => {
+        this.toastr.success(response.message);
+        setTimeout(() => this.reloadPage(), 1000)
+      }, responseError => {
+        this.toastr.warning(responseError.error.message)
+      })
+
+    } else {
+      this.toastr.error("Geçersiz Kullanım")
+    }
+
+  }
+
+  //----------------------------------------------------------------
+
+  getCarImageDataByCarId() {
+    this.carImageService.getCarImagesByCarId(this.car.carId).subscribe(response => {
+      this.carImages = response.data;
+      //console.log(response.data);
+      this.getCarImageUrl();
+    })
+  }
 
   getCarImageUrl() {
-    const imageUrl: any[] = []
     this.carImages.forEach(image => {
-      imageUrl.push({
+      this.imageUrls.push({
         url: this.carImageService.getCarImageUrl(image.id),
         imageId: image.id
       })
     });
 
-    console.log(imageUrl)
-    
+    //console.log(this.imageUrls);
+
   }
 
 }

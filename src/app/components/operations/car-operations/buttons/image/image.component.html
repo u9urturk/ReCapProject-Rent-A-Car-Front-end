@@ -1,12 +1,71 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col" id="card" *ngFor="let imageUrl of imageUrls">
+    <div class="card">
+      <img src="{{ imageUrl.url }}" id="image" />
+      <div class="overlay">
+        <a href="javascript:void(0)" class="icon"></a>
+        <i
+          type="button"
+          id="trash"
+          class="fa fa-trash"
+          (click)="setCurrentImageId(imageUrl.imageId)"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        ></i>
+        <i
+          type="button"
+          (click)="selectAdd()"
+          class="fa fa-picture-o"
+          id="picture"
+          data-bs-toggle="modal"
+          data-bs-target="#uploadModalCar"
+        ></i>
+        <i
+          class="fa fa-wrench"
+          type="button"
+          (click)="setCurrentImageId(imageUrl.imageId)"
+          (click)="selectUpdate()"
+          id="update"
+          data-bs-toggle="modal"
+          data-bs-target="#uploadModalCar"
+        ></i>
+      </div>
+    </div>
+    <div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+>
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius: 40px">
+      <div class="modal-header" style="border: none; margin-left: 60px">
+        <h2 class="modal-title" id="exampleModalLabel">
+          <b>Görsel Silinecek , Onaylıyor musunuz ?</b>
+        </h2>
+      </div>
+      <div class="modal-footer"  style="border: none">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Vazgeç
+        </button>
+        <button type="button" class="btn btn-warning"
+         (click)="deleteImage()">
+          Onaylıyorum
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div
   class="modal fade"
-  id="imageModal"
+  id="uploadModalCar"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog">
-    <div class="modal-content" style="border-radius: 50px;color: whitesmoke;">
+    <div class="modal-content" style="border-radius: 40px">
       <div class="modal-header" id="uploadHeader">
         <h2 class="modal-title" id="exampleModalLabel">
           <img id="logo" src="assets/svg/rentacar.png" />
@@ -24,14 +83,6 @@
           Vazgeç
         </button>
         <button
-        type="button"
-        class="btn btn-danger"
-        *ngIf="add == true"
-        (click)="getCarImageUrl()"
-      >
-        Sil
-      </button>
-        <button
           type="button"
           class="btn btn-success"
           *ngIf="add == true"
@@ -39,7 +90,17 @@
         >
           Yükle
         </button>
+        <button
+          type="button"
+          class="btn btn-warning"
+          *ngIf="update == true"
+          (click)="updateImage()"
+        >
+          Güncelle
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+

@@ -10,6 +10,7 @@ import { TestComponent } from './components/car/test/test.component';
 import { ColorOperationComponent } from './components/color/color-operation/color-operation.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/navi/login/login.component';
+import { ImageComponent } from './components/operations/car-operations/buttons/image/image.component';
 import { CarOperationsComponent } from './components/operations/car-operations/car-operations.component';
 
 import { RentalComponent } from './components/rental/rental.component';
@@ -20,7 +21,7 @@ import { LoginGuard } from './guards/login.guard';
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
   {path:"cars",component:CarComponent},
-  {path:"tester",component:TestComponent},
+  {path:"tester",component:CarOperationsComponent},
   {path:"cars/brand/:brandId",component:CarComponent},
   {path:"cars/color/:colorId",component:CarComponent},
   {path:"cardetail/:carId",component:CarDetailComponent},

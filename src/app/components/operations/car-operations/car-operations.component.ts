@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CarDetail } from 'src/app/models/carDetail';
+import { CarService } from 'src/app/services/car.service';
 
 @Component({
   selector: 'app-car-operations',
@@ -6,14 +8,18 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./car-operations.component.css']
 })
 export class CarOperationsComponent implements OnInit {
-  admin = false;
-  constructor() { }
+  cars:CarDetail[]=[];
+  
+  constructor(private carService:CarService) { }
 
   ngOnInit(): void {
-    this.adminOperation();
+    this.getCars()
   }
 
-  adminOperation(){
-    this.admin = true
+  getCars(){
+    this.carService.getCars().subscribe(response=>{
+      this.cars = response.data;
+    })
   }
+
 }

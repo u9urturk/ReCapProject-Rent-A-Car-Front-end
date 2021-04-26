@@ -10,32 +10,40 @@ import { ResponseModel } from '../models/responseModel';
   providedIn: 'root'
 })
 export class CarImageService {
-  apiUrl = "https://localhost:44378/api/";
+  apiUrl = "https://localhost:44378/api/carimages/";
   
   constructor(private httpClient:HttpClient) { }
 
   getAllCarImage():Observable<ListResponseModel<CarImage>>{
-    let newPath = this.apiUrl+"carimages/getall"
+    let newPath = this.apiUrl+"getall"
     return this.httpClient.get<ListResponseModel<CarImage>>(newPath)
 
   }
 
   getCarImagesByCarId(carId:number):Observable<ListResponseModel<CarImage>>{
-    let newPath = `${this.apiUrl}carimages/getimagebycarid?carid=${carId}`;
+    let newPath = `${this.apiUrl}getimagebycarid?carid=${carId}`;
     return this.httpClient.get<ListResponseModel<CarImage>>(newPath);
   }
 
   getFileById(id:number):Observable<string>{
     return this.httpClient.get<string>(
-     `${this.apiUrl}carimages/getfilebyid?id=${id}`
+     `${this.apiUrl}getfilebyid?id=${id}`
     );
   }
 
   getCarImageUrl(id:number):string{
-    return `${this.apiUrl}carimages/getfilebyid?id=${id}`;
+    return `${this.apiUrl}getfilebyid?id=${id}`;
   }
 
   imageAdd(image:CarImageAdd):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"carImages/imageadd",image)
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"imageadd",image)
+  }
+
+  imageDelete(imageDelete:any):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"imagedelete",imageDelete)
+  }
+
+  imageUpdate(imageUpdate:any):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"imageupdate",imageUpdate)
   }
 }

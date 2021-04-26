@@ -20,7 +20,6 @@ import { AuthService } from 'src/app/services/material_services/auth.service';
   
 })
 export class CarComponent implements OnInit {
-  @Input() admin = false;
   carDetails: CarDetail[] = []
   car!: CarDetail;
   brands: Brand[] = []
@@ -32,7 +31,7 @@ export class CarComponent implements OnInit {
   dataLoaded = false;
   items: GalleryItem[] = [];
   filterText = "";
-  add = false;
+
   
   constructor(private carService: CarService,
     private activatedRoute: ActivatedRoute,
@@ -98,11 +97,14 @@ export class CarComponent implements OnInit {
     this.carImages.forEach(image => {
       imageUrl.push({
         src: this.carImageService.getCarImageUrl(image.id),
-        thumb: this.carImageService.getCarImageUrl(image.id)
+        thumb: this.carImageService.getCarImageUrl(image.id),
+        
+      
       })
     });
 
-    this.items = imageUrl.map(img => new ImageItem({ src: img.src, thumb: img.thumb }))
+    this.items = imageUrl.map(img => new ImageItem({ src: img.src, thumb: img.thumb}))
+    //console.log(this.items);
   }
 
   getBrands() {
@@ -151,7 +153,7 @@ export class CarComponent implements OnInit {
   setCurrentCarId(car: CarDetail) {
     this.getImageByCarId(car.carId)
     this.currentCar = car;
-    console.log(this.currentCar.carId)
+    //console.log(this.currentCar.carId)
   }
 
 
@@ -161,13 +163,7 @@ export class CarComponent implements OnInit {
    }
   }
 
- //Admin Operations
+ 
 
-  imageAdd(){
-    this.add = true;
-  }
-
-
-
-
+  
 }

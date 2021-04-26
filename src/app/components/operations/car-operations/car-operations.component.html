@@ -1,1 +1,18 @@
-<app-car [admin]="admin"></app-car>
+<div class="container">
+    <div class="row" *ngFor="let car of cars">
+        <div class="col-md-8">
+            <app-image
+            [car]="car"></app-image>
+        </div>
+        <div class="col-md-4">
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action"><strong>Araç Plakası : </strong><b>{{car.carName}}</b></a>
+                <a class="list-group-item list-group-item-action"><strong>Marka - Model : </strong><b>{{car.brandName}} - {{car.desciription}}</b></a>
+                <a class="list-group-item list-group-item-action"><strong>Model Yılı : </strong><b>{{car.modelYear}}</b></a>
+                <a class="list-group-item list-group-item-action"><strong>Renk  : </strong><b>{{car.colorName}}</b></a>
+                <a class="list-group-item list-group-item-action"><strong>Günlük Ücret : </strong><b>{{car.dailyPrice}}</b></a>
+                <a class="list-group-item list-group-item-action"><strong>Araç Findeks Puanı : </strong><b>{{car.carFindeksPoint}}</b></a>
+            </div>
+        </div>
+    </div>
+</div>
