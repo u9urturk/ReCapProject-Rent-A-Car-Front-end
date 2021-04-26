@@ -9,98 +9,30 @@
           id="trash"
           class="fa fa-trash"
           (click)="setCurrentImageId(imageUrl.imageId)"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          (click)="deleteImage()"
+          data-mdb-toggle="tooltip" title="Fotoğraf Sil"
         ></i>
-        <i
-          type="button"
-          (click)="selectAdd()"
-          class="fa fa-picture-o"
-          id="picture"
-          data-bs-toggle="modal"
-          data-bs-target="#uploadModalCar"
-        ></i>
-        <i
-          class="fa fa-wrench"
-          type="button"
-          (click)="setCurrentImageId(imageUrl.imageId)"
-          (click)="selectUpdate()"
-          id="update"
-          data-bs-toggle="modal"
-          data-bs-target="#uploadModalCar"
-        ></i>
-      </div>
-    </div>
-    <div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
->
-  <div class="modal-dialog">
-    <div class="modal-content" style="border-radius: 40px">
-      <div class="modal-header" style="border: none; margin-left: 60px">
-        <h2 class="modal-title" id="exampleModalLabel">
-          <b>Görsel Silinecek , Onaylıyor musunuz ?</b>
-        </h2>
-      </div>
-      <div class="modal-footer"  style="border: none">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Vazgeç
-        </button>
-        <button type="button" class="btn btn-warning"
-         (click)="deleteImage()">
-          Onaylıyorum
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="modal fade"
-  id="uploadModalCar"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content" style="border-radius: 40px">
-      <div class="modal-header" id="uploadHeader">
-        <h2 class="modal-title" id="exampleModalLabel">
-          <img id="logo" src="assets/svg/rentacar.png" />
-        </h2>
-      </div>
-      <div class="modal-body">
         <form [formGroup]="imageForm">
           <div class="form-group">
             <input type="file" (change)="uploadImage($event)" />
           </div>
         </form>
-      </div>
-      <div class="modal-footer" style="border: none">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Vazgeç
-        </button>
-        <button
-          type="button"
-          class="btn btn-success"
-          *ngIf="add == true"
+        <i
           (click)="addImage()"
-        >
-          Yükle
-        </button>
-        <button
           type="button"
-          class="btn btn-warning"
-          *ngIf="update == true"
+          class="fa fa-picture-o"
+          id="picture"
+          data-mdb-toggle="tooltip" title="Fotoğraf Ekle"
+        ></i>
+        <i
+          class="fa fa-wrench"
+          type="button"
+          (click)="setCurrentImageId(imageUrl.imageId)"
           (click)="updateImage()"
-        >
-          Güncelle
-        </button>
+          id="update"
+          data-mdb-toggle="tooltip" title="Fotoğraf Güncelle"
+        ></i>
       </div>
     </div>
   </div>
 </div>
-
-

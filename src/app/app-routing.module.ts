@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrandOperationComponent } from './components/brand/brand-operation/brand-operation.component';
-import { CarAddComponent } from './components/car/car-add/car-add.component';
 import { CarDetailComponent } from './components/car/car-detail/car-detail.component';
-
 import { CarComponent } from './components/car/car.component';
-import { TestComponent } from './components/car/test/test.component';
-
 import { ColorOperationComponent } from './components/color/color-operation/color-operation.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/navi/login/login.component';
-import { ImageComponent } from './components/operations/car-operations/buttons/image/image.component';
 import { CarOperationsComponent } from './components/operations/car-operations/car-operations.component';
-
 import { RentalComponent } from './components/rental/rental.component';
 import { Test2Component } from './components/test2/test2.component';
 import { AdminGuard } from './guards/admin.guard';

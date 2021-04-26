@@ -1,7 +1,75 @@
-.list-group-item{
-    margin-top: 10px;
+.list-group-item {
+  margin-top: 10px;
 }
 
-.row{
-    margin-top: 50px;
+#start {
+  margin-top: 50px;
 }
+
+#title1 {
+  color: whitesmoke;
+  margin-left: 200px;
+}
+
+#title2 {
+    color: whitesmoke;
+    margin-left: 120px;
+}
+
+
+
+#logo{
+    height: 60px;
+    width: 300px;
+    margin-left: 80px;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+
+  .list-group:hover .overlay {
+    opacity: 1;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: 0.3s ease;
+  }
+  
+  #trash {
+    color: red;
+    font-size: 25px;
+    position: absolute;
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }
+  #update {
+    color: blue;
+    font-size: 25px;
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }
+  

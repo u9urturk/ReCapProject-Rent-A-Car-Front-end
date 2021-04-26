@@ -16,8 +16,6 @@ export class ImageComponent implements OnInit {
   @Input() car: CarDetail;
   imageForm: FormGroup;
   carImages: CarImage[] = []
-  add = false;
-  update = false;
   imageId: number;
   imageUrls: ImageUrl[] = [];
   constructor(private fb: FormBuilder,
@@ -29,19 +27,6 @@ export class ImageComponent implements OnInit {
     this.getCarImageDataByCarId();
 
   }
-
-
-  selectAdd() {
-    this.add = true;
-    this.update = false;
-  }
-
-  selectUpdate() {
-    this.add = false;
-    this.update = true;
-  }
-
-
   reloadPage() {
     window.location.reload();
   }
@@ -81,7 +66,7 @@ export class ImageComponent implements OnInit {
 
 
   }
-  
+
 
 
   setCurrentImageId(id: number) {
@@ -91,16 +76,21 @@ export class ImageComponent implements OnInit {
 
   // Image Delete
   deleteImage() {
-    console.log(this.imageId)
-    // var formData: any = new FormData();
-    // formData.append("id", this.imageId)
+    //console.log(this.imageId)
+    if (this.imageId != 0) {
+      var formData: any = new FormData();
+      formData.append("id", this.imageId)
 
-    // this.carImageService.imageDelete(formData).subscribe(response => {
-    //   this.toastr.success(response.message)
-    //   setTimeout(() => this.reloadPage(), 1000)
-    // }, responseError => {
-    //   this.toastr.error(responseError.error.message)
-    // })
+      this.carImageService.imageDelete(formData).subscribe(response => {
+        this.toastr.success(response.message)
+        setTimeout(() => this.reloadPage(), 1000)
+      }, responseError => {
+        this.toastr.error(responseError.error.message)
+      })
+    }else{
+      this.toastr.warning("Varsayılan Fotoğraf Silinemez","Dikkat ! ")
+    }
+
 
   }
   //----------------------------------------------------------------

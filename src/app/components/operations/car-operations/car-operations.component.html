@@ -1,18 +1,127 @@
 <div class="container">
-    <div class="row" *ngFor="let car of cars">
+    <button type="button" (click)="selectAdd()" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning">
+        <b>Yeni Araba Ekle</b>
+    </button>
+    <div class="row" id="start" *ngFor="let car of cars">
         <div class="col-md-8">
-            <app-image
-            [car]="car"></app-image>
+            <app-image [car]="car"></app-image>
         </div>
         <div class="col-md-4">
+
             <div class="list-group">
-                <a class="list-group-item list-group-item-action"><strong>Araç Plakası : </strong><b>{{car.carName}}</b></a>
-                <a class="list-group-item list-group-item-action"><strong>Marka - Model : </strong><b>{{car.brandName}} - {{car.desciription}}</b></a>
-                <a class="list-group-item list-group-item-action"><strong>Model Yılı : </strong><b>{{car.modelYear}}</b></a>
-                <a class="list-group-item list-group-item-action"><strong>Renk  : </strong><b>{{car.colorName}}</b></a>
-                <a class="list-group-item list-group-item-action"><strong>Günlük Ücret : </strong><b>{{car.dailyPrice}}</b></a>
-                <a class="list-group-item list-group-item-action"><strong>Araç Findeks Puanı : </strong><b>{{car.carFindeksPoint}}</b></a>
+                <a class="list-group-item list-group-item-action"><strong>Araç Plakası : </strong><b>{{ car.carName
+                        }}</b>
+                    <div class="overlay">
+                        <a href="javascript:void(0)" class="icon"></a>
+                        <i type="button" id="trash" class="fa fa-trash" (click)="setCurrentCar(car)" (click)="carDelete()" data-mdb-toggle="tooltip"
+                            title="Arabayı Sil"></i>
+                        <i class="fa fa-wrench" type="button" 
+                            id="update" 
+                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            (click)="selectUpdate()" (click)="setCurrentCar(car)"
+                             data-mdb-toggle="tooltip" title="Arabayı Güncelle"></i>
+                    </div>
+                </a>
+
+                <a class="list-group-item list-group-item-action"><strong>Marka - Model : </strong><b>{{ car.brandName
+                        }} - {{ car.desciription }}</b></a>
+                <a class="list-group-item list-group-item-action"><strong>Model Yılı : </strong><b>{{ car.modelYear
+                        }}</b></a>
+                <a class="list-group-item list-group-item-action"><strong>Renk : </strong><b>{{ car.colorName }}</b></a>
+                <a class="list-group-item list-group-item-action"><strong>Günlük Ücret : </strong><b>{{ car.dailyPrice |
+                        lira }}</b></a>
+                <a class="list-group-item list-group-item-action"><strong>Araç Findeks Puanı : </strong><b>{{
+                        car.carFindeksPoint }}</b></a>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 50px">
+            <div class="modal-header">
+                <img src="assets/svg/rentacar.png" id="logo" />
+            </div>
+            <div class="modal-body" [ngStyle]="{'background-image':'url(assets/admin/cars.png)',
+            'background-repeat':'no-repeat',
+            'background-size':'500px'
+            }">
+                <div>
+                    <button (click)="selectBrand()" type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#modals">Marka
+                        Seç</button>
+                    <button (click)="selectColor()" type="button" style="float: right;" class="btn btn-primary"
+                        data-bs-toggle="modal" data-bs-target="#modals">Renk Seç</button>
+                </div>
+                <form [formGroup]="carAddForm">
+                    <div class="form-floating">
+                        <input style="margin-top: 10px; background-color: whitesmoke; " type="text" id="carName"
+                            formControlName="carName" class="form-control" placeholder="Araç Plakası" />
+                        <label for="carName">Araç Plakası</label>
+                    </div>
+                    <div class="form-floating">
+                        <input style="margin-top: 10px; background-color: whitesmoke;" type="text" id="description"
+                            formControlName="description" class="form-control" placeholder="Model" />
+                        <label for="description">Model</label>
+                    </div>
+                    <div class="form-floating">
+                        <input style="margin-top: 10px;background-color: whitesmoke;" type="number" id="modelYear"
+                            formControlName="modelYear" class="form-control" placeholder="Model Yılı" />
+                        <label for="modelYear">Model Yılı</label>
+                    </div>
+                    <div class="form-floating">
+                        <input style="margin-top: 10px;background-color: whitesmoke; " type="number" id="dailyPrice"
+                            formControlName="dailyPrice" class="form-control" placeholder="Günlük Ücret" />
+                        <label for="dailyPrice">Günlük Ücret</label>
+                    </div>
+                    <div class="form-floating">
+                        <input style="margin-top: 10px;background-color: whitesmoke; " type="number" id="findeksPoint"
+                            formControlName="carFindeksPoint" class="form-control" placeholder="Findeks Puanı" />
+                        <label for="findeksPoint">Findeks Puanı</label>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="reloadPage(200)" data-bs-dismiss="modal">
+                    Vazgeç
+                </button>
+                <button *ngIf="sltAdd == true"(click)="carAdd()" type="button" class="btn btn-warning" style="margin-right: 10px">
+                    <b>Ekle</b>
+                </button>
+                <button *ngIf="sltUpdate == true" (click)="carUpdate()" type="button" class="btn btn-primary" style="margin-right: 10px">
+                    <b>Güncelle</b>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- COLOR AND BRAND MODAL -->
+<div class="modal fade" id="modals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 50px; background-color: gray;">
+            <!-- Get Color Modal -->
+            <div class="modal-body" *ngIf="sltColor == true">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col" *ngFor="let color of colors" style="border: none;">
+                        <div class="card" type="button" data-bs-dismiss="modal" (click)="setCurrentColor(color)"
+                            style="border:none; width: 40px; height: 40px; margin-left: 40px;background-color: gray;">
+                            <img src="{{ color.colorLogo}}" width="40px" height="40px" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Get Brand Modal -->
+            <div class="modal-body" *ngIf="sltBrand == true">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col" *ngFor="let brand of brands" style="border: none;">
+                        <div class="card" type="button" data-bs-dismiss="modal" (click)="setCurrentBrand(brand)"
+                            style="border:none; width: 40px; height: 40px; margin-left: 40px;background-color: gray;">
+                            <img src="{{ brand.brandLogo}}" width="50px" height="50px" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
