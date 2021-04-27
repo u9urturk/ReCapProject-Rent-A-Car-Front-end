@@ -61,6 +61,12 @@ https://user-images.githubusercontent.com/77547474/116231237-4a96df80-a761-11eb-
 ### Admin Guard
 https://user-images.githubusercontent.com/77547474/116231328-600c0980-a761-11eb-9af0-64e390d4bd18.mp4
 
+<br>
+<br>
+
+## License
+[MIT©Uğur Türk](https://github.com/u9urturk/ReCapProject-Rent-A-Car/blob/master/LICENSE)
+
 
 
 
