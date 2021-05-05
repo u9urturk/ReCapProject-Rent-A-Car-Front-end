@@ -126,10 +126,10 @@ export class CarOperationsComponent implements OnInit {
   }
 
   carUpdate(){
-    console.log(this.currentCar.carId)
-    console.log(this.currentBrand.brandId)
-    console.log(this.currentColor.colorId)
-    console.log(this.carAddForm)
+    // console.log(this.currentCar.carId)
+    // console.log(this.currentBrand.brandId)
+    // console.log(this.currentColor.colorId)
+    // console.log(this.carAddForm)
     if(this.currentCar && this.auth.isLogened()==true && this.carAddForm){
       let carModel = Object.assign({
         carId:this.currentCar.carId,
