@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
+import { UserClaimInfo } from '../models/userClaimInfo';
 import { UserModel } from '../models/userModel';
 
 @Injectable({
@@ -20,4 +22,9 @@ export class UserService {
   userUpdate(userModel:UserModel):Observable<ResponseModel>{
     return this.http.post<ResponseModel>(this.apiUrl+"userupdate",userModel);
   }
-}
+
+  getAllUserDetail():Observable<ListResponseModel<UserClaimInfo>>{
+    let newPath = this.apiUrl + "getalluserdetail";
+    return this.http.get<ListResponseModel<UserClaimInfo>>(newPath);
+  }
+}     

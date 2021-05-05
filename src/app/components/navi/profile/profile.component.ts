@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserModel } from 'src/app/models/userModel';
+import { AuthService } from 'src/app/services/material_services/auth.service';
 import { ProfileImageService } from 'src/app/services/profile-image.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,16 +16,23 @@ export class ProfileComponent implements OnInit {
   userId:number
   updateFormName:FormGroup
   updateFormEmail:FormGroup
+  claim:any = "";
   constructor(private userService:UserService,
     private fb:FormBuilder,
     private toastr:ToastrService,
-    private profileImageService:ProfileImageService) { }
+    private authService:AuthService) { }
 
   ngOnInit(): void {
     this.getUserId();
     this.getUserByUserId();
     this.createUpdateNameForm();
     this.createUpdateFormEmail();
+    this.getRole();
+  }
+  
+  getRole(){
+    this.claim = this.authService.getRole();
+    //console.log(this.claim)
   }
   getUserId(){
     this.userId = Number(localStorage.getItem("userId"))

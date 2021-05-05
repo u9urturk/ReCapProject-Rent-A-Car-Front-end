@@ -10,6 +10,7 @@ import { CarOperationsComponent } from './components/operations/car-operations/c
 import { RentalComponent } from './components/rental/rental.component';
 import { AdminGuard } from './guards/admin.guard';
 import { LoginGuard } from './guards/login.guard';
+import { ClaimOperationsComponent } from './components/operations/claim-operations/claim-operations.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path:"car/operation",component:CarOperationsComponent,canActivate:[LoginGuard,AdminGuard]},
   {path:"brand/operation",component:BrandOperationComponent,canActivate:[LoginGuard,AdminGuard]},
   {path:"color/operation",component:ColorOperationComponent,canActivate:[LoginGuard,AdminGuard]},
-  {path:"login",component:LoginComponent}
+  {path:"login",component:LoginComponent},
+  {path:"claim/operation",component:ClaimOperationsComponent,canActivate:[LoginGuard,AdminGuard]}
  
   
   

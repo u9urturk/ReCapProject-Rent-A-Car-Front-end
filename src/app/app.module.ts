@@ -45,6 +45,7 @@ import { ProfileComponent } from './components/navi/profile/profile.component';
 import { ProfileImageComponent } from './components/operations/profile-image/profile-image.component';
 import { CarOperationsComponent } from './components/operations/car-operations/car-operations.component';
 import { ImageComponent } from './components/operations/car-operations/buttons/image/image.component';
+import { ClaimOperationsComponent } from './components/operations/claim-operations/claim-operations.component';
 
 
 
@@ -79,6 +80,7 @@ import { ImageComponent } from './components/operations/car-operations/buttons/i
     ProfileImageComponent,
     CarOperationsComponent,
     ImageComponent,
+    ClaimOperationsComponent,
 
 
       
