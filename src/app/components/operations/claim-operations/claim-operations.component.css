@@ -1,0 +1,49 @@
+#test {
+  color: whitesmoke;
+}
+
+#test:hover .overlay {
+  opacity: 1;
+}
+
+.overlay {
+  position: relative;
+  top: 10px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+#trash {
+  color:red;
+  font-size: 20px;
+  position: relative;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+#add{
+    
+    font-size: 20px;
+    position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+#refresh{
+    color: rgb(15, 189, 15);
+    font-size: 20px;
+    position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}

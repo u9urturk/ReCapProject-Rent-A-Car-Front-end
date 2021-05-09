@@ -1,39 +1,99 @@
 <div class="container">
-    <div  class="row">
-        <div class="col-md-4">
-            <h2 style="margin-left: 200px; color: whitesmoke;"><strong>Kategori</strong></h2>
-        </div>
-        <div class="col-md-8">
-            <h2 style="margin-left: 300px; color: whitesmoke;"><strong>Veri</strong></h2>
-            <table class="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>
+  <div class="row" style="margin-top: 20px">
+    <div class="col-md-3">
+      <h2 style="margin-left: 70px; color: whitesmoke">
+        <strong>Mevcut Roller </strong>
+      </h2>
+      <table class="table table-striped table-hover" style="color: whitesmoke">
+        <thead>
+          <tr id="test">
+            <th scope="col" >Rol ID</th>
+            <th scope="col">
+              Rol Adı
+              <a class="overlay">
+                <a href="javascript:void(0)" class="icon" title="remove"></a>
+                <i type="button" aria-hidden="true" id="add" data-bs-toggle="modal" data-bs-target="#addModal"
+                  class="fa fa-plus-square"></i>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="test" *ngFor="let claim of claims" class="table-default" [class]="claimActive(claim)" >
+            <th scope="row">{{ claim.id }}</th>
+            <td>
+              <b type="button" (click)=" setCurrentUpdateClaim(claim)">{{ claim.name }}</b>
+              <a class="overlay">
+                <a href="javascript:void(0)" class="icon" title="remove"></a>
+                <i type="button" aria-hidden="true" (click)="setCurrentClaim(claim)"
+                 id="trash" class="fa fa-trash"
+                 (click)="deleteClaim()"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
+    <div class="col-md-9">
+      <h2 style="margin-left: 300px; color: whitesmoke">
+        <strong>Kullanıcılar</strong>
+      </h2>
+      <table class="table table-striped table-hover" style="color: whitesmoke">
+        <thead>
+          <tr>
+            <th scope="col">Kullanıcı ID</th>
+            <th scope="col">Kullanıcı Ad - Soyad</th>
+            <th scope="col">E-posta</th>
+            <th scope="col">Yetki</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="test" *ngFor="let user of users">
+            <th scope="row">{{ user.userId }}</th>
+            <td>
+              <b>{{ user.firstName }} &nbsp; {{ user.lastName }}</b>
+            </td>
+            <td>
+              <b>{{ user.email }}</b>
+            </td>
+            <td >
+              <b>{{user.claimName}}</b>
+              <a class="overlay">
+                <a href="javascript:void(0)" class="icon" title="remove"></a>
+                <i type="button" aria-hidden="true" (click)="setCurrentUser(user)"id="refresh" class="fa fa-refresh"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius: 50px">
+      <div class="modal-header">
+        <img src="assets/svg/rentacar.png" id="logo" />
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="claimForm">
+          <div class="form-floating">
+            <input style="margin-top: 10px; background-color: whitesmoke" type="text" id="name" formControlName="name"
+              class="form-control" placeholder="Rol adı" />
+            <label for="name">Rol Adı</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <b>Vazgeç</b>
+        </button>
+        <button type="button" class="btn btn-warning" (click)="addClaim()">
+          <b>Ekle</b>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
